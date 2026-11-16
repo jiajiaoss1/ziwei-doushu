@@ -373,5 +373,5 @@ export const TERMS_JA = {
   shusei: '主星（しゅせい）',
   kuukyuu: '空宮（くうきゅう）',
   kyuumei: '九星',
-  chineseAstrology: '中国四千年の帝王学',
+  chineseAstrology: '中国伝統の占術',
 } as const;

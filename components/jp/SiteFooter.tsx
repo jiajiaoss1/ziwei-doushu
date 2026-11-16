@@ -7,7 +7,7 @@ export default function SiteFooter() {
       <div className="ja-wrap ja-footer-inner">
         <div>
           <div style={{ marginBottom: 8, color: '#a49e8f', letterSpacing: '0.12em' }}>紫微館（しびかん）</div>
-          <div>中国四千年の帝王学・紫微斗数をもとに、あなたの星の設計図を読み解きます。</div>
+          <div>中国伝統の占術・紫微斗数をもとに、あなたの星の設計図を読み解きます。</div>
         </div>
         <div style={{ textAlign: 'right' }}>
           <div>

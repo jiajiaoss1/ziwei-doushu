@@ -15,13 +15,13 @@ export const metadata: Metadata = {
     template: '%s｜紫微館',
   },
   description:
-    '生年月日と出生時刻から、中国四千年の帝王学・紫微斗数（しびとすう）で、あなたの本質・恋愛・仕事の傾向を読み解きます。登録不要の無料診断。',
+    '生年月日と出生時刻から、中国伝統の占術・紫微斗数（しびとすう）で、あなたの本質・恋愛・仕事の傾向を読み解きます。登録不要の無料診断。',
   keywords: ['紫微斗数', 'しびとすう', '占い', '恋愛占い', '命盤', '四化', '東洋占術'],
   alternates: { canonical: '/ja' },
   openGraph: {
     title: '紫微館｜紫微斗数で読む、あなたの星の設計図',
     description:
-      '生まれた日時から、中国四千年の帝王学・紫微斗数で、あなたの本質・恋愛・仕事の傾向を読み解きます。',
+      '生年月日と出生時刻から、中国伝統の占術・紫微斗数で、あなたの本質・恋愛・仕事の傾向を読み解きます。',
     url: `${SITE_URL}/ja`,
     siteName: '紫微館',
     locale: 'ja_JP',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: '紫微館｜紫微斗数で読む、あなたの星の設計図',
-    description: '生まれた日時から、本質・恋愛・仕事の傾向を読み解きます。登録不要の無料診断。',
+    description: '生年月日と出生時刻から、本質・恋愛・仕事の傾向を読み解きます。登録不要の無料診断。',
     images: ['/ja/ogp.png'],
   },
 };
@@ -52,7 +52,7 @@ export default function JaLayout({ children }: { children: React.ReactNode }) {
     url: `${SITE_URL}/ja`,
     inLanguage: 'ja',
     description:
-      '生まれた日時から、中国四千年の帝王学・紫微斗数で本質・恋愛・仕事の傾向を読み解く無料診断サービス。',
+      '生年月日と出生時刻から、中国伝統の占術・紫微斗数で本質・恋愛・仕事の傾向を読み解く無料診断サービス。',
     publisher: {
       '@type': 'Organization',
       name: '紫微館',
