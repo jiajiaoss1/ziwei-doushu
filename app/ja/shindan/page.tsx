@@ -57,7 +57,7 @@ export default async function ShindanPage({
 
         <p className="ja-disclaimer">
           本サービスは紫微斗数を用いた自己理解のためのエンターテインメントです。将来を保証するものではなく、
-          医療・法律・投資などの専門的助言ではありません。
+          医療・法律・投資などの専門的な助言に代わるものではありません。
         </p>
 
         <div style={{ textAlign: 'center', marginTop: 20 }}>

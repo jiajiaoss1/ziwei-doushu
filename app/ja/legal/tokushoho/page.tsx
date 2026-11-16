@@ -26,7 +26,7 @@ export default function TokushohoPage() {
               ['販売事業者', '準備中（法人設立準備中）'],
               ['運営責任者', '準備中'],
               ['所在地', '準備中'],
-              ['連絡先', 'support@example.com（β版）'],
+              ['連絡先', 'support@example.com（ベータ版）'],
               ['電話番号', '準備中（お問い合わせはメールでお願いいたします）'],
             ].map(([k, v]) => (
               <p key={k} style={{ marginBottom: 8 }}>
@@ -57,7 +57,7 @@ export default function TokushohoPage() {
         </div>
 
         <p className="ja-disclaimer">
-          β版期間中は、鑑定書を無料で公開しているため、上記の販売条件は正式版の公開時に適用されます。
+          ベータ版期間中は、鑑定書を無料で公開しているため、上記の販売条件は正式版の公開時に適用されます。
         </p>
 
         <div style={{ marginTop: 24 }}>

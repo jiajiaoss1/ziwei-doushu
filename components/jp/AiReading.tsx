@@ -120,7 +120,7 @@ export default function AiReading({ params, type = 'general', enabled }: AiReadi
         AIで深掘りする
       </h2>
       <p style={{ fontSize: 12.5, color: '#a49e8f', marginBottom: 16 }}>
-        命盤の事実をもとに、気になるテーマを文章で掘り下げます（β版）。
+        命盤の事実をもとに、気になるテーマを文章で掘り下げます（ベータ版）。
       </p>
 
       {!text && !loading && (

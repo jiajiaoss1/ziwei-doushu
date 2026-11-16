@@ -94,7 +94,7 @@ export function buildUserPrompt(
   const type = options.type ?? 'general';
   const focus =
     type === 'love'
-      ? '恋愛・パートナーシップ（夫妻宮を中心に、命宮・福德宮も参照）'
+      ? '恋愛・パートナーシップ（夫妻宮を中心に、命宮・福徳宮も参照）'
       : type === 'work'
         ? '仕事・キャリア・お金（官禄宮・財帛宮を中心に、大限・流年も参照）'
         : '本質・恋愛・仕事・今年のテーマ';

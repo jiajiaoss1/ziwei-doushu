@@ -156,7 +156,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
         <p className="ja-disclaimer">
           本記事は、紫微斗数を用いた自己理解のための情報提供です。将来の結果を保証するものではなく、
-          医療・法律・投資などの専門的助言ではありません。
+          医療・法律・投資などの専門的な助言に代わるものではありません。
         </p>
       </div>
     </main>

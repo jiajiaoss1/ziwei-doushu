@@ -88,7 +88,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams: SP 
             {title}
           </h2>
           <p style={{ fontSize: 13, color: '#a49e8f', margin: '0 0 16px' }}>
-            3行サマリー＋命盤＋6セクションの詳細鑑定。
+            3行サマリー＋命盤＋6項目の詳細鑑定。
           </p>
           <div
             style={{
@@ -115,7 +115,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams: SP 
               lineHeight: 1.9,
             }}
           >
-            β版のため、いまは<strong style={{ color: '#e3c473' }}>無料</strong>で全文を公開しています。
+            ベータ版のため、いまは<strong style={{ color: '#e3c473' }}>無料</strong>で全文を公開しています。
             お支払いは発生しません。
           </div>
         ) : (

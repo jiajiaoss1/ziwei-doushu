@@ -211,7 +211,7 @@ export default function JaHomePage() {
               </Link>
             </div>
             <div className="ja-price featured">
-              <span className="ja-badge">β版・無料公開中</span>
+              <span className="ja-badge">ベータ版・無料公開中</span>
               <h3>恋愛鑑定書</h3>
               <div className="amount">
                 2,980<small>円（税込）</small>
@@ -222,7 +222,7 @@ export default function JaHomePage() {
               </Link>
             </div>
             <div className="ja-price">
-              <span className="ja-badge">β版・無料公開中</span>
+              <span className="ja-badge">ベータ版・無料公開中</span>
               <h3>事業鑑定書</h3>
               <div className="amount">
                 4,980<small>円（税込）</small>
@@ -261,7 +261,7 @@ export default function JaHomePage() {
           </Link>
           <p className="ja-disclaimer" style={{ marginTop: 28, borderTop: 'none' }}>
             本サービスは、紫微斗数を用いた自己理解のためのエンターテインメントです。
-            将来の結果や特定の行動を保証するものではなく、医療・法律・投資などの専門的助言ではありません。
+            将来の結果や特定の行動を保証するものではなく、医療・法律・投資などの専門的な助言に代わるものではありません。
           </p>
         </div>
       </section>

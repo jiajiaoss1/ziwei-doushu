@@ -168,7 +168,7 @@ export default function Year2027Page() {
         <div className="ja-wrap-narrow">
           <p className="ja-disclaimer" style={{ borderTop: 'none' }}>
             本ページは、紫微斗数を用いた自己理解のための情報提供です。2027年の結果を保証するものではなく、
-            医療・法律・投資などの専門的助言ではありません。
+            医療・法律・投資などの専門的な助言に代わるものではありません。
           </p>
         </div>
       </section>

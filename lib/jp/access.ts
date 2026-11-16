@@ -1,5 +1,5 @@
 /**
- * 有料レポートのアクセス制御（β版は全公開）。
+ * 有料レポートのアクセス制御（ベータ版は全公開）。
  *
  * 正式版では、決済事業者（Stripe / Paddle / Lemon Squeezy など）の
  * 決済完了後に `signUnlock()` でトークンを発行し、レポートURLに `?t=` で付与する。
@@ -16,7 +16,7 @@ export const REPORT_PRICES: Record<PaidReportType, number> = {
   work: 4980,
 };
 
-/** β版として無料公開するか（既定: true） */
+/** ベータ版として無料公開するか（既定: true） */
 export function isBetaFree(): boolean {
   return process.env.JP_BETA_FREE !== 'false';
 }
@@ -74,7 +74,7 @@ export function verifyUnlock(token: string | undefined, type: PaidReportType, ke
 export interface ReportAccess {
   /** 全文を表示してよいか */
   full: boolean;
-  /** β版の無料公開か */
+  /** ベータ版の無料公開か */
   beta: boolean;
   /** 有料本文の価格 */
   price: number;

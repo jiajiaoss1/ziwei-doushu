@@ -251,7 +251,7 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
             もっと詳しく読む
           </h2>
           <p style={{ fontSize: 13, color: '#a49e8f', marginBottom: 18 }}>
-            β版のあいだは、以下の鑑定書を無料で公開しています。
+            ベータ版のあいだは、以下の鑑定書を無料で公開しています。
           </p>
           <div className="ja-cards">
             <Link
@@ -299,7 +299,7 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
 
         <p className="ja-disclaimer">
           本結果は、紫微斗数を用いた自己理解のためのエンターテインメントです。将来の結果や特定の行動を保証するものではなく、
-          医療・法律・投資などの専門的助言ではありません。出生時刻が正確でない場合、命盤が変わる可能性があります。
+          医療・法律・投資などの専門的な助言に代わるものではありません。出生時刻が正確でない場合、命盤が変わる可能性があります。
         </p>
 
         <div style={{ textAlign: 'center', marginTop: 28 }}>

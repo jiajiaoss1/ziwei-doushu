@@ -96,7 +96,7 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
       <section className="ja-result-head">
         <div className="ja-wrap-narrow">
           <div className="ja-eyebrow">
-            PREMIUM REPORT ・ {access.beta ? 'β版無料公開中' : access.full ? '購入済み' : '有料鑑定'}
+            PREMIUM REPORT ・ {access.beta ? 'ベータ版無料公開中' : access.full ? '購入済み' : '有料鑑定'}
           </div>
           <h1>{report.title}</h1>
           <p style={{ color: '#a49e8f', fontSize: 14, margin: 0 }}>{report.subtitle}</p>
@@ -188,7 +188,7 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
               全文を読む
             </Link>
             <p style={{ fontSize: 11, color: '#8a8577', marginTop: 12 }}>
-              決済は準備中です。現在はβ版として無料公開しています。
+              決済は準備中です。現在はベータ版として無料公開しています。
             </p>
           </div>
         )}
@@ -207,8 +207,8 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
 
         <p className="ja-disclaimer">
           本鑑定書は、紫微斗数を用いた自己理解のためのエンターテインメントです。将来の結果や特定の行動を保証するものではなく、
-          医療・法律・投資などの専門的助言ではありません。{access.beta
-            ? 'β版期間中は無料で公開しています。'
+          医療・法律・投資などの専門的な助言に代わるものではありません。{access.beta
+            ? 'ベータ版期間中は無料で公開しています。'
             : access.full
               ? '本レポートは購入済みです。'
               : '有料パートの全文は、決済後にご覧いただけます。'}

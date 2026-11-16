@@ -42,7 +42,7 @@ export default function PrivacyPage() {
           <article className="ja-article">
             <h2>3. 保存と第三者提供</h2>
             <p>
-              β版では、入力された生年月日等は URL のパラメータとして扱われ、当サービスのデータベースには保存しません。
+              ベータ版では、入力された生年月日等は URL のパラメータとして扱われ、当サービスのデータベースには保存しません。
               今後、履歴機能等を追加する場合は、保存の目的と期間を明示し、必要に応じて同意を取得します。
             </p>
             <p>
@@ -69,7 +69,7 @@ export default function PrivacyPage() {
             <h2>6. 開示・訂正・削除の請求</h2>
             <p>
               ご本人からの個人情報の開示・訂正・利用停止・削除のご請求には、本人確認のうえ、法令に従い対応します。
-              お問い合わせ先：support@example.com（β版）
+              お問い合わせ先：support@example.com（ベータ版）
             </p>
           </article>
 
