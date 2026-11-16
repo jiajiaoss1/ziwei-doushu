@@ -7,6 +7,10 @@
  *   npm run smoke:ja
  */
 
+import dns from 'node:dns';
+
+dns.setDefaultResultOrder('ipv4first');
+
 const BASE = (process.env.BASE_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/+$/, '');
 const Q = 'y=1990&m=6&d=15&h=8&mi=0&g=m&p=' + encodeURIComponent('東京都');
 const PAIR =
@@ -36,8 +40,21 @@ const results = [];
 const fail = (name, detail) => results.push({ ok: false, name, detail });
 const pass = (name) => results.push({ ok: true, name });
 
+async function request(url, options = {}, attempts = 3) {
+  let last;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await fetch(url, options);
+    } catch (err) {
+      last = err;
+      await new Promise((r) => setTimeout(r, 300 * (i + 1)));
+    }
+  }
+  throw last;
+}
+
 async function get(path) {
-  const res = await fetch(`${BASE}${path}`, { redirect: 'manual' });
+  const res = await request(`${BASE}${path}`, { redirect: 'manual' });
   return { res, text: await res.text() };
 }
 
@@ -71,7 +88,7 @@ for (const c of cases) {
 
 // OGP image
 try {
-  const res = await fetch(`${BASE}/ja/ogp.png`);
+  const res = await request(`${BASE}/ja/ogp.png`);
   const type = res.headers.get('content-type') || '';
   if (res.status === 200 && type.includes('image/png')) pass('OGP image');
   else fail('OGP image', `${res.status} ${type}`);
@@ -81,13 +98,13 @@ try {
 
 // sitemap / robots
 try {
-  const sm = await (await fetch(`${BASE}/sitemap.xml`)).text();
+  const sm = await (await request(`${BASE}/sitemap.xml`)).text();
   const locs = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   const foreign = locs.filter((u) => !u.startsWith(BASE));
   if (locs.length >= 40 && foreign.length === 0) pass(`sitemap (${locs.length} urls, same host)`);
   else fail('sitemap', `count=${locs.length}, foreign=${foreign.slice(0, 2).join(',')}`);
 
-  const rb = await (await fetch(`${BASE}/robots.txt`)).text();
+  const rb = await (await request(`${BASE}/robots.txt`)).text();
   if (rb.includes(`Sitemap: ${BASE}/sitemap.xml`) && rb.includes(`Host: ${BASE}`)) pass('robots');
   else fail('robots', 'host/sitemap mismatch');
 } catch (err) {
@@ -109,7 +126,7 @@ try {
 
 // API: invalid body should be 400 (or 501 when no key)
 try {
-  const res = await fetch(`${BASE}/api/ja/interpret`, {
+  const res = await request(`${BASE}/api/ja/interpret`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: '{}',
