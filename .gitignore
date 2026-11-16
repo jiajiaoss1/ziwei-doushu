@@ -9,3 +9,6 @@ dist/
 node_modules
 
 !.env.ja.example
+
+# VPS 本番用テンプレートはコミットする
+!.env.production.example

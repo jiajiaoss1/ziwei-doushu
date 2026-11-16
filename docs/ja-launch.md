@@ -176,3 +176,10 @@ npm start         # http://localhost:3000/ja
 5. Bing Webmaster Tools は「Google Search Console からインポート」でOK
 
 > ルート `/` は 307 で `/ja` に飛ぶため、Search Console では `/ja` を正規URLとして扱う。sitemap は日本語ページのみ（中国語デモは除外）。
+
+
+---
+
+## 10. VPS 構成
+
+Netlify の無料枠が止まる場合の移行先として、VPS + Docker + Caddy の手順を [ja-vps-deploy.md](./ja-vps-deploy.md) に用意している。
