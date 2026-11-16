@@ -357,6 +357,8 @@ export function brightnessJa(raw?: string): BrightnessJa | undefined {
   if (!raw) return undefined;
   // エンジンは簡体字の「庙」を返すため、日本語の「廟」に寄せる
   const key = raw === '庙' ? '廟' : raw;
+  // 「地」は XD1 系の拡張段階。表示は一般的な7段階に合わせて「平」に寄せる
+  if (key === '地') return BRIGHTNESS_JA['平'];
   return BRIGHTNESS_JA[key];
 }
 

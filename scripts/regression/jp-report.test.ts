@@ -32,6 +32,8 @@ const charts: [string, JpBirthInput][] = [
   ['A', { year: 1990, month: 6, day: 15, clockHour: 8, clockMinute: 0, unknownTime: false, prefecture: '東京都', gender: 'male' }],
   ['B（空宮）', { year: 1988, month: 3, day: 3, clockHour: 14, clockMinute: 0, unknownTime: false, prefecture: '大阪府', gender: 'female' }],
   ['C', { year: 1995, month: 11, day: 20, clockHour: 23, clockMinute: 40, unknownTime: false, prefecture: '北海道', gender: 'female' }],
+  ['D（官禄宮が空宮）', { year: 1985, month: 1, day: 1, clockHour: 14, clockMinute: 0, unknownTime: false, prefecture: '東京都', gender: 'female' }],
+  ['E（命宮・夫妻宮が複数星）', { year: 1985, month: 1, day: 1, clockHour: 6, clockMinute: 0, unknownTime: false, prefecture: '東京都', gender: 'female' }],
 ];
 
 for (const [label, input] of charts) {

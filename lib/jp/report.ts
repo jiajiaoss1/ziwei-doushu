@@ -311,8 +311,7 @@ export function buildWorkReport(facts: JpChartFacts): PaidReport {
       title: '2. 向いている働き方・職種',
       body: [
         opening(guanlu),
-        traits(guanlu, 'work'),
-        `具体的には、${job}が向いています。`,
+        `向いているのは、${job}です。`,
         luckyText(guanlu),
         '組織か独立かで迷ったときは、どちらが自分の資質に合うかで選ぶと、長続きします。',
       ]

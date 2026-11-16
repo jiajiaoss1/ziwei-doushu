@@ -61,6 +61,7 @@ ok('迁移 → 遷移宮', palaceJa('迁移').nameJa === '遷移宮');
 
 // 明暗（簡体字の庙を日本語の廟へ）
 ok('庙 → 廟', brightnessJa('庙')?.label === '廟');
+ok('地 → 平（表示は7段階）', brightnessJa('地')?.label === '平');
 ok('明暗が8段階', Object.keys(BRIGHTNESS_JA).length === 8);
 
 // 格局：patterns.ts の全パターンに日本語説明があるか
