@@ -5,6 +5,7 @@ import { isValidJpBirthInput, jpBirthToChartInput, type JpBirthInput } from '@/l
 import { buildJpFacts } from '@/lib/jp/facts';
 import { buildSystemPrompt, buildUserPrompt, getLlmConfig, streamChat } from '@/lib/jp/llm';
 import type { PaidReportType } from '@/lib/jp/access';
+import { checkRateLimit, hashIp, isAllowedOrigin } from '@/lib/jp/rate-limit';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -23,6 +24,11 @@ interface Body {
 }
 
 export async function POST(req: Request) {
+  // 同一オリジン以外のブラウザ呼び出しを拒否
+  if (!isAllowedOrigin(req.headers.get('origin'), req.url, process.env.NEXT_PUBLIC_SITE_URL)) {
+    return NextResponse.json({ error: 'forbidden_origin' }, { status: 403 });
+  }
+
   const config = getLlmConfig();
   if (!config) {
     return NextResponse.json(
@@ -32,6 +38,25 @@ export async function POST(req: Request) {
           'AI解説は現在準備中です。テンプレートの読み解きをご利用ください。',
       },
       { status: 501 },
+    );
+  }
+
+  // IP 単位の制限（10 分に 10 回）
+  const ip =
+    req.headers.get('x-nf-client-connection-ip') ||
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    'unknown';
+  const limit = await checkRateLimit(`ip:${hashIp(ip)}`, 10, 10 * 60 * 1000);
+  if (!limit.ok) {
+    return NextResponse.json(
+      { error: 'rate_limited', message: 'しばらく時間をおいてからお試しください。' },
+      {
+        status: 429,
+        headers: {
+          'Retry-After': String(limit.retryAfter),
+          'X-RateLimit-Remaining': '0',
+        },
+      },
     );
   }
 

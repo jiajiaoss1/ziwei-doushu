@@ -71,6 +71,11 @@ export default function AiReading({ params, type = 'general', enabled }: AiReadi
         setLoading(false);
         return;
       }
+      if (res.status === 429) {
+        setError('回数制限に達しました。しばらく時間をおいてからお試しください。');
+        setLoading(false);
+        return;
+      }
       if (!res.ok || !res.body) throw new Error('failed');
 
       const reader = res.body.getReader();
