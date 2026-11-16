@@ -183,3 +183,10 @@ npm start         # http://localhost:3000/ja
 ## 10. VPS 構成
 
 Netlify の無料枠が止まる場合の移行先として、VPS + Docker + Caddy の手順を [ja-vps-deploy.md](./ja-vps-deploy.md) に用意している。
+
+
+---
+
+## 11. コンテンツ生成フロー
+
+入力→排盘→事実→文案の流れは [ja-content-pipeline.md](./ja-content-pipeline.md) を参照。
