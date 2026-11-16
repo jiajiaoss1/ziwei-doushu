@@ -9,7 +9,7 @@ import type { Palace, Star, ZiweiChart } from '@/lib/ziwei/types';
 import { BRANCHES, STEMS } from '@/lib/ziwei/constants';
 import { getLiuNianSiHua } from '@/lib/ziwei/sihua';
 import type { Pattern } from '@/lib/ziwei/patterns';
-import { brightnessJa, patternJa, palaceJa, starJa, type BrightnessJa, type StarJa } from './glossary';
+import { brightnessJa, jaStarName, patternJa, palaceJa, starJa, type BrightnessJa, type StarJa } from './glossary';
 
 export type HuaKey = '禄' | '権' | '科' | '忌';
 
@@ -142,8 +142,8 @@ function palaceFact(palace: Palace): PalaceFact {
     stemName: STEMS[palace.stem] ?? '',
     stars,
     major: stars.filter((s) => s.type === 'major'),
-    lucky: stars.filter((s) => s.type === 'lucky').map((s) => s.name),
-    sha: stars.filter((s) => s.type === 'sha').map((s) => s.name),
+    lucky: stars.filter((s) => s.type === 'lucky').map((s) => s.ja.nameJa),
+    sha: stars.filter((s) => s.type === 'sha').map((s) => s.ja.nameJa),
     isEmpty: palace.isEmpty ?? stars.filter((s) => s.type === 'major').length === 0,
     borrowedFromName: palace.borrowedFromName,
     borrowedStars: palace.borrowedStars ?? [],
@@ -210,10 +210,10 @@ export function buildJpFacts(
     year,
     age: chart.currentAge,
     gender: chart.birthInfo.gender,
-    yinYangGender: chart.yinYangGender ?? '',
+    yinYangGender: jaStarName(chart.yinYangGender ?? ''),
     wuxingJuName: chart.wuxingJuName,
-    mingZhu: chart.mingZhu ?? '',
-    shenZhu: chart.shenZhu ?? '',
+    mingZhu: starJa(chart.mingZhu ?? '').nameJa,
+    shenZhu: starJa(chart.shenZhu ?? '').nameJa,
     ming,
     fuqi: byName('夫妻'),
     guanlu: byName('官禄'),

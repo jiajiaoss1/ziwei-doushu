@@ -115,7 +115,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams: SP 
               lineHeight: 1.9,
             }}
           >
-            ベータ版のため、いまは<strong style={{ color: '#e3c473' }}>無料</strong>で全文を公開しています。
+            ベータ版のため、現在は全文を無料で公開しています。お支払いは発生しません。<strong style={{ color: '#e3c473' }}>無料</strong>で全文を公開しています。
             お支払いは発生しません。
           </div>
         ) : (
@@ -151,7 +151,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams: SP 
         )}
 
         <p style={{ fontSize: 11.5, color: '#8a8577', marginTop: 18, lineHeight: 1.9 }}>
-          デジタルコンテンツの性質上、提供開始後の返品・キャンセルはお受けできません。
+          返品・キャンセルの条件は、デジタルコンテンツの提供方法や契約内容に応じて定めます。正式公開前に、適用法令に照らして確認してください。
           詳細は
           <Link
             href="/ja/legal/tokushoho"

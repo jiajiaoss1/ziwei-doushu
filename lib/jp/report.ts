@@ -61,8 +61,36 @@ const JOB_TYPES: Record<string, string> = {
   破軍: '新規事業・変革・立て直しなど、ゼロから生み出す働き方',
 };
 
+function borrowedFacts(palace: PalaceFact): StarFact[] {
+  return palace.borrowedStars.map((name) => ({
+    name,
+    ja: starJa(name),
+    type: 'major' as const,
+  }));
+}
+
+/** 主星がなければ対宮の星を「借りて」読む（空宮の扱い） */
+function palaceStars(palace: PalaceFact): StarFact[] {
+  return palace.major.length > 0 ? palace.major : borrowedFacts(palace);
+}
+
 function starNames(palace: PalaceFact): string {
-  return palace.major.map((s) => s.ja.nameJa).join('・');
+  return palaceStars(palace).map((s) => s.ja.nameJa).join('・');
+}
+
+function primaryStar(palace: PalaceFact): StarFact | undefined {
+  return palaceStars(palace)[0];
+}
+
+/** 宮の書き出し。空宮なら対宮の星を明示する */
+function opening(palace: PalaceFact): string {
+  if (palace.major.length > 0) {
+    return `${palace.nameJa}には${starNames(palace)}が入っています。`;
+  }
+  if (palace.borrowedStars.length > 0) {
+    return `${palace.nameJa}は空宮で、対宮の${starNames(palace)}の影響を強く受けます。`;
+  }
+  return `${palace.nameJa}は空宮です。`;
 }
 
 function partnerImage(palace: PalaceFact): string {
@@ -86,16 +114,20 @@ function jobType(palace: PalaceFact): string {
 }
 
 function traits(palace: PalaceFact, field: 'essence' | 'love' | 'work' | 'money'): string {
-  return palace.major.map((s) => s.ja[field]).join('');
+  return palaceStars(palace).map((s) => s.ja[field]).join('');
 }
 
 function shadows(palace: PalaceFact): string {
-  return palace.major.map((s) => s.ja.shadow).join('');
+  return palaceStars(palace).map((s) => s.ja.shadow).join('');
 }
 
 function shaText(palace: PalaceFact, label: string): string {
   if (palace.sha.length === 0) return '';
-  return `${label}には${palace.sha.slice(0, 2).join('・')}が入っています。良さが素直に出にくい場面があるので、無理に押し切らず、時間をかけて関係を育てるのが得策です。`;
+  const names = palace.sha.slice(0, 2).join('・');
+  if (label === '夫妻宮') {
+    return `${label}には${names}が入っています。気持ちが先走ったり、思いどおりに進まなかったりすることもあるため、焦らず対話を重ねることが大切です。`;
+  }
+  return `${label}には${names}が入っています。計画どおりに進みにくい場面もあるため、確認を重ねながら、余裕を持って進めるとよいでしょう。`;
 }
 
 function luckyText(palace: PalaceFact): string {
@@ -141,7 +173,7 @@ function topPatterns(facts: JpChartFacts): string {
 export function buildLoveReport(facts: JpChartFacts): PaidReport {
   const ming = facts.ming;
   const fuqi = facts.fuqi;
-  const mainStar = ming.major[0];
+  const mainStar = primaryStar(ming);
   const partner = partnerImage(fuqi);
 
   const loveHua = hasHuaIn(facts, '夫妻', '禄') || hasHuaIn(facts, '夫妻', '科');
@@ -151,7 +183,7 @@ export function buildLoveReport(facts: JpChartFacts): PaidReport {
   const summary = [
     `本質は${mainStar ? mainStar.ja.keyword : '静かな芯'}。恋愛では${partner}に惹かれやすいでしょう。`,
     fuqiHua.length > 0
-      ? `今年は夫妻宮に${fuqiHua.join('、')}が入り、恋愛面が動きやすい年です。`
+      ? `今年は夫妻宮に${fuqiHua.join('、')}が入り、恋愛やパートナーシップについて見直す機会が増えそうです。`
       : '今年は恋愛面よりも、自分を整えることが関係を育てます。',
     loveJi
       ? 'こだわりや執着が強く出やすいので、相手を変えようとせず、対話を重ねることが鍵になります。'
@@ -162,7 +194,7 @@ export function buildLoveReport(facts: JpChartFacts): PaidReport {
     {
       title: '1. 恋愛の土台になる性格',
       body: [
-        `命宮には${starNames(ming)}が座っています。`,
+        opening(ming),
         traits(ming, 'essence'),
         mainStar?.ja.shadow ? `影の面では、${mainStar.ja.shadow}` : '',
         `恋愛の場面でも、この${mainStar?.ja.keyword ?? '資質'}がそのまま出ます。無理に別人を演じるより、自分のペースを大切にしたほうが、長く愛される関係になります。`,
@@ -173,7 +205,7 @@ export function buildLoveReport(facts: JpChartFacts): PaidReport {
     {
       title: '2. 惹かれやすい相手と、惹きつける魅力',
       body: [
-        `夫妻宮には${fuqi.major.length > 0 ? starNames(fuqi) : '主星がなく、対宮の影響が強い配置'}が入っています。`,
+        opening(fuqi),
         `あなたが惹かれやすいのは、${partner}。`,
         traits(fuqi, 'love'),
         luckyText(fuqi),
@@ -186,7 +218,7 @@ export function buildLoveReport(facts: JpChartFacts): PaidReport {
       title: '3. 関係が深まるまで',
       body: [
         `恋愛の進み方は、命宮と夫妻宮の組み合わせで変わります。`,
-        `${starNames(ming)}のあなたは、${traits(ming, 'love')}`,
+        `${primaryStar(ming) ? `${primaryStar(ming)!.ja.nameJa}の` : ''}あなたは、${traits(ming, 'love')}`,
         `相手を知る時間を惜しまず、小さな約束を重ねることが、関係の土台になります。`,
         fuqi.sha.length > 0
           ? '夫妻宮に緊張の星があるため、最初の勢いだけで突っ走ると、後で息切れしやすいでしょう。'
@@ -235,7 +267,7 @@ export function buildLoveReport(facts: JpChartFacts): PaidReport {
   return {
     type: 'love',
     title: '恋愛鑑定書',
-    subtitle: `${starNames(ming)}の命宮から読む、あなたの恋愛の設計図`,
+    subtitle: `${starNames(ming) || '命宮'}の命宮から読み解く、あなたの恋愛傾向`,
     summary,
     sections,
     generatedAt: new Date().toISOString(),
@@ -246,7 +278,7 @@ export function buildWorkReport(facts: JpChartFacts): PaidReport {
   const ming = facts.ming;
   const guanlu = facts.guanlu;
   const caibo = facts.caibo;
-  const mainStar = ming.major[0];
+  const mainStar = primaryStar(ming);
   const job = jobType(guanlu);
 
   const workHua = hasHuaIn(facts, '官禄', '禄') || hasHuaIn(facts, '官禄', '権') || hasHuaIn(facts, '官禄', '科');
@@ -267,9 +299,9 @@ export function buildWorkReport(facts: JpChartFacts): PaidReport {
     {
       title: '1. 仕事の資質',
       body: [
-        `命宮には${starNames(ming)}が座っています。`,
+        opening(ming),
         traits(ming, 'essence'),
-        mainStar?.ja.shadow ? `仕事の場では、${mainStar.ja.shadow}という影も出やすいので、意識して人に頼るとバランスが取れます。` : '',
+        mainStar?.ja.shadow ? `仕事の場では、${mainStar.ja.shadow.replace(/。$/, '')}という面も出やすいので、意識して人に頼るとバランスが取れます。` : '',
         `この資質は、${job}で特に活きるでしょう。`,
       ]
         .filter(Boolean)
@@ -278,7 +310,7 @@ export function buildWorkReport(facts: JpChartFacts): PaidReport {
     {
       title: '2. 向いている働き方・職種',
       body: [
-        `官禄宮には${guanlu.major.length > 0 ? starNames(guanlu) : '主星がなく、対宮の影響が強い配置'}が入っています。`,
+        opening(guanlu),
         traits(guanlu, 'work'),
         `具体的には、${job}が向いています。`,
         luckyText(guanlu),
@@ -290,9 +322,9 @@ export function buildWorkReport(facts: JpChartFacts): PaidReport {
     {
       title: '3. お金の流れ',
       body: [
-        `財帛宮には${caibo.major.length > 0 ? starNames(caibo) : '主星がなく、対宮の影響が強い配置'}が入っています。`,
+        opening(caibo),
         traits(caibo, 'money'),
-        `田宅宮には${facts.tianzhai.major.length > 0 ? starNames(facts.tianzhai) : '空宮'}が入り、資産の貯め方にも傾向が出ます。`,
+        opening(facts.tianzhai),
         '収入が増えたときほど、固定費と投資の割合を先に決めておくと、安定しやすくなります。',
       ]
         .filter(Boolean)
@@ -337,7 +369,7 @@ export function buildWorkReport(facts: JpChartFacts): PaidReport {
   return {
     type: 'work',
     title: '事業鑑定書',
-    subtitle: `${starNames(ming)}の命宮から読む、仕事とお金の設計図`,
+    subtitle: `${starNames(ming) || '命宮'}の命宮から読み解く、仕事とお金の設計図`,
     summary,
     sections,
     generatedAt: new Date().toISOString(),

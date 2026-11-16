@@ -41,7 +41,7 @@ export default function ArticlesPage() {
               </h2>
               <p style={{ fontSize: 13.5, color: '#a49e8f', margin: 0 }}>{a.description}</p>
               <span style={{ display: 'inline-block', marginTop: 12, fontSize: 12, color: '#e3c473' }}>
-                読む →
+                記事を読む →
               </span>
             </Link>
           ))}

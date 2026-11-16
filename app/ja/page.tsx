@@ -48,9 +48,9 @@ export default function JaHomePage() {
       {/* Hero */}
       <section className="ja-hero">
         <div className="ja-wrap">
-          <div className="ja-eyebrow">中国四千年の帝王学 ・ 紫微斗数</div>
+          <div className="ja-eyebrow">中国伝統の占術・紫微斗数</div>
           <h1>
-            生まれた日時から、
+            生年月日と出生時刻から、
             <br />
             あなたの「星の設計図」を読み解く。
           </h1>
@@ -66,14 +66,14 @@ export default function JaHomePage() {
               紫微斗数とは
             </a>
           </div>
-          <p className="ja-hint">登録不要 ・ 約30秒 ・ 完全無料</p>
+          <p className="ja-hint">登録不要・約30秒・無料</p>
         </div>
       </section>
 
       {/* Features */}
       <section className="ja-section" id="about">
         <div className="ja-wrap">
-          <h2 className="ja-section-title">命盤は、あなたの取扱説明書。</h2>
+          <h2 className="ja-section-title">命盤から、自分らしさを読み解く。</h2>
           <p className="ja-section-lead">
             12の宮と14の主星、そして四化（しか）の動きから、人生の領域ごとに読み解きます。
           </p>
@@ -110,18 +110,18 @@ export default function JaHomePage() {
       <section className="ja-section">
         <div className="ja-wrap">
           <h2 className="ja-section-title">診断の流れ</h2>
-          <p className="ja-section-lead">入力は3つだけ。むずかしい操作はありません。</p>
+          <p className="ja-section-lead">入力するのは3項目だけ。簡単に診断できます。</p>
           <div className="ja-steps">
             <div className="ja-step">
               <strong>生年月日と時刻を入力</strong>
               <p>西暦の生年月日、わかれば出生時刻、都道府県を選ぶだけ。</p>
             </div>
             <div className="ja-step">
-              <strong>命盤を自動で計算</strong>
+              <strong>命盤を自動計算</strong>
               <p>真太陽時で補正し、12の宮と主星の配置をその場で算出します。</p>
             </div>
             <div className="ja-step">
-              <strong>読み解きが表示される</strong>
+              <strong>診断結果が表示される</strong>
               <p>本質・恋愛・今年のテーマを、やさしい言葉でお届けします。</p>
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function JaHomePage() {
               <span className="ja-card-label">本質</span>
               <h3>あなたの資質</h3>
               <p>
-                命宮には紫微（しび）が座っています。生まれながらの品格と存在感を持ち、
+                命宮には紫微（しび）が入っています。生まれながらの品格と存在感を持ち、
                 自然と人の中心に立つ星です。責任感が強い一方で、弱みを見せにくいところも。
               </p>
             </div>
@@ -166,7 +166,7 @@ export default function JaHomePage() {
       <section className="ja-section">
         <div className="ja-wrap">
           <h2 className="ja-section-title">もっと知る</h2>
-          <p className="ja-section-lead">二人で見る相性と、来年の運気。</p>
+          <p className="ja-section-lead">相性診断と、来年の運気をチェック。</p>
           <div className="ja-cards">
             <Link href="/ja/aishou" className="ja-card" style={{ textDecoration: 'none', color: 'inherit' }}>
               <span className="ja-card-label">相性</span>

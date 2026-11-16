@@ -5,7 +5,8 @@
  * 断定せず「関係の質」を言葉にする。点数化はしない（景表法・消費者契約法の回避）。
  */
 
-import type { JpChartFacts, StarFact } from './facts';
+import type { JpChartFacts, PalaceFact, StarFact } from './facts';
+import { starJa } from './glossary';
 
 export type BranchRelation = '六合' | '三合' | '冲' | 'その他';
 export type ElementRelation = '相生' | '相剋' | '同じ' | '不明';
@@ -75,8 +76,27 @@ function starName(star: StarFact): string {
   return `${star.ja.nameJa}${star.brightness ? `（${star.brightness.label}）` : ''}`;
 }
 
-function majorList(palace: { major: StarFact[] }): string {
-  return palace.major.length > 0 ? palace.major.map(starName).join('・') : '空宮';
+function effectiveStars(palace: PalaceFact): { ja: ReturnType<typeof starJa>; brightness?: { label: string } }[] {
+  return palace.major.length > 0
+    ? palace.major.map((s) => ({ ja: s.ja, brightness: s.brightness }))
+    : palace.borrowedStars.map((n) => ({ ja: starJa(n) }));
+}
+
+function palaceNames(palace: PalaceFact): string {
+  const stars = effectiveStars(palace);
+  if (stars.length === 0) return '空宮';
+  return stars.map((s) => `${s.ja.nameJa}${s.brightness ? `（${s.brightness.label}）` : ''}`).join('・');
+}
+
+function palaceOpening(label: string, palace: PalaceFact): string {
+  const stars = effectiveStars(palace);
+  if (palace.major.length > 0) {
+    return `${label}には${palaceNames(palace)}が入っています。${firstSentence(stars[0]?.ja.essence ?? '')}`;
+  }
+  if (stars.length > 0) {
+    return `${label}は空宮で、対宮の${palaceNames(palace)}の影響を受けます。${firstSentence(stars[0]?.ja.essence ?? '')}`;
+  }
+  return `${label}は空宮です。`;
 }
 
 function overlap(a: StarFact[], b: StarFact[]): string[] {
@@ -93,14 +113,14 @@ function relationText(rel: BranchRelation): string {
     case '冲':
       return '地支が「冲」で、惹かれ合う反面、ぶつかりやすい組み合わせです。違いを面白がれるかどうかが、長続きの分かれ目になります。';
     default:
-      return '地支に強い衝突はなく、ゆるやかに距離を縮められる組み合わせです。焦らず、日常の会話を重ねるとよいでしょう。';
+      return '地支の組み合わせに大きな衝突は見られず、比較的穏やかに関係を育てていけそうです。焦らず、日常の会話を重ねるとよいでしょう。';
   }
 }
 
 function elementText(rel: ElementRelation): string {
   switch (rel) {
     case '相生':
-      return '五行は「相生」で、自然に支え合える関係です。片方が疲れているとき、もう片方が補いやすいでしょう。';
+      return '五行の関係は「相生」とされ、互いの長所を活かしやすい組み合わせです。相手の状況に合わせて助け合うことを意識するとよいでしょう。';
     case '相剋':
       return '五行は「相剋」で、主導権の取り合いが起きやすい関係です。どちらが上かではなく、役割を分けると安定します。';
     case '同じ':
@@ -119,7 +139,7 @@ export function buildCompat(a: JpChartFacts, b: JpChartFacts): CompatResult {
   const loveMatch =
     aLovesB.length > 0 || bLovesA.length > 0
       ? `あなたが惹かれやすいタイプと、お相手の本質に「${[...new Set([...aLovesB, ...bLovesA])].join('・')}」が重なっています。`
-      : '惹かれ合うタイプの重なりは大きくありませんが、その分だけ相手を新鮮に感じやすいでしょう。';
+      : '価値観や考え方に違いがあるからこそ、お相手を新鮮に感じやすいでしょう。';
 
   const label =
     rel === '六合' || rel === '三合'
@@ -133,19 +153,22 @@ export function buildCompat(a: JpChartFacts, b: JpChartFacts): CompatResult {
   const aLoveHua = a.liunian.landed.filter((l) => l.palaceName === '夫妻');
   const bLoveHua = b.liunian.landed.filter((l) => l.palaceName === '夫妻');
 
+  const aKey = effectiveStars(a.ming)[0]?.ja.keyword || '静かな芯';
+  const bKey = effectiveStars(b.ming)[0]?.ja.keyword || '穏やかな芯';
+
   const summary = [
-    `あなたは${a.ming.major[0]?.ja.keyword || '静かな芯'}、お相手は${b.ming.major[0]?.ja.keyword || '穏やかな芯'}を持つ人。`,
+    `あなたは${aKey}、お相手は${bKey}を持つ人。`,
     relationText(rel).split('。')[0] + '。',
-    `関係の鍵は「${label}」として、違いを役割に変えていくことです。`,
+    'お互いの違いを否定せず、それぞれの得意なことを活かして支え合うことが、関係を深める鍵になります。',
   ];
 
   const sections: CompatSection[] = [
     {
       title: '1. お二人の基本性質',
       body: [
-        `あなたの命宮には${majorList(a.ming)}が座っています。${firstSentence(a.ming.major[0]?.ja.essence ?? '')}`,
-        `お相手の命宮には${majorList(b.ming)}が座っています。${firstSentence(b.ming.major[0]?.ja.essence ?? '')}`,
-        '同じ星でも、組み合わせと過ごし方で関係の色は変わります。まずは、お互いのペースの違いを知ることから始めましょう。',
+        palaceOpening('あなたの命宮', a.ming),
+        palaceOpening('お相手の命宮', b.ming),
+        '命宮の星の組み合わせによって、お互いの感じ方や関係の築き方にも違いが生まれます。まずは、お互いのペースの違いを知ることから始めましょう。',
         '命宮の星は、相手にとっての「安心の型」を映します。相手がどこでホッとするのかを観察すると、関係の手がかりになります。',
       ]
         .filter(Boolean)
@@ -165,8 +188,8 @@ export function buildCompat(a: JpChartFacts, b: JpChartFacts): CompatResult {
     {
       title: '3. すれ違いやすいポイント',
       body: [
-        `あなたの影の面は「${(a.ming.major[0]?.ja.shadow || 'こだわり').replace(/。$/, '')}」。`,
-        `お相手の影の面は「${(b.ming.major[0]?.ja.shadow || 'ためらい').replace(/。$/, '')}」。`,
+        `あなたの影の面は「${(effectiveStars(a.ming)[0]?.ja.shadow || 'こだわり').replace(/。$/, '')}」。`,
+        `お相手の影の面は「${(effectiveStars(b.ming)[0]?.ja.shadow || 'ためらい').replace(/。$/, '')}」。`,
         elementText(el),
         a.fuqi.sha.length > 0 || b.fuqi.sha.length > 0
           ? '夫妻宮に緊張の星があり、すれ違いが起きたときに「言わなくても分かる」を前提にすると、こじれやすくなります。'
@@ -194,7 +217,7 @@ export function buildCompat(a: JpChartFacts, b: JpChartFacts): CompatResult {
           ? `お相手は「${b.daxian.palaceJa}」の大限（${b.daxian.startAge}〜${b.daxian.endAge}歳）。${b.daxian.decadeTheme}です。`
           : 'お相手はまだ大限に入る前の時期です。',
         aLoveHua.length > 0 || bLoveHua.length > 0
-          ? `今年は${[...aLoveHua, ...bLoveHua].map((l) => `${l.star}の${l.hua === '権' ? '化権' : `化${l.hua}`}`).join('、')}が夫妻宮に入り、恋愛面が動きやすい年です。`
+          ? `今年は夫妻宮に${[...aLoveHua, ...bLoveHua].map((l) => `${l.star}の${l.hua === '権' ? '化権' : `化${l.hua}`}`).join('、')}が関わるため、恋愛やパートナーシップについて考える機会が増えそうです。`
           : '今年は恋愛面の大きな動きは少なく、関係を育てる年になりそうです。',
         '縁は、日常の延長線上で動きます。特別な場所より、いつもの場所での会話を大切にしてください。',
       ].join(''),

@@ -6,7 +6,7 @@
  */
 
 import type { JpChartFacts, PalaceFact, StarFact } from './facts';
-import { SIHUA_JA, type SiHuaJaKey } from './glossary';
+import { SIHUA_JA, starJa, type SiHuaJaKey } from './glossary';
 
 export interface ReadingHighlight {
   title: string;
@@ -68,15 +68,18 @@ function palaceIntro(palace: PalaceFact): string {
     const names = palace.major
       .map((s) => `${s.ja.nameJa}${s.brightness ? `（${s.brightness.label}）` : ''}`)
       .join('・');
-    return `${palace.nameJa}には${names}が座っています。`;
+    return `${palace.nameJa}には${names}が入っています。`;
   }
-  const borrowed = palace.borrowedStars.length > 0 ? palace.borrowedStars.join('・') : '対宮の主星';
+  const borrowed = palace.borrowedStars.length > 0
+    ? palace.borrowedStars.map((n) => starJa(n).nameJa).join('・')
+    : '対宮の主星';
   return `${palace.nameJa}は空宮（くうきゅう）で、対宮の${borrowed}の影響を強く受けます。`;
 }
 
 function majorTraits(palace: PalaceFact, field: 'essence' | 'love' | 'work' | 'money'): string {
-  const list = palace.major.length > 0 ? palace.major : [];
-  if (list.length === 0) return '';
+  const list = palace.major.length > 0
+    ? palace.major
+    : palace.borrowedStars.map((name) => ({ ja: starJa(name) }));
   return list
     .map((s) => s.ja[field])
     .filter(Boolean)
@@ -86,7 +89,7 @@ function majorTraits(palace: PalaceFact, field: 'essence' | 'love' | 'work' | 'm
 function shaNote(palace: PalaceFact): string {
   if (palace.sha.length === 0) return '';
   const names = palace.sha.slice(0, 2).join('・');
-  return `${names}も同じ宮にあり、良さが素直に出にくい場面があります。焦らず、時間をかけて整えることが助けになります。`;
+  return `${names}も同じ宮にあり、持ち味を発揮するまでに時間がかかることもあります。焦らず、自分に合ったペースを大切にしましょう。`;
 }
 
 function luckyNote(palace: PalaceFact): string {
@@ -107,7 +110,7 @@ function daxianText(facts: JpChartFacts): string {
 function liunianText(facts: JpChartFacts): string {
   const ln = facts.liunian;
   const parts: string[] = [];
-  parts.push(`${ln.year}年は${ln.stem}${ln.branch}年。${ln.palaceJa}が今年の中心になります。`);
+  parts.push(`${ln.year}年は${ln.stem}${ln.branch}年。${ln.palaceJa}が今年のテーマの中心になりそうです。`);
 
   const order: SiHuaJaKey[] = ['禄', '権', '科', '忌'];
   for (const hua of order) {
@@ -135,7 +138,10 @@ function patternsText(facts: JpChartFacts): string {
 export function buildFreeReading(facts: JpChartFacts): FreeReading {
   const ming = facts.ming;
   const mingStars = ming.major;
-  const mainStar = mingStars[0]?.ja;
+  const effectiveMing = ming.major.length > 0
+    ? ming.major.map((s) => s.ja)
+    : ming.borrowedStars.map((n) => starJa(n));
+  const mainStar = effectiveMing[0];
   const headline = mainStar
     ? `${mainStar.nameJa}の命宮を持つ、${mainStar.keyword}の人`
     : '静かな芯を持つ人';
@@ -147,7 +153,9 @@ export function buildFreeReading(facts: JpChartFacts): FreeReading {
       label: '本質',
       title: 'あなたの資質',
       body: mainStar
-        ? `${mainStar.nameJa}（${mainStar.kana}）の命宮。${firstSentence(mainStar.essence)}`
+        ? ming.major.length > 0
+          ? `${mainStar.nameJa}（${mainStar.kana}）の命宮。${firstSentence(mainStar.essence)}`
+          : `命宮は空宮。対宮の${mainStar.nameJa}（${mainStar.kana}）の影響を受けます。${firstSentence(mainStar.essence)}`
         : firstSentence('静かな芯を持ち、周囲に合わせすぎない人です。'),
     },
     {
@@ -155,7 +163,9 @@ export function buildFreeReading(facts: JpChartFacts): FreeReading {
       title: '恋愛の傾向',
       body: facts.fuqi.major.length > 0
         ? `${facts.fuqi.major.map((s) => s.ja.nameJa).join('・')}の夫妻宮。${firstSentence(facts.fuqi.major[0].ja.love)}`
-        : '夫妻宮は空宮。対宮の影響を受け、相手を通して自分を知る恋になりやすいでしょう。',
+        : facts.fuqi.borrowedStars.length > 0
+          ? `夫妻宮は空宮。対宮の${facts.fuqi.borrowedStars.map((n) => starJa(n).nameJa).join('・')}の影響を受けやすいでしょう。`
+          : '夫妻宮は空宮。対宮の影響を受け、相手を通して自分を知る恋になりやすいでしょう。',
     },
     {
       label: '今年',
@@ -176,7 +186,7 @@ export function buildFreeReading(facts: JpChartFacts): FreeReading {
         majorTraits(ming, 'essence'),
         mingStars.map(huaSentence).join(''),
         shaNote(ming),
-        mingStars[0]?.ja.shadow ? `影の面としては、${mingStars[0].ja.shadow}` : '',
+        mainStar?.shadow ? `影の面としては、${mainStar.shadow}` : '',
         facts.sanfang.length > 0
           ? `三方四正（さんぽうししょう）には${facts.sanfang.map((s) => `${s.palaceName}の${s.stars.join('・') || '空宮'}`).join('、')}が並び、人生の土台を支えています。`
           : '',
@@ -194,7 +204,7 @@ export function buildFreeReading(facts: JpChartFacts): FreeReading {
         luckyNote(facts.fuqi),
         shaNote(facts.fuqi),
         facts.liunian.landed.some((l) => l.palaceName === '夫妻')
-          ? '今年は夫妻宮にも星の動きがあり、恋愛面が動きやすい年です。'
+          ? '今年は夫妻宮にも四化の影響が及ぶため、恋愛やパートナーシップについて考える機会が増えそうです。'
           : '',
       ]
         .filter(Boolean)
@@ -207,7 +217,7 @@ export function buildFreeReading(facts: JpChartFacts): FreeReading {
         palaceIntro(facts.guanlu),
         majorTraits(facts.guanlu, 'work'),
         facts.guanlu.sha.length > 0
-          ? '仕事の宮に緊張の星が入るため、頑張りすぎず、要所で人に任せることが長続きのコツです。'
+          ? '官禄宮には緊張感をもたらす星も入っています。頑張りすぎず、要所で周囲に相談したり、仕事を任せたりすることが長続きのコツです。'
           : '',
       ]
         .filter(Boolean)

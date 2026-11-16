@@ -43,7 +43,7 @@ const SIHUA_2027 = [
     star: '巨門',
     kana: 'きょもん',
     theme: '言葉・こだわり',
-    text: '言葉の行き違いや、こだわりが強く出やすいサインです。会話や契約の場面では、確認を丁寧に。',
+    text: '言葉の行き違いや考え方の違いに気づきやすい時期です。大切な話し合いや契約では、内容を一つずつ確認しましょう。',
   },
 ];
 
@@ -51,7 +51,7 @@ export default function Year2027Page() {
   const faq = [
     {
       q: '2027年の運気はいつから切り替わりますか？',
-      a: '紫微斗数の流年は、一般的に旧正月（春節）を境に切り替わるとされます。2027年の春節は2月6日ごろです。',
+      a: 'このページでは、流年の切り替わりを旧正月（春節）に合わせています。2027年の春節は2月6日です。なお、流年の起点は流派や採用する暦法によって異なる場合があります。',
     },
     {
       q: '四化がどの宮に入るかは、どうやって見ますか？',
@@ -92,14 +92,14 @@ export default function Year2027Page() {
               記事で詳しく読む
             </Link>
           </div>
-          <p className="ja-hint">登録不要 ・ 約30秒 ・ 無料</p>
+          <p className="ja-hint">登録不要・約30秒・無料</p>
         </div>
       </section>
 
       <section className="ja-section">
         <div className="ja-wrap-narrow">
           <h2 className="ja-section-title">2027年の四化</h2>
-          <p className="ja-section-lead">丁の年は、太陰・天同・天機・巨門の四つが動きます。</p>
+          <p className="ja-section-lead">丁年の四化は、太陰化禄・天同化権・天機化科・巨門化忌です。</p>
           <div className="ja-cards" style={{ marginBottom: 20 }}>
             {SIHUA_2027.map((s) => (
               <div key={s.hua} className="ja-card">
