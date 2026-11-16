@@ -46,7 +46,20 @@
 
 ## 4. 支付接入（事业鉴定书 4,980 円）
 
-当前实现：
+> **重要（2026-11 调查）**：主流全球支付商对「占い」有明确限制，不能按普通数字商品接。
+> - Stripe 日本：禁止「霊媒サービス・算命師」（[Stripe 禁止/限制业务](https://stripe.com/cn/legal/restricted-businesses) 的日本管辖条款）
+> - Creem：禁止「Metaphysical, fortune-telling, and spiritual outcome services」（[Creem 审核政策](https://docs.creem.io/merchant-of-record/account-reviews/account-reviews)）
+> - Dodo：把「Spiritual & Astrology」列为需严格审查，仅限娱乐、不得预测（[Dodo 政策](https://docs.dodopayments.com/miscellaneous/merchant-acceptance)）
+> - Lemon Squeezy：社区反馈自 2026-02 起不接受中国开发者；且其禁止清单也需要逐条确认
+>
+> 因此，**可落地的路线是日本本地支付代行**（接受「占い」业种），而不是 Stripe/MoR：
+> - AXES Payment（SBI 集团）：有「有料占いサイト」导入实绩（[事例](https://www.axes-payment.co.jp/case/horoscope.html)）
+> - SUI Credit Service（シマトモ）：明确列出「占い」为可对应业种（[业种](https://shimatomo.com/industries)）
+> - 其他：GMO PG / KOMOJU 等需事前审查，向营业确认「占い」可否
+>
+> 这些都需要**日本法人或日本个人事业主 + 日本地址 + 日本银行账户**，并提交网站、特商法表记、价格、退款政策、免责说明。费率与保证金按业种报价。
+
+当前代码已就绪的流程：
 
 ```
 购买页 → 外部结账（JP_CHECKOUT_URL）
@@ -57,15 +70,26 @@
 
 接入步骤：
 
-1. 选支付商：Stripe（需日本账户）或 Paddle / Lemon Squeezy（MoR，代收代缴 JCT）。
-2. 在支付商后台创建商品「事業鑑定書 4,980円」，把结账 URL 填入 `JP_CHECKOUT_URL`。
+1. 先完成日本主体与 PSP 事前审查（提交本网站、特商法、利用规约、隐私政策、退款条款）。
+2. 在 PSP 侧创建「事業鑑定書 4,980円」的支付链接/API，把 URL 填入 `JP_CHECKOUT_URL`。
 3. 回调里校验支付状态，然后用 `lib/jp/access.ts` 的 `signUnlock()` 生成 token。
 4. token 默认 30 天有效；退款/争议时把 `JP_UNLOCK_SECRET` 轮换即可让旧 token 失效。
-5. 上线前跑一遍「无 token → 锁定 / 有 token → 全文」，命令见 README。
+5. 上线前跑一遍「无 token → 锁定 / 有 token → 全文」。
 
-> 注意：`JP_BETA_FREE=false` 之后，恋爱报告仍免费（`getReportAccess` 里写死），只有事业报告收费。
+> `JP_BETA_FREE=false` 之后，恋爱报告仍免费（`getReportAccess` 里写死），只有事业报告收费。
+> 在主体/PSP 准备好之前，保持 `JP_BETA_FREE=true`，用免费版验证内容与转化。
 
 ---
+
+## 4.5 ドメイン
+
+- `.jp` は日本国内の住所（通知を受け取れる住所）が必要。`.co.jp` は日本で登記した法人のみ（[JPRS](https://jprs.jp/faq/registration/)）。
+- 日本主体・住所がない段階では **.com を先に取得**し、後から `.jp` を取得して 301 リダイレクトするのが現実的。
+- 日本ユーザーは `.jp` / `.co.jp` を「国内事業者」のサインとして見るが、`.com` でも信頼は得られる。実際は特商法表記・会社情報・日本語の品質・SSL の方が効く。
+- 候補：`shibikan.jp` / `shibikan.com`（短く、ハイフン・数字なし）。ブランド名で取り、キーワード（uranai / shibitosu）は title/description 側で拾う。
+- 日本語ドメイン（IDN）はメインにしない（メール・共有・入力の事故）。必要なら防御的に取得。
+- `.jp` は WHOIS で登録者情報が公開されるため、住所は事業用のものを使う。
+- 取得後、`NEXT_PUBLIC_SITE_URL` を正式ドメインに変更して再デプロイ（OGP/canonical/sitemap が全部これ基準）。
 
 ## 5. 法务上线清单
 
