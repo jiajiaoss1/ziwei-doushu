@@ -101,8 +101,9 @@ try {
   const sm = await (await request(`${BASE}/sitemap.xml`)).text();
   const locs = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   const foreign = locs.filter((u) => !u.startsWith(BASE));
-  if (locs.length >= 40 && foreign.length === 0) pass(`sitemap (${locs.length} urls, same host)`);
-  else fail('sitemap', `count=${locs.length}, foreign=${foreign.slice(0, 2).join(',')}`);
+  const nonJa = locs.filter((u) => !u.includes('/ja'));
+  if (locs.length >= 12 && foreign.length === 0 && nonJa.length === 0) pass(`sitemap (${locs.length} urls, JA only)`);
+  else fail('sitemap', `count=${locs.length}, foreign=${foreign.slice(0, 2).join(',')}, nonJa=${nonJa.slice(0, 2).join(',')}`);
 
   const rb = await (await request(`${BASE}/robots.txt`)).text();
   if (rb.includes(`Sitemap: ${BASE}/sitemap.xml`) && rb.includes(`Host: ${BASE}`)) pass('robots');
