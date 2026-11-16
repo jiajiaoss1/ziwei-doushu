@@ -16,6 +16,7 @@ interface AiReadingProps {
   };
   type?: 'general' | 'love' | 'work';
   enabled: boolean;
+  token?: string;
 }
 
 interface Segment {
@@ -42,7 +43,7 @@ export function parse(text: string): Segment[] {
   return segments;
 }
 
-export default function AiReading({ params, type = 'general', enabled }: AiReadingProps) {
+export default function AiReading({ params, type = 'general', enabled, token }: AiReadingProps) {
   const [text, setText] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -62,12 +63,17 @@ export default function AiReading({ params, type = 'general', enabled }: AiReadi
       const res = await fetch('/api/ja/interpret', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...params, type }),
+        body: JSON.stringify({ ...params, type, token }),
         signal: controller.signal,
       });
 
       if (res.status === 501) {
         setError('AI解説は現在準備中です。上の読み解きをご利用ください。');
+        setLoading(false);
+        return;
+      }
+      if (res.status === 401) {
+        setError('このページからもう一度お試しください。');
         setLoading(false);
         return;
       }

@@ -6,6 +6,8 @@ import { buildJpFacts } from '@/lib/jp/facts';
 import { buildSystemPrompt, buildUserPrompt, getLlmConfig, streamChat } from '@/lib/jp/llm';
 import type { PaidReportType } from '@/lib/jp/access';
 import { checkRateLimit, hashIp, isAllowedOrigin } from '@/lib/jp/rate-limit';
+import { verifyAiToken } from '@/lib/jp/ai-token';
+import { birthKey } from '@/lib/jp/access';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -21,6 +23,7 @@ interface Body {
   p?: string;
   type?: 'general' | PaidReportType;
   question?: string;
+  token?: string;
 }
 
 export async function POST(req: Request) {
@@ -80,6 +83,19 @@ export async function POST(req: Request) {
 
   if (!isValidJpBirthInput(input)) {
     return NextResponse.json({ error: 'invalid_birth' }, { status: 400 });
+  }
+
+  if (!verifyAiToken(body.token, ip, birthKey(input))) {
+    return NextResponse.json({ error: 'invalid_token' }, { status: 401 });
+  }
+
+  // 同じトークンの使い回しも制限（15 分に 5 回）
+  const tokenLimit = await checkRateLimit(`token:${hashIp(body.token!)}`, 5, 15 * 60 * 1000);
+  if (!tokenLimit.ok) {
+    return NextResponse.json(
+      { error: 'rate_limited', message: 'しばらく時間をおいてからお試しください。' },
+      { status: 429, headers: { 'Retry-After': String(tokenLimit.retryAfter) } },
+    );
   }
 
   const question = (body.question ?? '').slice(0, 200);

@@ -10,6 +10,9 @@ import {
 } from '@/lib/jp/birth';
 import { buildJpFacts } from '@/lib/jp/facts';
 import { detectPatterns } from '@/lib/ziwei/patterns';
+import { headers } from 'next/headers';
+import { birthKey } from '@/lib/jp/access';
+import { signAiToken } from '@/lib/jp/ai-token';
 import { buildFreeReading } from '@/lib/jp/interpret';
 import { isLlmEnabled } from '@/lib/jp/llm';
 import { resolveFlowYear } from '@/lib/jp/year';
@@ -74,6 +77,13 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
 
   const thisYear = new Date().getFullYear();
   const flowYear = resolveFlowYear(one(sp.year), thisYear);
+
+  const h = await headers();
+  const ip =
+    h.get('x-nf-client-connection-ip') ||
+    h.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    'unknown';
+  const aiToken = signAiToken(ip, birthKey(input));
 
   const birth = jpBirthToChartInput(input);
   const chart = generateChart(birth.birthInfo);
@@ -233,6 +243,7 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
         <AiReading
           enabled={isLlmEnabled()}
           type="general"
+          token={aiToken}
           params={{
             y: input.year,
             m: input.month,
