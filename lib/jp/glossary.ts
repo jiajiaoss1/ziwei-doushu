@@ -198,7 +198,7 @@ export const PALACE_JA: Record<string, PalaceJa> = {
   财帛: { nameJa: '財帛宮', kana: 'ざいばくきゅう', theme: 'お金や収入の得方', decade: 'お金との付き合い方が問われる十年' },
   疾厄: { nameJa: '疾厄宮', kana: 'しつやくきゅう', theme: '健康や体質', decade: '心身のメンテナンスが主題になる十年' },
   迁移: { nameJa: '遷移宮', kana: 'せんいきゅう', theme: '外出・環境の変化', decade: '外に出ること、環境を変えることが主題になる十年' },
-  仆役: { nameJa: '僕役宮', kana: 'ぼくえききゅう', theme: '友人や部下との関係', decade: '仲間やチームとの関係が主題になる十年' },
+  仆役: { nameJa: '交友宮', kana: 'こうゆうきゅう', theme: '友人や部下との関係', decade: '仲間やチームとの関係が主題になる十年' },
   官禄: { nameJa: '官禄宮', kana: 'かんろくきゅう', theme: '仕事や社会的な立場', decade: '仕事と立場が大きく動く十年' },
   田宅: { nameJa: '田宅宮', kana: 'でんたくきゅう', theme: '住まいや資産', decade: '住まいや基盤を整える十年' },
   福德: { nameJa: '福徳宮', kana: 'ふくとくきゅう', theme: '心の充実や趣味', decade: '心の充足や楽しみが主題になる十年' },
