@@ -153,7 +153,10 @@ export default async function CheckoutPage({ searchParams }: { searchParams: SP 
         <p style={{ fontSize: 11.5, color: '#8a8577', marginTop: 18, lineHeight: 1.9 }}>
           デジタルコンテンツの性質上、提供開始後の返品・キャンセルはお受けできません。
           詳細は
-          <Link href="/ja/legal/tokushoho" style={{ color: '#a49e8f' }}>
+          <Link
+            href="/ja/legal/tokushoho"
+            style={{ color: '#a49e8f', textDecoration: 'underline' }}
+          >
             特定商取引法に基づく表記
           </Link>
           をご確認ください。

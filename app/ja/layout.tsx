@@ -4,6 +4,11 @@ import SiteHeader from '@/components/jp/SiteHeader';
 import SiteFooter from '@/components/jp/SiteFooter';
 import { SITE_URL } from '@/lib/site';
 
+export const viewport = {
+  themeColor: '#0a0e1c',
+  colorScheme: 'dark' as const,
+};
+
 export const metadata: Metadata = {
   title: {
     default: '紫微館｜紫微斗数で読む、あなたの星の設計図',
