@@ -116,7 +116,7 @@ Vercel Analytics 已接入，事件名：
 | `jp_checkout_view` | 结账页渲染 | 购买意向 |
 | `jp_ai_generate` | 点击 AI 生成 | 功能使用率 |
 
-本地/非 Vercel 环境下事件会被静默忽略，不影响页面。
+`NEXT_PUBLIC_GA_ID` 未設定時はタグを読み込まず、イベントも送信しない。
 
 ---
 
@@ -126,7 +126,7 @@ Vercel Analytics 已接入，事件名：
 cd repo
 npm ci
 npx tsc --noEmit
-npm test          # 14 组
+npm test          # 19 组
 npm run build
 npm start         # http://localhost:3000/ja
 ```
@@ -137,7 +137,7 @@ npm start         # http://localhost:3000/ja
 - [ ] 未填时刻 → 正午计算，页面有提示
 - [ ] 无 API Key 时 `/api/ja/interpret` 返回 501，页面不显示 AI 面板
 - [ ] 付费模式：无 token 锁定、有 token 全文
-- [ ] 本番スモーク：`BASE_URL=https://<domain> npm run smoke:ja`（35+ 項目）
+- [ ] 本番スモーク：`BASE_URL=https://<domain> npm run smoke:ja`（36 項目）
 
 ---
 
@@ -147,3 +147,32 @@ npm start         # http://localhost:3000/ja
 - 紫微斗数使用中国农历；日本旧暦在极少数日期会差一天，建议在 FAQ 说明。
 - 日语内容由 LLM 生成并逐句校对，但仍建议上线前请母语者通读。
 - 生年月日只存在 URL 参数中，刷新/分享会带上参数；若后续做账号体系，需要重新设计存储与同意流程。
+
+
+---
+
+## 9. GA4 と Search Console
+
+### GA4
+
+1. https://analytics.google.com → 管理 → プロパティを作成
+2. データストリーム → Web → URL に `https://shibikan.com`
+3. 測定 ID（`G-XXXXXXXXXX`）をコピー
+4. Netlify → Environment variables → `NEXT_PUBLIC_GA_ID` に設定
+5. Deploys → Trigger deploy → **Clear cache and deploy site**
+6. GA4 の「リアルタイム」で `/ja` を開いて確認
+
+カスタムイベントは `jp_*`（診断送信・結果閲覧・鑑定書閲覧・購入画面・AI 生成・相性）で送信される。
+
+### Search Console
+
+1. https://search.google.com/search-console → **ドメイン** プロパティで `shibikan.com` を追加
+2. Netlify DNS → Add record:
+   - Type: `TXT`
+   - Name: `@`
+   - Value: Google が表示する `google-site-verification=...`
+3. 所有権を確認
+4. **サイトマップ** に `https://shibikan.com/sitemap.xml` を送信
+5. Bing Webmaster Tools は「Google Search Console からインポート」でOK
+
+> ルート `/` は 307 で `/ja` に飛ぶため、Search Console では `/ja` を正規URLとして扱う。sitemap は日本語ページのみ（中国語デモは除外）。

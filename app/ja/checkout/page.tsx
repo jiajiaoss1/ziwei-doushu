@@ -115,8 +115,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams: SP 
               lineHeight: 1.9,
             }}
           >
-            ベータ版のため、現在は全文を無料で公開しています。お支払いは発生しません。<strong style={{ color: '#e3c473' }}>無料</strong>で全文を公開しています。
-            お支払いは発生しません。
+            ベータ版のため、現在は全文を無料で公開しています。お支払いは発生しません。
           </div>
         ) : (
           <div
@@ -130,7 +129,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams: SP 
               lineHeight: 1.9,
             }}
           >
-            決済はクレジットカード（Stripe）または外部決済ページを予定しています。
+            決済はクレジットカード（決済代行会社経由）を予定しています。
             決済完了後、鑑定書の全文URLが発行されます。
           </div>
         )}
