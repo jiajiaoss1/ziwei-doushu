@@ -53,6 +53,26 @@ Netlify → **Domain management** → `shibikan.com` → DNS records:
 
 > Caddy は HTTP-01 / TLS-ALPN で証明書を取るため、DNS が VPS を向いてから証明書が発行される。先に DNS を向けてから Caddy を起動するのが楽。
 
+## 2.5 証明書を DNS-01 で取る（推奨）
+
+A レコードの反映待ちを避けるため、Caddy は Netlify DNS の API で TXT を書き、DNS-01 で証明書を取る。
+
+1. Netlify → User settings → Applications → Personal access tokens → New access token
+2. `.env.production` に追記:
+
+```dotenv
+NETLIFY_AUTH_TOKEN=xxxxxxxx
+```
+
+3. `Caddyfile` は `tls { dns netlify {env.NETLIFY_AUTH_TOKEN} }` を使う（このリポジトリの既定）
+4. `Dockerfile.caddy` が `caddy-dns/netlify` を組み込んだ Caddy をビルドする
+
+```bash
+bash scripts/vps/deploy.sh
+```
+
+> A レコードが VPS を向いていなくても証明書を取得できる。DNS の TTL キャッシュに悩まされない。
+
 ## 3. 初期設定
 
 ```bash
