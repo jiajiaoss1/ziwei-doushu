@@ -190,3 +190,10 @@ Netlify の無料枠が止まる場合の移行先として、VPS + Docker + Cad
 ## 11. コンテンツ生成フロー
 
 入力→排盘→事実→文案の流れは [ja-content-pipeline.md](./ja-content-pipeline.md) を参照。
+
+
+---
+
+## 12. Backlog
+
+公開前の必須項目・課金・改善・技術的負債は [ja-backlog.md](./ja-backlog.md) に集約。
