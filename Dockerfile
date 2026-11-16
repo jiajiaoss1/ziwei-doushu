@@ -5,7 +5,8 @@ FROM node:22-alpine AS deps
 WORKDIR /app
 RUN apk add --no-cache libc6-compat
 COPY package.json package-lock.json ./
-RUN npm ci --no-audit --no-fund
+# npm 10 は lock 内の fdir/picomatch の hoisting を厳密に検証して失敗するため legacy-peer-deps を使う
+RUN npm ci --legacy-peer-deps --no-audit --no-fund
 
 FROM node:22-alpine AS builder
 WORKDIR /app
