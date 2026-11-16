@@ -137,6 +137,7 @@ npm start         # http://localhost:3000/ja
 - [ ] 未填时刻 → 正午计算，页面有提示
 - [ ] 无 API Key 时 `/api/ja/interpret` 返回 501，页面不显示 AI 面板
 - [ ] 付费模式：无 token 锁定、有 token 全文
+- [ ] 本番スモーク：`BASE_URL=https://<domain> npm run smoke:ja`（35+ 項目）
 
 ---
 
