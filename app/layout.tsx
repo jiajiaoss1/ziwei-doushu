@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { SITE_URL } from '@/lib/site';
+import LocaleBanner from '@/components/LocaleBanner';
 
 export const metadata: Metadata = {
   title: '紫微命盘 · 倪海厦正宗紫微斗数',
@@ -38,14 +39,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
+    <html lang="ja" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('ziwei-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);else document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();` }} />
       </head>
-      <body className="min-h-screen">
+      <body className="min-h-screen" lang="zh-CN">
         <ThemeProvider>
           {children}
         </ThemeProvider>
+        <LocaleBanner />
         <Analytics />
         <SpeedInsights />
       </body>

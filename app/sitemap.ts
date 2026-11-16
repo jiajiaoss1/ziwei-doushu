@@ -11,11 +11,31 @@ import type { MetadataRoute } from 'next';
 import { ALL_BOOKS } from '@/lib/classics';
 import { getAllKnowledgeRoutes } from '@/lib/seo/knowledge';
 import { SITE_URL } from '@/lib/site';
+import { ARTICLES } from '@/lib/jp/articles';
 
 const BASE_URL = SITE_URL;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastmod = new Date('2026-04-28');
+
+  // 日本語版（日本市場向け）— 更新日はビルド日を使う
+  const jaLastmod = new Date();
+  const jaPages: MetadataRoute.Sitemap = [
+    { url: `${BASE_URL}/ja`, priority: 1.0, changeFrequency: 'weekly', lastModified: jaLastmod },
+    { url: `${BASE_URL}/ja/shindan`, priority: 0.9, changeFrequency: 'weekly', lastModified: jaLastmod },
+    { url: `${BASE_URL}/ja/articles`, priority: 0.8, changeFrequency: 'weekly', lastModified: jaLastmod },
+    { url: `${BASE_URL}/ja/aishou`, priority: 0.85, changeFrequency: 'weekly', lastModified: jaLastmod },
+    { url: `${BASE_URL}/ja/2027`, priority: 0.85, changeFrequency: 'weekly', lastModified: jaLastmod },
+    ...ARTICLES.map((a) => ({
+      url: `${BASE_URL}/ja/articles/${a.slug}`,
+      priority: 0.8,
+      changeFrequency: 'monthly' as const,
+      lastModified: new Date(a.updatedAt),
+    })),
+    { url: `${BASE_URL}/ja/legal/terms`, priority: 0.2, changeFrequency: 'yearly', lastModified: jaLastmod },
+    { url: `${BASE_URL}/ja/legal/privacy`, priority: 0.2, changeFrequency: 'yearly', lastModified: jaLastmod },
+    { url: `${BASE_URL}/ja/legal/tokushoho`, priority: 0.2, changeFrequency: 'yearly', lastModified: jaLastmod },
+  ];
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL, priority: 1.0, changeFrequency: 'weekly', lastModified: lastmod },
@@ -52,5 +72,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: lastmod,
   }));
 
-  return [...staticPages, ...libraryPages, ...knowledgePages];
+  return [...jaPages, ...staticPages, ...libraryPages, ...knowledgePages];
 }

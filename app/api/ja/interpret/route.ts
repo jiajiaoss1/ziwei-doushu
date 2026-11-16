@@ -1,0 +1,109 @@
+import { NextResponse } from 'next/server';
+import { generateChart } from '@/lib/ziwei/algorithm';
+import { detectPatterns } from '@/lib/ziwei/patterns';
+import { isValidJpBirthInput, jpBirthToChartInput, type JpBirthInput } from '@/lib/jp/birth';
+import { buildJpFacts } from '@/lib/jp/facts';
+import { buildSystemPrompt, buildUserPrompt, getLlmConfig, streamChat } from '@/lib/jp/llm';
+import type { PaidReportType } from '@/lib/jp/access';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+interface Body {
+  y?: number;
+  m?: number;
+  d?: number;
+  h?: number;
+  mi?: number;
+  u?: boolean;
+  g?: 'm' | 'f';
+  p?: string;
+  type?: 'general' | PaidReportType;
+  question?: string;
+}
+
+export async function POST(req: Request) {
+  const config = getLlmConfig();
+  if (!config) {
+    return NextResponse.json(
+      {
+        error: 'llm_not_configured',
+        message:
+          'AI解説は現在準備中です。テンプレートの読み解きをご利用ください。',
+      },
+      { status: 501 },
+    );
+  }
+
+  let body: Body;
+  try {
+    body = (await req.json()) as Body;
+  } catch {
+    return NextResponse.json({ error: 'invalid_json' }, { status: 400 });
+  }
+
+  const input: JpBirthInput = {
+    year: Number(body.y),
+    month: Number(body.m),
+    day: Number(body.d),
+    clockHour: Number(body.h ?? 0),
+    clockMinute: Number(body.mi ?? 0),
+    unknownTime: Boolean(body.u),
+    prefecture: body.p || '東京都',
+    gender: body.g === 'm' ? 'male' : 'female',
+  };
+
+  if (!isValidJpBirthInput(input)) {
+    return NextResponse.json({ error: 'invalid_birth' }, { status: 400 });
+  }
+
+  const question = (body.question ?? '').slice(0, 200);
+  const type: 'general' | PaidReportType =
+    body.type === 'love' || body.type === 'work' ? body.type : 'general';
+
+  let facts;
+  try {
+    const birth = jpBirthToChartInput(input);
+    const chart = generateChart(birth.birthInfo);
+    facts = buildJpFacts(chart, new Date().getFullYear(), detectPatterns(chart));
+  } catch {
+    return NextResponse.json({ error: 'chart_failed' }, { status: 422 });
+  }
+
+  const messages = [
+    { role: 'system' as const, content: buildSystemPrompt() },
+    { role: 'user' as const, content: buildUserPrompt(facts, { type, question }) },
+  ];
+
+  const encoder = new TextEncoder();
+  const stream = new ReadableStream<Uint8Array>({
+    async start(controller) {
+      try {
+        for await (const delta of streamChat(config, messages, { maxTokens: 1200 })) {
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text: delta })}\n\n`));
+        }
+        controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+      } catch (err) {
+        const message = err instanceof Error ? err.message : 'llm_error';
+        controller.enqueue(
+          encoder.encode(`data: ${JSON.stringify({ error: 'llm_upstream', message })}\n\n`),
+        );
+        controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+      } finally {
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      'Content-Type': 'text/event-stream; charset=utf-8',
+      'Cache-Control': 'no-cache, no-transform',
+      Connection: 'keep-alive',
+    },
+  });
+}
+
+export async function GET() {
+  return NextResponse.json({ error: 'method_not_allowed' }, { status: 405 });
+}
