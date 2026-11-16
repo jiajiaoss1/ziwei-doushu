@@ -1,9 +1,8 @@
 /**
  * AI エンドポイントの簡易レートリミット。
  *
- * Netlify 上では Blobs（永続ストア）にカウンタを置き、複数インスタンスでも
- * ある程度共有する。ローカルや Blobs が使えない環境ではプロセス内メモリに
- * フォールバックする（インスタンスごとの制限になる点は許容）。
+ * プロセス内メモリのカウンタで制限する（インスタンス単位）。
+ * 強いグローバル制限が必要になったら Upstash Redis などに置き換える。
  */
 
 import crypto from 'node:crypto';
@@ -42,51 +41,19 @@ export function isAllowedOrigin(
   }
 }
 
-async function getBlobStore(): Promise<
-  { get: (k: string, o?: unknown) => Promise<unknown>; setJSON: (k: string, v: unknown) => Promise<unknown> } | null
-> {
-  try {
-    const mod = await import('@netlify/blobs');
-    return mod.getStore('ja-rate-limit') as never;
-  } catch {
-    return null;
-  }
-}
-
 export async function checkRateLimit(
   key: string,
   limit = 10,
   windowMs = 10 * 60 * 1000,
 ): Promise<RateLimitResult> {
   const now = Date.now();
-  const store = await getBlobStore();
-
-  let bucket: Bucket | null = null;
-  if (store) {
-    try {
-      bucket = (await store.get(key, { type: 'json' })) as Bucket | null;
-    } catch {
-      bucket = null;
-    }
-  }
-
-  if (!bucket) bucket = memory.get(key) ?? null;
-
-  if (!bucket || bucket.reset <= now) {
-    bucket = { count: 1, reset: now + windowMs };
-  } else {
-    bucket = { count: bucket.count + 1, reset: bucket.reset };
-  }
+  const current = memory.get(key) ?? null;
+  const bucket: Bucket =
+    !current || current.reset <= now
+      ? { count: 1, reset: now + windowMs }
+      : { count: current.count + 1, reset: current.reset };
 
   memory.set(key, bucket);
-
-  if (store) {
-    try {
-      await store.setJSON(key, bucket);
-    } catch {
-      // Blobs が使えなくてもメモリ側で継続
-    }
-  }
 
   const remaining = Math.max(0, limit - bucket.count);
   return {
