@@ -1,7 +1,7 @@
 # 紫微館 Backlog
 
 更新日：2026-11-18  
-現状：**VPS（Vultr 東京 / 45.77.180.73）で稼働**。`https://shibikan.com` は Caddy + Next.js。DNS は西部数码（west.cn）管理、2026-11-18 に Netlify から切替。β版は全無料、AI は未設定（501）。格局の日文訳は 2026-11-18 に3回の校閲を経て確定、CI（typecheck / test / build）は緑。運用手順は `docs/ja-deploy-runbook.md`。
+現状：**VPS（Vultr 東京 / 45.77.180.73）で稼働**。`https://shibikan.com` は Caddy + Next.js。DNS は西部数码（west.cn）管理、2026-11-18 に Netlify から切替。β版は全無料、AI は DeepSeek で稼働（日次上限 1000 回）。格局の日文訳は 2026-11-18 に3回の校閲を経て確定、CI（typecheck / test / build）は緑。運用手順は `docs/ja-deploy-runbook.md`。
 
 ---
 
@@ -60,10 +60,7 @@
 - [ ] Search Console / GA4 のデータを見て記事テーマを追加
 - [ ] 2027 ページの季節性・公開タイミング見直し
 - [ ] 相性結果の共有導線（OGP 画像含む）
-- [ ] AI を有効化する場合：
-  - `JP_LLM_API_KEY` 設定
-  - コスト上限・レート制限（グローバル）を確認
-  - AI 出力の免責・レビュー
+- [x] AI を有効化（DeepSeek `deepseek-chat`、`JP_LLM_*` 設定済み。日次上限 1000/IP 20/1200 tokens、簡体字混入対策 prompt 済み。`2026-11-18`）
 
 ---
 
