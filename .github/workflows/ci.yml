@@ -6,10 +6,16 @@ on:
   pull_request:
   workflow_dispatch:
 
+# 同一分支的旧运行自动取消，省额度
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
-    name: 类型检查 + 排盘回归
+    name: 类型检查 + 回归测试 + 构建
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -25,5 +31,12 @@ jobs:
       - name: 类型检查
         run: npm run typecheck
 
-      - name: 排盘引擎回归
+      # 日本語版の回帰テスト込み。jp-patterns は patterns.ts の `server-only` を
+      # 避けるため、package.json 側で NODE_OPTIONS=--conditions=react-server を付与している。
+      # （CI 側で NODE_OPTIONS を全体に掛けると他のテストの解決条件まで変わるため、あえて個別にしている）
+      - name: 回归测试
         run: npm test
+
+      # VPS/Docker で配る前に、本番ビルドが通ることを保証する
+      - name: 生产构建
+        run: npm run build
