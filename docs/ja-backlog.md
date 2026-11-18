@@ -43,10 +43,10 @@
 
 - [ ] 日本法人/事業者を確定
 - [ ] PSP を選定（AXES / SUI など。Stripe は占い不可）
-- [ ] チェックアウトセッション作成
-- [ ] Webhook 署名検証
+- [x] チェックアウトセッション作成（無状態 order token、AES-GCM で生年情報を秘匿）
+- [x] Webhook 署名検証（`/api/ja/webhook`、`JP_WEBHOOK_SECRET` の HMAC-SHA256）
 - [ ] 注文テーブル（DB）と管理画面
-- [ ] 決済成功 → `signUnlock()` で鑑定書 URL 発行
+- [x] 決済成功 → `signUnlock()` で鑑定書 URL 発行（`/api/ja/webhook` が返す）
 - [ ] 領収書メール / 返金 / 問い合わせ導線
 - [ ] `JP_BETA_FREE=false` に切り替え、価格・税表示を最終確認
 

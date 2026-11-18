@@ -8,6 +8,7 @@ import {
   isBetaFree,
   type PaidReportType,
 } from '@/lib/jp/access';
+import { buildCheckoutUrl, signOrder } from '@/lib/jp/checkout';
 
 export const metadata: Metadata = {
   title: 'お支払い',
@@ -64,6 +65,15 @@ export default async function CheckoutPage({ searchParams }: { searchParams: SP 
   const price = REPORT_PRICES[type];
   const beta = isBetaFree();
   const externalUrl = getCheckoutUrl();
+  // 有料時は order token を付けた決済 URL を出す（JP_WEBHOOK_SECRET 未設定なら従来の URL）
+  let checkoutHref = externalUrl;
+  if (!beta && externalUrl) {
+    try {
+      checkoutHref = buildCheckoutUrl(signOrder(type, input)) ?? externalUrl;
+    } catch {
+      checkoutHref = externalUrl;
+    }
+  }
   const title = type === 'love' ? '恋愛鑑定書' : '事業鑑定書';
   const reportHref = `/ja/report?${qs.toString()}`;
 
@@ -134,9 +144,9 @@ export default async function CheckoutPage({ searchParams }: { searchParams: SP 
           </div>
         )}
 
-        {beta || externalUrl ? (
+        {beta || checkoutHref ? (
           <a
-            href={beta ? reportHref : externalUrl}
+            href={beta ? reportHref : checkoutHref}
             className="ja-btn"
             style={{ width: '100%', textAlign: 'center' }}
             {...(beta ? {} : { rel: 'noopener noreferrer' })}
