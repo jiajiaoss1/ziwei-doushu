@@ -8,6 +8,7 @@ import type { PaidReportType } from '@/lib/jp/access';
 import { checkRateLimit, hashIp, isAllowedOrigin } from '@/lib/jp/rate-limit';
 import { verifyAiToken } from '@/lib/jp/ai-token';
 import { birthKey } from '@/lib/jp/access';
+import { takeGlobalSlot, takeIpDailySlot, LLM_MAX_OUTPUT_TOKENS } from '@/lib/jp/llm-guard';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -98,6 +99,28 @@ export async function POST(req: Request) {
     );
   }
 
+  // コストガード: 1 IP 1 日 20 回 / グローバル 1 日 1000 回
+  const ipDaily = takeIpDailySlot(hashIp(ip));
+  if (!ipDaily.ok) {
+    return NextResponse.json(
+      {
+        error: 'ai_daily_limit',
+        message: '本日のAI解説は上限に達しました。テンプレートの読み解きをご利用ください。',
+      },
+      { status: 429, headers: { 'X-RateLimit-Remaining': '0' } },
+    );
+  }
+  const globalDaily = takeGlobalSlot();
+  if (!globalDaily.ok) {
+    return NextResponse.json(
+      {
+        error: 'ai_daily_limit',
+        message: '本日のAI解説は上限に達しました。テンプレートの読み解きをご利用ください。',
+      },
+      { status: 429, headers: { 'X-RateLimit-Remaining': '0' } },
+    );
+  }
+
   const question = (body.question ?? '').slice(0, 200);
   const type: 'general' | PaidReportType =
     body.type === 'love' || body.type === 'work' ? body.type : 'general';
@@ -120,7 +143,7 @@ export async function POST(req: Request) {
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
       try {
-        for await (const delta of streamChat(config, messages, { maxTokens: 1200 })) {
+        for await (const delta of streamChat(config, messages, { maxTokens: LLM_MAX_OUTPUT_TOKENS })) {
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text: delta })}\n\n`));
         }
         controller.enqueue(encoder.encode('data: [DONE]\n\n'));

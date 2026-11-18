@@ -69,7 +69,7 @@
 
 ## P3：技術的負債
 
-- [ ] AI レート制限のグローバル化（Upstash Redis など。現在はプロセス内 + token）
+- [x] AI の日次コストガード（グローバル 1000 回/日・IP 20 回/日・出力 1200 tokens 固定。`lib/jp/llm-guard.ts`）。複数インスタンス時のグローバル化（Upstash 等）は未対応
 - [ ] 四柱を画面に出す場合、`utcOffset` 対応（現在は中国標準時前提）
 - [ ] 中国語デモページの扱いを決定（残す / 404 / `/zh` に移す）
 - [x] Netlify の扱い（2026-11-18 に西部数码 DNS へ切替。Netlify zone は削除済み。`NETLIFY_AUTH_TOKEN` は Caddy を HTTP-01 に変えたら削除）

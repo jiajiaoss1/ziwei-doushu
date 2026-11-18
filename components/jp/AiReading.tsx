@@ -78,7 +78,15 @@ export default function AiReading({ params, type = 'general', enabled, token }: 
         return;
       }
       if (res.status === 429) {
-        setError('回数制限に達しました。しばらく時間をおいてからお試しください。');
+        // 短期レート制限と日次上限で文言を分ける
+        let message = '回数制限に達しました。しばらく時間をおいてからお試しください。';
+        try {
+          const body = (await res.json()) as { error?: string; message?: string };
+          if (body.error === 'ai_daily_limit' && body.message) message = body.message;
+        } catch {
+          // 本文が読めない場合は既定文言
+        }
+        setError(message);
         setLoading(false);
         return;
       }
