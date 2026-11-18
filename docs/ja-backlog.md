@@ -1,7 +1,7 @@
 # 紫微館 Backlog
 
-更新日：2026-11-16  
-現状：**VPS（Vultr 東京）で本番稼働中**。`https://shibikan.com` は Caddy + Next.js。Netlify は DNS と証明書用トークンのみ依存。β版は全無料、AI は未設定（501）。
+更新日：2026-11-18  
+現状：**VPS（Vultr 東京）で本番稼働中**。`https://shibikan.com` は Caddy + Next.js。Netlify は DNS と証明書用トークンのみ依存。β版は全無料、AI は未設定（501）。格局の日文訳は 2026-11-18 に3回の校閲を経て確定、CI（typecheck / test / build）は緑。
 
 ---
 
@@ -77,7 +77,7 @@
   - ホスティングプロジェクトは安定 2 週間後に削除
   - 完全移行するなら Cloudflare DNS + Caddy `dns cloudflare` へ
 - [x] 金標準盤を追加（空宮・晚子時・読年非依存は `jp-patterns`、大限/節気境界は `jp-edge`）
-- [ ] `npm test` / `smoke:ja` を CI（GitHub Actions）に組み込む
+- [x] `npm test` を CI（GitHub Actions）に組み込む（4d17131）。CI は typecheck / test / build を実行。`smoke:ja` は本番ドメイン前提のため未組み込み
 - [ ] エラーモニタリング（Sentry 等）
 
 ---
@@ -98,3 +98,11 @@
   - 製品方針「不安をあおらず、安心感を保つ」と、景表法・消費者契約法（断定的判断の提供）に照らして判断
 - 検討する場合：格名をそのまま出さず「課題」「守りの時期」などに言い換え、専門家の確認を経る。
   製品ロードマップと相談して着手時期を決める。
+
+## 已完成（2026-11-18）
+
+- 格局の日文訳 38 件を確定（〈定貴局〉17・〈定富局〉4・分岐 10・模板 3・復用 4）
+  - 《全書》出典注記、正格優先の並び順、`jp-patterns` 回帰テスト（金標準盤 3 種）
+  - 3 回の校閲を経て終審通過。記録は `docs/ja-pattern-review-20261118.md`
+- 「三方四正」の読みを さんぽうしせい に修正（`TERMS_JA` / `interpret.ts` / `ja-review-packet-2.md`）
+- CI に生産ビルドと concurrency を追加（4d17131）
