@@ -63,6 +63,7 @@ flowchart TD
 | 排盘 | `lib/ziwei/algorithm.ts` + `iztro` | 決定的 | 命理ルール、宮位・星曜の算法 |
 | 事実整理 | `lib/jp/facts.ts` | 決定的 | どの宮・星を取るか、日本語への対応 |
 | 星曜文案 | `lib/jp/glossary.ts` | 手書きテンプレート | 14 主星・12 宮・四化・格局の言い回し |
+| 格局 | `lib/ziwei/patterns.ts` + `patterns-dinggui.ts` / `patterns-dingfu.ts` + `lib/jp/glossary.ts` | 判定は決定的・訳文は手書き | 判定ロジック、《全書》定貴局/定富局の収録範囲、日本語訳 |
 | 無料読み解き | `lib/jp/interpret.ts` | テンプレート結合 | 本質・恋愛・仕事・今年 |
 | 恋愛鑑定書 | `lib/jp/report.ts` | テンプレート結合 | 6 項目・要約・書き出し |
 | 事業鑑定書 | `lib/jp/report.ts` | テンプレート結合 | 仕事・お金・官禄・財帛 |
@@ -79,6 +80,7 @@ flowchart TD
 - 四化がどの宮に入るか
 - 大限の開始・終了年齢、流年干支
 - 夫妻宮・官禄宮・財帛宮の星
+- 格局の判定（どの格が立つか。訳文と並び順は `glossary.ts` / `facts.ts`）
 
 **手書き（コードに固定）**
 
@@ -105,6 +107,7 @@ flowchart TD
 - `jp-report`：空宮・簡体字・欠落
 - `jp-edge`：大限境界・立春/春節
 - `jp-compat`：相性の分岐
+- `jp-patterns`：格局の並び順・出典・未翻訳＋金標準盤（空宮・晚子時・読年非依存）（`NODE_OPTIONS=--conditions=react-server` で実行）
 - `jp-ratelimit` / `jp-ai-token`：AI の入口
 
 文案を変えたら `npm test` と `smoke:ja` を通すこと。

@@ -22,6 +22,7 @@ import {
   STAR_JA,
   brightnessJa,
   palaceJa,
+  patternJa,
   starJa,
 } from '../../lib/jp/glossary';
 
@@ -69,11 +70,21 @@ const patternsSrc = fs.readFileSync(
   path.join(process.cwd(), 'lib/ziwei/patterns.ts'),
   'utf8',
 );
-const patternNames = Array.from(patternsSrc.matchAll(/name: '([^']+)'/g)).map((m) => m[1]);
-const uniquePatterns = Array.from(new Set(patternNames));
+// 文字列リテラルの name に加え、条件分岐（`name: cond ? 'A' : 'B'`）の両方も拾う。
+// テンプレート文字列（`${star}化禄入命` など）は星名ごとに変わるため対象外とする。
+const literalNames = Array.from(patternsSrc.matchAll(/name: '([^']+)'/g)).map((m) => m[1]);
+const ternaryNames = Array.from(
+  patternsSrc.matchAll(/name:\s*[^,?`$]*\?\s*'([^']+)'\s*:\s*'([^']+)'/g),
+).flatMap((m) => [m[1], m[2]]);
+const uniquePatterns = Array.from(new Set([...literalNames, ...ternaryNames]));
 ok('格局が1件以上ある', uniquePatterns.length > 0, String(uniquePatterns.length));
 for (const name of uniquePatterns) {
   ok(`格局 ${name} の日本語説明がある`, Boolean(PATTERN_JA[name]));
+}
+
+// 生年四化が星名を伴う格局（`天同化禄入命` など）も日本語説明を組み立てられる
+for (const name of ['天同化禄入命', '天机化忌入命', '天机化忌入迁']) {
+  ok(`模板格局 ${name} の日本語説明がある`, Boolean(patternJa(name)));
 }
 
 // 命盤 → 文章生成

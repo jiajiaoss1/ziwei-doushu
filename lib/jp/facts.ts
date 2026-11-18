@@ -111,6 +111,14 @@ const LEVEL_LABEL: Record<Pattern['level'], string> = {
   caution: '注意点',
 };
 
+/** 表示順：強み → 追い風 → 特徴 → 注意点。前 2〜3 件だけ画面に出るため、正格を先に。 */
+const LEVEL_RANK: Record<Pattern['level'], number> = {
+  excellent: 0,
+  good: 1,
+  neutral: 2,
+  caution: 3,
+};
+
 function toHua(raw?: string): HuaKey | undefined {
   if (!raw) return undefined;
   if (raw === '权') return '権';
@@ -198,12 +206,14 @@ export function buildJpFacts(
         name: p.name,
         nameJa: ja.nameJa,
         kana: ja.kana,
-        desc: ja.desc,
+        // 《全書》巻一の格表から来た格は出典を添える（信頼性の担保）
+        desc: p.source?.includes('卷一') ? `${ja.desc}（『紫微斗数全書』巻一 出典）` : ja.desc,
         level: p.level,
         levelLabel: LEVEL_LABEL[p.level],
       } satisfies PatternFact;
     })
-    .filter((p): p is PatternFact => Boolean(p));
+    .filter((p): p is PatternFact => Boolean(p))
+    .sort((a, b) => LEVEL_RANK[a.level] - LEVEL_RANK[b.level]);
 
   const facts: JpChartFacts = {
     chart,

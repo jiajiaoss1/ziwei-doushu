@@ -188,7 +188,7 @@ export function buildFreeReading(facts: JpChartFacts): FreeReading {
         shaNote(ming),
         mainStar?.shadow ? `影の面としては、${mainStar.shadow}` : '',
         facts.sanfang.length > 0
-          ? `三方四正（さんぽうししょう）には${facts.sanfang.map((s) => `${s.palaceName}の${s.stars.join('・') || '空宮'}`).join('、')}が並び、人生の土台を支えています。`
+          ? `三方四正（さんぽうしせい）には${facts.sanfang.map((s) => `${s.palaceName}の${s.stars.join('・') || '空宮'}`).join('、')}が並び、人生の土台を支えています。`
           : '',
       ]
         .filter(Boolean)

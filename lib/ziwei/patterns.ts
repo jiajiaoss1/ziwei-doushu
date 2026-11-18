@@ -17,6 +17,8 @@
 
 import 'server-only';
 import type { ZiweiChart, Palace, Star } from './types';
+import { detectDingGui } from './patterns-dinggui';
+import { detectDingFu } from './patterns-dingfu';
 
 // ────────────────── 类型 ──────────────────
 export interface PatternCondition {
@@ -1015,6 +1017,41 @@ function detectKeQuanShuangHui(chart: ZiweiChart, patterns: Pattern[]) {
   });
 }
 
+// ────────────────── 《全书》格表 · 严格判定 ──────────────────
+//
+// 日文版只接入〈定贵局〉(27) 与〈定富局〉(6) 两张表：两者都是正向格，契合
+// 服务「不安をあおらず、安心感を保つ」的定位。〈定贫贱局〉(8) 多为负面格名、
+// 〈定杂局〉(8) 多为大限格，暂不接入，见 docs/ja-backlog.md。
+
+interface QuanshuHit {
+  no: number;
+  name: string;
+  note: string;
+  status: string;
+}
+
+function detectQuanshuStrict(chart: ZiweiChart): Pattern[] {
+  const out: Pattern[] = [];
+  // 格名对日文版用户不友好、且未做日语化，暂不输出。
+  const SKIP = new Set(['刑囚夹印', '羊刃入庙']);
+  const push = (hits: QuanshuHit[], table: string, level: Pattern['level']) => {
+    for (const h of hits) {
+      if (SKIP.has(h.name)) continue;
+      out.push({
+        name: h.name,
+        level,
+        description: `原书第${h.no}条：「${h.note}」`,
+        palaces: ['命宫'],
+        conditions: { required: [`《全书》${table}第${h.no}条：${h.note}`] },
+        source: `《紫微斗数全书·卷一·${table}》第${h.no}条`,
+      });
+    }
+  };
+  push(detectDingGui(chart), '定贵局', 'excellent');
+  push(detectDingFu(chart), '定富局', 'good');
+  return out;
+}
+
 // ────────────────── 主入口 ──────────────────
 export function detectPatterns(chart: ZiweiChart): Pattern[] {
   const patterns: Pattern[] = [];
@@ -1072,7 +1109,27 @@ export function detectPatterns(chart: ZiweiChart): Pattern[] {
   detectKuiYueTongHui(chart, patterns);
   detectKeQuanShuangHui(chart, patterns);
 
-  return patterns;
+  // 《全书》格表严格判定接入（同名严格版取代宽松版，保留宽松版的加分/破格）
+  const strict = detectQuanshuStrict(chart);
+  const looseByName = new Map(patterns.map(p => [p.name, p]));
+  const out = patterns.slice();
+  for (const s of strict) {
+    const loose = looseByName.get(s.name);
+    if (loose) {
+      const idx = out.indexOf(loose);
+      out[idx] = {
+        ...s,
+        conditions: {
+          required: s.conditions!.required,
+          bonus: loose.conditions?.bonus,
+          breaking: loose.conditions?.breaking,
+        },
+      };
+    } else {
+      out.push(s);
+    }
+  }
+  return out;
 }
 
 // ────────────────── 命宫摘要（保持向后兼容）──────────────────
