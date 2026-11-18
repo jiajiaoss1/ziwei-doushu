@@ -1,7 +1,7 @@
 # 紫微館 Backlog
 
 更新日：2026-11-18  
-現状：**VPS（Vultr 東京）で本番稼働中**。`https://shibikan.com` は Caddy + Next.js。Netlify は DNS と証明書用トークンのみ依存。β版は全無料、AI は未設定（501）。格局の日文訳は 2026-11-18 に3回の校閲を経て確定、CI（typecheck / test / build）は緑。
+現状：**VPS（Vultr 東京 / 45.77.180.73）で稼働**。`https://shibikan.com` は Caddy + Next.js。DNS は西部数码（west.cn）管理、2026-11-18 に Netlify から切替。β版は全無料、AI は未設定（501）。格局の日文訳は 2026-11-18 に3回の校閲を経て確定、CI（typecheck / test / build）は緑。運用手順は `docs/ja-deploy-runbook.md`。
 
 ---
 
@@ -72,10 +72,7 @@
 - [ ] AI レート制限のグローバル化（Upstash Redis など。現在はプロセス内 + token）
 - [ ] 四柱を画面に出す場合、`utcOffset` 対応（現在は中国標準時前提）
 - [ ] 中国語デモページの扱いを決定（残す / 404 / `/zh` に移す）
-- [ ] Netlify の扱い
-  - DNS zone と `NETLIFY_AUTH_TOKEN` は Caddy の DNS-01 に必要なので残す
-  - ホスティングプロジェクトは安定 2 週間後に削除
-  - 完全移行するなら Cloudflare DNS + Caddy `dns cloudflare` へ
+- [x] Netlify の扱い（2026-11-18 に西部数码 DNS へ切替。Netlify zone は削除済み。`NETLIFY_AUTH_TOKEN` は Caddy を HTTP-01 に変えたら削除）
 - [x] 金標準盤を追加（空宮・晚子時・読年非依存は `jp-patterns`、大限/節気境界は `jp-edge`）
 - [x] `npm test` を CI（GitHub Actions）に組み込む（4d17131）。CI は typecheck / test / build を実行。`smoke:ja` は本番ドメイン前提のため未組み込み
 - [ ] エラーモニタリング（Sentry 等）
