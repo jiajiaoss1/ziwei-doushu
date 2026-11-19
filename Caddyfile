@@ -4,10 +4,6 @@
 }
 
 shibikan.com {
-	tls {
-		dns netlify {env.NETLIFY_AUTH_TOKEN}
-	}
-
 	encode zstd gzip
 	reverse_proxy app:3000
 
@@ -29,9 +25,5 @@ shibikan.com {
 }
 
 www.shibikan.com {
-	tls {
-		dns netlify {env.NETLIFY_AUTH_TOKEN}
-	}
-
 	redir https://shibikan.com{uri} permanent
 }
