@@ -10,6 +10,7 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/site';
 import { ARTICLES } from '@/lib/jp/articles';
+import { ARTICLES as ARTICLES_ZH } from '@/lib/zh/articles';
 
 const BASE_URL = SITE_URL;
 
@@ -40,6 +41,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/zh`, priority: 1.0, changeFrequency: 'weekly', lastModified: zhLastmod },
     { url: `${BASE_URL}/zh/shindan`, priority: 0.9, changeFrequency: 'weekly', lastModified: zhLastmod },
     { url: `${BASE_URL}/zh/aishou`, priority: 0.85, changeFrequency: 'weekly', lastModified: zhLastmod },
+    { url: `${BASE_URL}/zh/articles`, priority: 0.8, changeFrequency: 'weekly', lastModified: zhLastmod },
+    ...ARTICLES_ZH.map((a) => ({
+      url: `${BASE_URL}/zh/articles/${a.slug}`,
+      priority: 0.8,
+      changeFrequency: 'monthly' as const,
+      lastModified: new Date(a.updatedAt),
+    })),
     { url: `${BASE_URL}/zh/2027`, priority: 0.85, changeFrequency: 'weekly', lastModified: zhLastmod },
     { url: `${BASE_URL}/zh/legal/terms`, priority: 0.2, changeFrequency: 'yearly', lastModified: zhLastmod },
     { url: `${BASE_URL}/zh/legal/privacy`, priority: 0.2, changeFrequency: 'yearly', lastModified: zhLastmod },
