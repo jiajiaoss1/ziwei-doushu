@@ -69,6 +69,21 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
   const worry = worryOf(one(sp.w));
   const orderedSections = orderSections(reading.sections, worry);
 
+  const qs = new URLSearchParams({
+    y: String(input.year),
+    m: String(input.month),
+    d: String(input.day),
+    g: input.gender === 'male' ? 'm' : 'f',
+    p: input.city,
+    ...(input.unknownTime
+      ? { u: '1' }
+      : { h: String(input.clockHour), mi: String(input.clockMinute) }),
+    ...(worry ? { w: worry.key } : {}),
+    ...(flowYear !== thisYear ? { year: String(flowYear) } : {}),
+  });
+  const loveHref = `/zh/report?${qs.toString()}&type=love`;
+  const workHref = `/zh/report?${qs.toString()}&type=work`;
+
   const dateText = `${input.year} 年 ${input.month} 月 ${input.day} 日`;
   const timeText = input.unknownTime
     ? '時刻不清楚（以正午計算）'
@@ -161,6 +176,39 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
           type={worry?.focus ?? 'general'}
           token={aiToken}
         />
+
+        <section style={{ marginTop: 40 }}>
+          <h2 style={{ fontSize: 20, letterSpacing: '0.1em', marginBottom: 8 }}>想再深入一點？</h2>
+          <p style={{ fontSize: 13, color: '#a49e8f', marginBottom: 18 }}>
+            Beta 期間，以下鑑定書免費公開。
+          </p>
+          <div className="ja-cards">
+            <Link href={loveHref} className="ja-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <span className="ja-card-label">感情</span>
+              <h3>感情鑑定書</h3>
+              <p>容易喜歡的對象、關係變深的節奏、容易卡住的點、緣分時機與具體建議。</p>
+              <span style={{ display: 'inline-block', marginTop: 12, color: '#e3c473', fontSize: 13 }}>
+                讀讀看 →
+              </span>
+            </Link>
+            <Link href={workHref} className="ja-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <span className="ja-card-label">事業</span>
+              <h3>事業鑑定書</h3>
+              <p>工作資質、適合的職種、金錢流向、轉機的讀法與行動提示。</p>
+              <span style={{ display: 'inline-block', marginTop: 12, color: '#e3c473', fontSize: 13 }}>
+                讀讀看 →
+              </span>
+            </Link>
+            <Link href="/zh/aishou" className="ja-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <span className="ja-card-label">相性</span>
+              <h3>相性診斷</h3>
+              <p>把兩個人的命盤疊起來，讀互相吸引與容易錯身的地方。免費。</p>
+              <span style={{ display: 'inline-block', marginTop: 12, color: '#e3c473', fontSize: 13 }}>
+                看相性 →
+              </span>
+            </Link>
+          </div>
+        </section>
 
         <p className="ja-disclaimer">
           本結果是以紫微斗數進行自我理解的娛樂性內容，不保證未來結果，

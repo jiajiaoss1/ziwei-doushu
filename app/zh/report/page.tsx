@@ -7,6 +7,7 @@ import { detectPatterns } from '@/lib/ziwei/patterns';
 import { buildReport, type ReportType } from '@/lib/zh/report';
 import { isBetaFree, verifyUnlock, birthKey } from '@/lib/jp/access';
 import { formatZhPrice } from '@/lib/zh/pricing';
+import { worryOf } from '@/lib/zh/worry';
 import Meiban from '@/components/zh/Meiban';
 
 export const metadata: Metadata = {
@@ -66,6 +67,7 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
   const facts = buildZhFacts(chart, flowYear, detectPatterns(chart));
   const report = buildReport(facts, type);
   const key = birthKey({ ...input, prefecture: input.city });
+  const worry = worryOf(one(sp.w));
   const beta = isBetaFree();
   const full = beta || verifyUnlock(one(sp.t) || undefined, type, key);
   const visibleSections = full ? report.sections : report.sections.slice(0, 2);
@@ -94,6 +96,20 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
           <div className="ja-eyebrow">
             PREMIUM REPORT ・ {beta ? 'Beta 免費公開中' : full ? '已購買' : '付費鑑定'}
           </div>
+          {worry && (
+            <p
+              style={{
+                margin: '0 0 14px',
+                fontSize: 13.5,
+                lineHeight: 1.9,
+                color: '#a49e8f',
+                borderLeft: '3px solid rgba(201,165,74,0.6)',
+                paddingLeft: 14,
+              }}
+            >
+              {worry.empathy}
+            </p>
+          )}
           <h1>{report.title}</h1>
           <p style={{ color: '#a49e8f', fontSize: 14, margin: 0 }}>{report.subtitle}</p>
           <div className="ja-meta">
