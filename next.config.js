@@ -4,17 +4,17 @@ const nextConfig = {
   transpilePackages: ['lunar-javascript'],
   async redirects() {
     return [
-      // 日本版ドメインのルートは日本語トップへ（ローカルでは中国語デモのまま）
+      // ルートは繁体字版（港台）トップへ（ローカルでは中国語デモのまま）
       {
         source: '/',
         has: [{ type: 'host', value: 'shibikan.com' }],
-        destination: '/ja',
+        destination: '/zh',
         permanent: false,
       },
       {
         source: '/',
         has: [{ type: 'host', value: 'www.shibikan.com' }],
-        destination: '/ja',
+        destination: '/zh',
         permanent: false,
       },
     ];
