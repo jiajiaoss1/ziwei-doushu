@@ -365,7 +365,7 @@ export function patternZh(name: string): PatternZh | undefined {
   const exact = PATTERN_ZH[name];
   if (exact) return exact;
   // 化祿入命 / 化忌入命 / 化忌入遷 等模板格
-  const m = name.match(/^(.+?)化(祿|權|科|忌)入(命|遷)$/);
+  const m = name.match(/^(.+?)化(祿|權|科|忌)入(命|遷|迁)$/);
   if (m) {
     const star = starZh(m[1]).nameZh;
     const hua = m[2];
