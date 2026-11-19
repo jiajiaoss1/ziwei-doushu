@@ -14,6 +14,9 @@ export default function SiteFooterZh() {
             <Link href="/zh/shindan">免費診斷</Link>
           </div>
           <div style={{ marginTop: 10 }}>© 2026 紫微館</div>
+          <div style={{ marginTop: 6, fontSize: 11, color: '#8a8577' }}>
+            參考：倪海廈《天紀》、紫微斗數全書
+          </div>
         </div>
       </div>
     </footer>

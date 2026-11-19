@@ -19,6 +19,9 @@ export default function SiteFooter() {
             <Link href="/ja/legal/tokushoho">特定商取引法に基づく表記</Link>
           </div>
           <div style={{ marginTop: 10 }}>© 2026 紫微館</div>
+          <div style={{ marginTop: 6, fontSize: 11, color: '#8a8577' }}>
+            参考：倪海厦『天紀』、『紫微斗数全書』
+          </div>
         </div>
       </div>
     </footer>
