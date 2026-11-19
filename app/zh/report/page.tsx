@@ -7,7 +7,7 @@ import { detectPatterns } from '@/lib/ziwei/patterns';
 import { buildReport, type ReportType } from '@/lib/zh/report';
 import { isBetaFree, verifyUnlock, birthKey } from '@/lib/jp/access';
 import { formatZhPrice } from '@/lib/zh/pricing';
-import { worryOf } from '@/lib/zh/worry';
+import { empathyOf, scenarioOf, worryOf } from '@/lib/zh/worry';
 import Meiban from '@/components/zh/Meiban';
 
 export const metadata: Metadata = {
@@ -68,6 +68,8 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
   const report = buildReport(facts, type);
   const key = birthKey({ ...input, prefecture: input.city });
   const worry = worryOf(one(sp.w));
+  const scenario = scenarioOf(worry, one(sp.s));
+  const empathy = empathyOf(worry, scenario);
   const beta = isBetaFree();
   const full = beta || verifyUnlock(one(sp.t) || undefined, type, key);
   const visibleSections = full ? report.sections : report.sections.slice(0, 2);
@@ -96,7 +98,7 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
           <div className="ja-eyebrow">
             PREMIUM REPORT ・ {beta ? 'Beta 免費公開中' : full ? '已購買' : '付費鑑定'}
           </div>
-          {worry && (
+          {empathy && (
             <p
               style={{
                 margin: '0 0 14px',
@@ -107,7 +109,7 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
                 paddingLeft: 14,
               }}
             >
-              {worry.empathy}
+              {empathy}
             </p>
           )}
           <h1>{report.title}</h1>
@@ -123,6 +125,20 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
       </section>
 
       <div className="ja-wrap-narrow" style={{ padding: '32px 20px 72px' }}>
+        <p
+          style={{
+            fontSize: 14.5,
+            lineHeight: 2,
+            color: '#e6dfd0',
+            margin: '0 0 26px',
+            padding: '18px 20px',
+            border: '1px solid rgba(201,165,74,0.22)',
+            borderRadius: 12,
+          }}
+        >
+          {report.opening}
+        </p>
+
         <div
           style={{
             background: 'linear-gradient(135deg, rgba(201,165,74,0.14), rgba(17,26,51,0.6))',
@@ -159,6 +175,19 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
             </article>
           ))}
         </div>
+
+        <p
+          style={{
+            fontSize: 14.5,
+            lineHeight: 2,
+            color: '#e6dfd0',
+            margin: '30px 0 0',
+            paddingTop: 20,
+            borderTop: '1px solid rgba(201,165,74,0.18)',
+          }}
+        >
+          {report.closing}
+        </p>
 
         {!full && lockedSections.length > 0 && (
           <div

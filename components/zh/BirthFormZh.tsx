@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { CITIES_ZH, CST_OFFSET_MINUTES, shichenZh } from '@/lib/zh/cities';
 import { calculateTrueSolarTime, isValidGregorianDate } from '@/lib/ziwei/true-solar-time';
 import { trackZh } from '@/lib/zh/analytics';
-import { WORRIES, WORRY_ORDER, type Worry } from '@/lib/zh/worry';
+import { SCENARIOS, WORRIES, WORRY_ORDER, type Worry } from '@/lib/zh/worry';
 
 export interface BirthFormInitial {
   year?: number;
@@ -45,6 +45,7 @@ export default function BirthFormZh({
   const [gender, setGender] = useState<'male' | 'female'>(initial?.gender ?? 'female');
   const [city, setCity] = useState(initial?.city ?? '台北市');
   const [worry, setWorry] = useState<Worry>('love');
+  const [scenario, setScenario] = useState<string>(SCENARIOS.love[0]?.key ?? '');
   const [error, setError] = useState('');
 
   const spot = CITIES_ZH.find((c) => c.name === city);
@@ -78,6 +79,7 @@ export default function BirthFormZh({
       g: gender,
       p: city,
       w: worry,
+      ...(scenario ? { s: scenario } : {}),
     });
     if (unknown) params.set('u', '1');
     else {
@@ -98,13 +100,37 @@ export default function BirthFormZh({
             const w = WORRIES[k];
             return (
               <label key={k} className={`ja-radio ${worry === k ? 'active' : ''}`}>
-                <input type="radio" name="worry" checked={worry === k} onChange={() => setWorry(k)} />
+                <input
+                  type="radio"
+                  name="worry"
+                  checked={worry === k}
+                  onChange={() => {
+                    setWorry(k);
+                    setScenario(SCENARIOS[k][0]?.key ?? '');
+                  }}
+                />
                 {w.label}
               </label>
             );
           })}
         </div>
-        <p className="ja-hint" style={{ marginTop: 6 }}>{WORRIES[worry].hint}</p>
+
+        <div className="ja-radio-group" style={{ flexWrap: 'wrap', marginTop: 10 }}>
+          {SCENARIOS[worry].map((sc) => (
+            <label key={sc.key} className={`ja-radio ${scenario === sc.key ? 'active' : ''}`}>
+              <input
+                type="radio"
+                name={`scenario-${worry}`}
+                checked={scenario === sc.key}
+                onChange={() => setScenario(sc.key)}
+              />
+              {sc.label}
+            </label>
+          ))}
+        </div>
+        <p className="ja-hint" style={{ marginTop: 6 }}>
+          {SCENARIOS[worry].find((x) => x.key === scenario)?.hint ?? WORRIES[worry].hint}
+        </p>
       </div>
 
       <div className="ja-field">

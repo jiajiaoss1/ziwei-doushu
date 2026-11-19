@@ -167,6 +167,35 @@ export default function ZhHomePage() {
         </div>
       </section>
 
+      <section className="ja-section">
+        <div className="ja-wrap">
+          <h2 className="ja-section-title">為什麼是紫微館</h2>
+          <p className="ja-section-lead">我們不做的事，和我們做的事一樣重要。</p>
+          <div className="ja-cards">
+            <div className="ja-card">
+              <span className="ja-card-label">01 不藏</span>
+              <h3>免費診斷就是完整解讀</h3>
+              <p>命盤、本質、感情、工作、今年的主題，免費版就給你。不把重點藏在付費牆後面。</p>
+            </div>
+            <div className="ja-card">
+              <span className="ja-card-label">02 不嚇</span>
+              <h3>不製造焦慮</h3>
+              <p>不用「大凶」「必分手」「血光」這種字眼。命盤是理解自己的工具，不是恐嚇。</p>
+            </div>
+            <div className="ja-card">
+              <span className="ja-card-label">03 不賣</span>
+              <h3>不推銷開運商品</h3>
+              <p>沒有水晶、符咒、開運小物。我們只提供解讀，不靠販賣焦慮賺錢。</p>
+            </div>
+            <div className="ja-card">
+              <span className="ja-card-label">04 專業</span>
+              <h3>真太陽時校正</h3>
+              <p>用出生地的經度與均時差校正時辰，不是只按出生時間套公式。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="ja-section" id="price">
         <div className="ja-wrap">
           <h2 className="ja-section-title">價格</h2>

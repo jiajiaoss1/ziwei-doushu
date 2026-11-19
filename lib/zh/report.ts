@@ -19,8 +19,12 @@ export interface PaidReport {
   type: ReportType;
   title: string;
   subtitle: string;
+  /** 開頭：像一封信的稱謂與開場 */
+  opening: string;
   summary: string[];
   sections: ReportSection[];
+  /** 結尾：寫給你的話 */
+  closing: string;
   generatedAt: string;
 }
 
@@ -264,8 +268,12 @@ export function buildLoveReport(facts: ZhChartFacts): PaidReport {
     type: 'love',
     title: '感情鑑定書',
     subtitle: `從${starNames(ming) || '命宮'}的命宮，解讀你的感情傾向`,
+    opening:
+      '這份鑑定書，不是要告訴你「該怎麼做」。而是想陪你把這陣子的感受，一條一條看清楚。有些地方你會點頭，有些地方你會想反駁——都很好。能停下來讀這些，本身就代表你在認真對待自己。',
     summary,
     sections,
+    closing:
+      '寫到這裡，想跟你說：你不需要馬上變得堅強，也不需要立刻做出決定。把這份報告收好，過一陣子再讀一次，你會看到不一樣的東西。',
     generatedAt: new Date().toISOString(),
   };
 }
@@ -367,8 +375,12 @@ export function buildWorkReport(facts: ZhChartFacts): PaidReport {
     type: 'work',
     title: '事業鑑定書',
     subtitle: `從${starNames(ming) || '命宮'}的命宮，解讀工作與金錢的設計圖`,
+    opening:
+      '這份鑑定書，是為正在考慮下一步的你準備的。不是要替你決定離開或留下，而是把「你的資質」與「現在的流年」攤開來看，讓你自己判斷。',
     summary,
     sections,
+    closing:
+      '工作的事，急不來，但也拖不得。把這份報告當成一段對話，而不是判決——最後做決定的人，還是你。',
     generatedAt: new Date().toISOString(),
   };
 }

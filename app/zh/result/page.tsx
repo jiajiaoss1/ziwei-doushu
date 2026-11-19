@@ -12,7 +12,7 @@ import { birthKey } from '@/lib/jp/access';
 import { isLlmEnabled } from '@/lib/jp/llm';
 import Meiban from '@/components/zh/Meiban';
 import AiReading from '@/components/zh/AiReading';
-import { worryOf, orderSections } from '@/lib/zh/worry';
+import { empathyOf, orderSections, scenarioOf, worryOf } from '@/lib/zh/worry';
 
 export const metadata: Metadata = {
   title: '診斷結果',
@@ -67,6 +67,8 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
     'unknown';
   const aiToken = signAiToken(ip, birthKey({ ...input, prefecture: input.city }));
   const worry = worryOf(one(sp.w));
+  const scenario = scenarioOf(worry, one(sp.s));
+  const empathy = empathyOf(worry, scenario);
   const orderedSections = orderSections(reading.sections, worry);
 
   const qs = new URLSearchParams({
@@ -79,6 +81,7 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
       ? { u: '1' }
       : { h: String(input.clockHour), mi: String(input.clockMinute) }),
     ...(worry ? { w: worry.key } : {}),
+    ...(scenario ? { s: scenario.key } : {}),
     ...(flowYear !== thisYear ? { year: String(flowYear) } : {}),
   });
   const loveHref = `/zh/report?${qs.toString()}&type=love`;
@@ -94,7 +97,7 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
       <section className="ja-hero" style={{ padding: '44px 0 20px' }}>
         <div className="ja-wrap-narrow">
           <div className="ja-eyebrow">DIAGNOSIS RESULT</div>
-          {worry && (
+          {empathy && (
             <div
               style={{
                 margin: '0 0 20px',
@@ -107,7 +110,7 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
                 color: '#e6dfd0',
               }}
             >
-              {worry.empathy}
+              {empathy}
             </div>
           )}
           <h1 style={{ fontSize: 'clamp(22px, 3.6vw, 32px)' }}>{reading.headline}</h1>
