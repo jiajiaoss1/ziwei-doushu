@@ -5,7 +5,8 @@ import { isValidZhBirthInput, zhBirthToChartInput, type ZhBirthInput } from '@/l
 import { buildZhFacts } from '@/lib/zh/facts';
 import { detectPatterns } from '@/lib/ziwei/patterns';
 import { buildReport, type ReportType } from '@/lib/zh/report';
-import { getReportAccess, REPORT_PRICES, birthKey } from '@/lib/jp/access';
+import { isBetaFree, verifyUnlock, birthKey } from '@/lib/jp/access';
+import { formatZhPrice } from '@/lib/zh/pricing';
 import Meiban from '@/components/zh/Meiban';
 
 export const metadata: Metadata = {
@@ -65,9 +66,10 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
   const facts = buildZhFacts(chart, flowYear, detectPatterns(chart));
   const report = buildReport(facts, type);
   const key = birthKey({ ...input, prefecture: input.city });
-  const access = getReportAccess(type, key, one(sp.t) || undefined);
-  const visibleSections = access.full ? report.sections : report.sections.slice(0, 2);
-  const lockedSections = access.full ? [] : report.sections.slice(2);
+  const beta = isBetaFree();
+  const full = beta || verifyUnlock(one(sp.t) || undefined, type, key);
+  const visibleSections = full ? report.sections : report.sections.slice(0, 2);
+  const lockedSections = full ? [] : report.sections.slice(2);
 
   const focus = type === 'love' ? '夫妻' : '官禄';
   const focusLabel = type === 'love' ? '夫妻宮（感情）' : '官祿宮（工作）';
@@ -90,7 +92,7 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
       <section className="ja-result-head">
         <div className="ja-wrap-narrow">
           <div className="ja-eyebrow">
-            PREMIUM REPORT ・ {access.beta ? 'Beta 免費公開中' : access.full ? '已購買' : '付費鑑定'}
+            PREMIUM REPORT ・ {beta ? 'Beta 免費公開中' : full ? '已購買' : '付費鑑定'}
           </div>
           <h1>{report.title}</h1>
           <p style={{ color: '#a49e8f', fontSize: 14, margin: 0 }}>{report.subtitle}</p>
@@ -142,7 +144,7 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
           ))}
         </div>
 
-        {!access.full && lockedSections.length > 0 && (
+        {!full && lockedSections.length > 0 && (
           <div
             style={{
               border: '1px solid rgba(201,165,74,0.4)',
@@ -163,7 +165,7 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
               {lockedSections.map((s) => s.title).join(' / ')}
             </p>
             <p style={{ fontSize: 13, color: '#a49e8f', margin: '0 0 18px' }}>
-              事業鑑定書 全文 ・ NT${REPORT_PRICES.work.toLocaleString('en-US')}（含稅）
+              事業鑑定書 全文 ・ {formatZhPrice('work')}（含稅）
             </p>
             <Link href={`/zh/report?${qs.toString()}&type=work`} className="ja-btn ja-btn-sm">
               閱讀全文
@@ -188,9 +190,9 @@ export default async function ReportPage({ searchParams }: { searchParams: SP })
 
         <p className="ja-disclaimer">
           本鑑定書是以紫微斗數進行自我理解的娛樂性內容，不保證未來結果或特定行動，
-          也不能取代醫療、法律、投資等專業建議。{access.beta
+          也不能取代醫療、法律、投資等專業建議。{beta
             ? 'Beta 期間免費公開。'
-            : access.full
+            : full
               ? '本報告已購買。'
               : '付費內容全文將於付款後顯示。'}
         </p>
