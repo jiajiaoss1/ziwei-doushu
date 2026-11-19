@@ -25,11 +25,20 @@ export const metadata: Metadata = {
     siteName: '紫微館',
     locale: 'zh_TW',
     type: 'website',
+    images: [
+      {
+        url: '/zh/ogp.png',
+        width: 1200,
+        height: 630,
+        alt: '紫微館 — 用紫微斗數讀你的星盤',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: '紫微館｜用紫微斗數讀你的星盤',
     description: '輸入出生年月日與時辰，用紫微斗數解讀你的本質、感情與工作傾向。',
+    images: ['/zh/ogp.png'],
   },
 };
 

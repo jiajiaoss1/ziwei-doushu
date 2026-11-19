@@ -28,6 +28,7 @@ export async function generateMetadata({
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt,
       locale: 'zh_TW',
+      images: [{ url: '/zh/ogp.png', width: 1200, height: 630, alt: '紫微館' }],
     },
   };
 }
