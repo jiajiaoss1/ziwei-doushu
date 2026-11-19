@@ -47,6 +47,7 @@ export default function AiReading({ params, type = 'general', enabled, token }: 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [done, setDone] = useState(false);
+  const [question, setQuestion] = useState('');
 
   if (!enabled) return null;
 
@@ -62,7 +63,7 @@ export default function AiReading({ params, type = 'general', enabled, token }: 
       const res = await fetch('/api/zh/interpret', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...params, type, token }),
+        body: JSON.stringify({ ...params, type, token, question }),
         signal: controller.signal,
       });
 
@@ -142,9 +143,27 @@ export default function AiReading({ params, type = 'general', enabled, token }: 
 
       {!text && !loading && (
         <div className="ja-card" style={{ textAlign: 'center' }}>
-          <p style={{ fontSize: 13, color: '#a49e8f', marginBottom: 16 }}>
-            從本質・感情・工作中，選一個現在想知道的主题。
+          <p style={{ fontSize: 13, color: '#a49e8f', marginBottom: 14 }}>
+            想問什麼？（選填）例如：「他還會聯絡我嗎？」「這個月適合換工作嗎？」
           </p>
+          <input
+            type="text"
+            placeholder="想問的問題（選填）"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            maxLength={200}
+            style={{
+              width: '100%',
+              padding: '12px 14px',
+              borderRadius: 10,
+              border: '1px solid rgba(201,165,74,0.3)',
+              background: 'rgba(10,14,28,0.6)',
+              color: '#e6dfd0',
+              fontSize: 13.5,
+              marginBottom: 12,
+              boxSizing: 'border-box',
+            }}
+          />
           <button type="button" className="ja-btn ja-btn-sm" onClick={run}>
             生成 AI 解讀
           </button>

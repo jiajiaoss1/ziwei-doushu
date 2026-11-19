@@ -18,6 +18,7 @@ import { isLlmEnabled } from '@/lib/jp/llm';
 import { resolveFlowYear } from '@/lib/jp/year';
 import Meiban from '@/components/jp/Meiban';
 import AiReading from '@/components/jp/AiReading';
+import { worryOf, orderSections } from '@/lib/jp/worry';
 import TrackView from '@/components/jp/TrackView';
 
 export const metadata: Metadata = {
@@ -108,6 +109,8 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
   });
   const yearQs = new URLSearchParams(params);
   if (flowYear !== thisYear) yearQs.set('year', String(flowYear));
+  const worry = worryOf(one(sp.w));
+  const orderedSections = orderSections(reading.sections, worry);
   const loveHref = `/ja/report?${yearQs.toString()}&type=love`;
   const workHref = `/ja/report?${yearQs.toString()}&type=work`;
 
@@ -117,6 +120,22 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
       <section className="ja-result-head">
         <div className="ja-wrap-narrow">
           <div className="ja-eyebrow">DIAGNOSIS RESULT</div>
+          {worry && (
+            <div
+              style={{
+                margin: '0 0 20px',
+                padding: '14px 18px',
+                borderLeft: '3px solid #c9a54a',
+                background: 'rgba(201,165,74,0.08)',
+                borderRadius: 8,
+                fontSize: 14,
+                lineHeight: 1.95,
+                color: '#e6dfd0',
+              }}
+            >
+              {worry.empathy}
+            </div>
+          )}
           <h1>{reading.headline}</h1>
           <p style={{ color: '#a49e8f', fontSize: 14, margin: 0 }}>{reading.lead}</p>
           <div className="ja-meta">
@@ -230,7 +249,7 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
 
         {/* sections */}
         <div className="ja-reading">
-          {reading.sections.map((s) => (
+          {orderedSections.map((s) => (
             <article key={s.key} className="ja-article">
               <h2>{s.title}</h2>
               {paragraphs(s.body).map((p, i) => (
@@ -242,7 +261,7 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
 
         <AiReading
           enabled={isLlmEnabled()}
-          type="general"
+          type={worry?.focus ?? 'general'}
           token={aiToken}
           params={{
             y: input.year,

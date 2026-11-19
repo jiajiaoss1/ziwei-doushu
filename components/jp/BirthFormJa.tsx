@@ -7,6 +7,7 @@ import { calculateTrueSolarTime, isValidGregorianDate } from '@/lib/ziwei/true-s
 import { JST_OFFSET_MINUTES } from '@/lib/jp/cities';
 import { shichenJa } from '@/lib/jp/birth';
 import { trackJa } from '@/lib/jp/analytics';
+import { WORRIES, WORRY_ORDER, type Worry } from '@/lib/jp/worry';
 
 export interface BirthFormInitial {
   year?: number;
@@ -45,6 +46,7 @@ export default function BirthFormJa({
   const [unknown, setUnknown] = useState(initial?.unknownTime ?? false);
   const [gender, setGender] = useState<'male' | 'female'>(initial?.gender ?? 'female');
   const [prefecture, setPrefecture] = useState(initial?.prefecture ?? '東京都');
+  const [worry, setWorry] = useState<Worry>('love');
   const [error, setError] = useState('');
 
   const pref = PREFECTURES_JA.find((p) => p.name === prefecture);
@@ -77,6 +79,7 @@ export default function BirthFormJa({
       d: String(day),
       g: gender,
       p: prefecture,
+      w: worry,
     });
     if (unknown) params.set('u', '1');
     else {
@@ -93,6 +96,22 @@ export default function BirthFormJa({
 
   return (
     <div className="ja-form">
+      <div className="ja-field">
+        <label>いま、いちばん気になっていることは？</label>
+        <div className="ja-radio-group" style={{ flexWrap: 'wrap' }}>
+          {WORRY_ORDER.map((k) => {
+            const w = WORRIES[k];
+            return (
+              <label key={k} className={`ja-radio ${worry === k ? 'active' : ''}`}>
+                <input type="radio" name="worry" checked={worry === k} onChange={() => setWorry(k)} />
+                {w.label}
+              </label>
+            );
+          })}
+        </div>
+        <p className="ja-hint" style={{ marginTop: 6 }}>{WORRIES[worry].hint}</p>
+      </div>
+
       <div className="ja-field">
         <label>生年月日（西暦）</label>
         <div className="ja-row">

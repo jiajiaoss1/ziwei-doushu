@@ -38,10 +38,10 @@ export default function ZhHomePage() {
       <section className="ja-hero">
         <div className="ja-wrap-narrow">
           <div className="ja-eyebrow">中國傳統占術・紫微斗數</div>
-          <h1>用紫微斗數，<br />讀你的星圖。</h1>
+          <h1>帶著你的煩惱來，<br />帶走一個被理解的答案。</h1>
           <p className="ja-hero-lead">
-            紫微斗數是從出生瞬間的星曜配置，讀出一個人本質、感情與工作傾向的東方占術。
-            流傳千年的體系，會為你排出一張專屬的命盤。
+            不是星座運勢的通用描述，而是針對你現在最在意的事，從命盤給出解讀。
+            感情、工作、人際——先說說你在意什麼，我們再一起看命盤。
           </p>
           <div className="ja-hero-cta">
             <Link href="/zh/shindan" className="ja-btn">免費診斷</Link>
@@ -171,7 +171,7 @@ export default function ZhHomePage() {
         <div className="ja-wrap">
           <h2 className="ja-section-title">價格</h2>
           <p className="ja-section-lead">
-            免費診斷之後，需要的人再使用更深入的鑑定書。
+            針對你的問題，給出更深的解讀。
           </p>
           <div className="ja-price-grid ja-cards-3">
             <div className="ja-price">

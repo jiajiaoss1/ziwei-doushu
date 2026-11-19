@@ -50,13 +50,13 @@ export default function JaHomePage() {
         <div className="ja-wrap">
           <div className="ja-eyebrow">中国伝統の占術・紫微斗数</div>
           <h1>
-            生年月日と出生時刻から、
+            いまの悩みに、
             <br />
-            あなたの「星の設計図」を読み解く。
+            命盤から答える。
           </h1>
           <p>
-            紫微斗数（しびとすう）は、生まれた瞬間の星の配置から、その人の本質・恋愛・仕事の傾向を読む東洋の占術です。
-            1,000年以上受け継がれてきた体系で、あなただけの命盤（めいばん）をつくります。
+            星占いの一般論ではなく、いま気になっていることへ。
+            恋愛・仕事・人間関係の悩みに、紫微斗数（しびとすう）の命盤から読み解きます。
           </p>
           <div className="ja-cta-row">
             <Link href="/ja/shindan" className="ja-btn">
@@ -197,7 +197,7 @@ export default function JaHomePage() {
         <div className="ja-wrap">
           <h2 className="ja-section-title">料金</h2>
           <p className="ja-section-lead">
-            無料診断のあと、必要な方だけ詳しい鑑定書をご利用いただけます。
+            悩みに合わせて、必要な方だけ詳しい鑑定書を。
           </p>
           <div className="ja-price-grid ja-cards-3">
             <div className="ja-price">

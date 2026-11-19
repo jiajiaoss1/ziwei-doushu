@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { CITIES_ZH, CST_OFFSET_MINUTES, shichenZh } from '@/lib/zh/cities';
 import { calculateTrueSolarTime, isValidGregorianDate } from '@/lib/ziwei/true-solar-time';
 import { trackZh } from '@/lib/zh/analytics';
+import { WORRIES, WORRY_ORDER, type Worry } from '@/lib/zh/worry';
 
 export interface BirthFormInitial {
   year?: number;
@@ -43,6 +44,7 @@ export default function BirthFormZh({
   const [unknown, setUnknown] = useState(initial?.unknownTime ?? false);
   const [gender, setGender] = useState<'male' | 'female'>(initial?.gender ?? 'female');
   const [city, setCity] = useState(initial?.city ?? '台北市');
+  const [worry, setWorry] = useState<Worry>('love');
   const [error, setError] = useState('');
 
   const spot = CITIES_ZH.find((c) => c.name === city);
@@ -75,6 +77,7 @@ export default function BirthFormZh({
       d: String(day),
       g: gender,
       p: city,
+      w: worry,
     });
     if (unknown) params.set('u', '1');
     else {
@@ -88,6 +91,22 @@ export default function BirthFormZh({
 
   return (
     <div className="ja-form">
+      <div className="ja-field">
+        <label>你現在最在意什麼？</label>
+        <div className="ja-radio-group" style={{ flexWrap: 'wrap' }}>
+          {WORRY_ORDER.map((k) => {
+            const w = WORRIES[k];
+            return (
+              <label key={k} className={`ja-radio ${worry === k ? 'active' : ''}`}>
+                <input type="radio" name="worry" checked={worry === k} onChange={() => setWorry(k)} />
+                {w.label}
+              </label>
+            );
+          })}
+        </div>
+        <p className="ja-hint" style={{ marginTop: 6 }}>{WORRIES[worry].hint}</p>
+      </div>
+
       <div className="ja-field">
         <label>出生年月日（西元）</label>
         <div className="ja-row">

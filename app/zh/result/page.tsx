@@ -12,6 +12,7 @@ import { birthKey } from '@/lib/jp/access';
 import { isLlmEnabled } from '@/lib/jp/llm';
 import Meiban from '@/components/zh/Meiban';
 import AiReading from '@/components/zh/AiReading';
+import { worryOf, orderSections } from '@/lib/zh/worry';
 
 export const metadata: Metadata = {
   title: '診斷結果',
@@ -65,6 +66,8 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
     h.get('x-forwarded-for')?.split(',')[0]?.trim() ||
     'unknown';
   const aiToken = signAiToken(ip, birthKey({ ...input, prefecture: input.city }));
+  const worry = worryOf(one(sp.w));
+  const orderedSections = orderSections(reading.sections, worry);
 
   const dateText = `${input.year} 年 ${input.month} 月 ${input.day} 日`;
   const timeText = input.unknownTime
@@ -76,6 +79,22 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
       <section className="ja-hero" style={{ padding: '44px 0 20px' }}>
         <div className="ja-wrap-narrow">
           <div className="ja-eyebrow">DIAGNOSIS RESULT</div>
+          {worry && (
+            <div
+              style={{
+                margin: '0 0 20px',
+                padding: '14px 18px',
+                borderLeft: '3px solid #c9a54a',
+                background: 'rgba(201,165,74,0.08)',
+                borderRadius: 8,
+                fontSize: 14,
+                lineHeight: 1.95,
+                color: '#e6dfd0',
+              }}
+            >
+              {worry.empathy}
+            </div>
+          )}
           <h1 style={{ fontSize: 'clamp(22px, 3.6vw, 32px)' }}>{reading.headline}</h1>
           <p>{reading.lead}</p>
         </div>
@@ -120,7 +139,7 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
           <Meiban facts={facts} />
         </div>
 
-        {reading.sections.map((s) => (
+        {orderedSections.map((s) => (
           <article key={s.key} className="ja-article">
             <h2>{s.title}</h2>
             <p>{s.body}</p>
@@ -139,6 +158,7 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
             p: input.city,
           }}
           enabled={isLlmEnabled()}
+          type={worry?.focus ?? 'general'}
           token={aiToken}
         />
 
