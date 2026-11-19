@@ -34,5 +34,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // 日本版ドメインのため、中国語デモページは sitemap に含めない
-  return jaPages;
+  // 繁体中文版（港台向け）
+  const zhLastmod = new Date();
+  const zhPages: MetadataRoute.Sitemap = [
+    { url: `${BASE_URL}/zh`, priority: 1.0, changeFrequency: 'weekly', lastModified: zhLastmod },
+    { url: `${BASE_URL}/zh/shindan`, priority: 0.9, changeFrequency: 'weekly', lastModified: zhLastmod },
+    { url: `${BASE_URL}/zh/aishou`, priority: 0.85, changeFrequency: 'weekly', lastModified: zhLastmod },
+    { url: `${BASE_URL}/zh/2027`, priority: 0.85, changeFrequency: 'weekly', lastModified: zhLastmod },
+    { url: `${BASE_URL}/zh/legal/terms`, priority: 0.2, changeFrequency: 'yearly', lastModified: zhLastmod },
+    { url: `${BASE_URL}/zh/legal/privacy`, priority: 0.2, changeFrequency: 'yearly', lastModified: zhLastmod },
+    { url: `${BASE_URL}/zh/legal/tokushoho`, priority: 0.2, changeFrequency: 'yearly', lastModified: zhLastmod },
+  ];
+  return [...jaPages, ...zhPages];
 }

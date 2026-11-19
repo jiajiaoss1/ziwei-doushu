@@ -81,6 +81,7 @@ export default function BirthFormZh({
       params.set('h', String(hour));
       params.set('mi', String(minute));
     }
+    if (flowYear) params.set('year', String(flowYear));
     trackZh('zh_diagnosis_submit', { unknown_time: unknown, gender, city });
     router.push(`/zh/result?${params.toString()}`);
   };
