@@ -1,12 +1,17 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { headers } from 'next/headers';
 import { generateChart } from '@/lib/ziwei/algorithm';
 import { detectPatterns } from '@/lib/ziwei/patterns';
 import { isValidZhBirthInput, zhBirthToChartInput, type ZhBirthInput } from '@/lib/zh/birth';
 import { buildZhFacts } from '@/lib/zh/facts';
 import { buildFreeReading } from '@/lib/zh/interpret';
 import { shichenZh } from '@/lib/zh/cities';
+import { signAiToken } from '@/lib/jp/ai-token';
+import { birthKey } from '@/lib/jp/access';
+import { isLlmEnabled } from '@/lib/jp/llm';
 import Meiban from '@/components/zh/Meiban';
+import AiReading from '@/components/zh/AiReading';
 
 export const metadata: Metadata = {
   title: '診斷結果',
@@ -53,6 +58,13 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
   const flowYear = rawYear >= 2020 && rawYear <= 2100 ? rawYear : thisYear;
   const facts = buildZhFacts(chart, flowYear, detectPatterns(chart));
   const reading = buildFreeReading(facts);
+
+  const h = await headers();
+  const ip =
+    h.get('x-nf-client-connection-ip') ||
+    h.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    'unknown';
+  const aiToken = signAiToken(ip, birthKey({ ...input, prefecture: input.city }));
 
   const dateText = `${input.year} 年 ${input.month} 月 ${input.day} 日`;
   const timeText = input.unknownTime
@@ -114,6 +126,21 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
             <p>{s.body}</p>
           </article>
         ))}
+
+        <AiReading
+          params={{
+            y: input.year,
+            m: input.month,
+            d: input.day,
+            h: input.clockHour,
+            mi: input.clockMinute,
+            u: input.unknownTime,
+            g: input.gender === 'male' ? 'm' : 'f',
+            p: input.city,
+          }}
+          enabled={isLlmEnabled()}
+          token={aiToken}
+        />
 
         <p className="ja-disclaimer">
           本結果是以紫微斗數進行自我理解的娛樂性內容，不保證未來結果，
