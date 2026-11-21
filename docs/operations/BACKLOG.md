@@ -81,7 +81,7 @@ canonical: true
 
 | 项目 | 状态 | 备注 |
 |---|---|---|
-| Threads 痛点研究 | in progress | agent 执行中 |
+| Threads beachhead 研究 | ready | V2 brief 已完成，待 agent 执行 |
 | Dcard/IG 三角验证 | proposed | 研究后 |
 | 文章内链/CTA | proposed | 文章 → 诊断 |
 | 电子报/CRM | proposed | 无账号 |

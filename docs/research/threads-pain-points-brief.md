@@ -1,179 +1,261 @@
-# Threads 痛点与购买动机调研 Brief
+# Threads 首个付费用户群体（Beachhead）研究 Brief
 
-> 对象：在 Threads 上做公开内容调研的 agent
-> 目的：为产品/文案收集真实的痛点、决策语言、购买触发与异议
-> 更新：2026-11-21
-> 状态：Draft（负责人确认后执行）
-
-> 说明：正文用简体中文；搜索关键词保留繁体，因为要搜港台内容。
+> 对象：在 Threads 上做公开内容调研的 agent / 研究员
+> 目的：支持台湾、香港市场首个付费用户群体、付费交付物与定价假设的决策
+> 版本：V2（2026-11-21）
+> 状态：Ready for execution
+> 语言：正文简体中文；搜索关键词保留繁体（要搜港台内容）
 
 ---
 
 ## 0. 你的任务（先读）
 
 你是「紫微馆」的用户研究员。
-调研 Threads 的**公开**帖子和回复，整理港台（台湾・香港）用户：
+你要研究 Threads 的**公开**帖子和回复，回答：
 
-- 在什么情境下
-- 用什么话表达痛点
-- 卡在什么决定上
-- 为什么愿意/不愿意付钱
+1. 哪些人最需要紫微馆？
+2. 他们在什么情境下会考虑付费？
+3. 他们为什么不满足于朋友、塔罗、心理咨询、ChatGPT？
+4. 他们真正愿意买的是什么交付物？
+5. 台湾和香港是否需要不同的定位/交付物/价格？
 
-这不是验证「紫微斗数准不准」，而是找到**购买欲望产生的瞬间和语言**。
+这不是验证「紫微斗数准不准」。
+这是**首个付费用户群体（beachhead）研究**：找到“有真实决策痛点 + 已经尝试过其他方法 + 仍不满意 + 可能愿意付费”的人。
 
-### 先读
-
-1. 这份 brief
-2. `docs/operations/HANDOVER.md`（产品现状）
-3. `docs/operations/BACKLOG.md`（已知问题）
-
-### 交付物
+### 必须交付
 
 1. `docs/research/threads-pain-points-findings.md`（分析报告）
-2. `docs/research/data/threads-posts.csv`（匿名化编码表）
-3. 原始数据（URL/原文）放 `docs/research/data/raw/`，**不要提交到 Git**
+2. `docs/research/data/threads-posts.csv`（脱敏研究数据，默认不进 Git）
+3. `docs/research/data/raw/*.jsonl`（原始数据，绝不进 Git）
+4. 完成 `docs/operations/HANDOVER.md` 时间线一行
 
 ---
 
-## 1. 调研目标
+## 1. 研究问题
 
-回答 4 个问题：
+### 主要问题
 
-1. 用户在什么**事件**之后开始求助/搜索/算命？
-2. 他们用什么**原话**描述痛点和决定？
-3. 他们试过什么、对什么失望、害怕什么？
-4. 什么**证据/承诺/呈现**会让他们愿意付 NT$680 / NT$980？
+1. 哪些痛点最集中、情绪最强、最接近付费？
+2. 台湾 vs 香港：需求、表达、价格、渠道有什么方向性差异？
+3. 用户在什么**触发事件**后开始找解决方案？
+4. 他们试过什么（朋友/塔罗/紫微/心理咨询/ChatGPT）？为什么不满意？
+5. 他们愿意为哪种交付物付费：报告、决策分析、时机、行动建议、持续追问？
+6. 他们为什么不信任线上命理产品？
+7. NT$680 / NT$980 是否值得进入下一轮验证？
 
-### 特别想知道
+### 次要问题
 
-- 「感情决定」和「工作决定」的痛点性质有什么不同
-- 「愿意为占卜付钱」的最后一推是什么
-- 「用 AI 就好」的瞬间和理由
-- 「怪怪的/被骗/不准」具体指什么
-- 价格在和什么比较（一顿饭、心理咨询、塔罗、朋友）
+- 免费 AI 与付费报告/付费追问的边界应该在哪？
+- 用户是否担心 AI 迎合、前后矛盾、没有依据？
+- 用户是否需要“可反复查看”的结构化报告？
 
 ---
 
-## 2. 样本范围
+## 2. 研究原则
+
+### 2.1 不要把“有痛点”当成“愿意付费”
+
+证据分四级，必须分开记录：
+
+| 等级 | 证据 | 能支持什么 |
+|---|---|---|
+| E1 | 痛点表达（「我不知道要不要分手」） | 有困扰 |
+| E2 | 主动寻找方案（「有没有推荐的老师？」） | 在找方案 |
+| E3 | 真实付费行为（「之前算过一次，花 1500」） | 曾付费 |
+| E4 | 明确购买意向（询价/比较/愿意买） | 强意向 |
+
+规则：
+
+- E1 ≠ E2 ≠ E3 ≠ E4
+- 无法判断 → `unknown`
+- 不要从情绪强度推断付费意愿
+- 报告要分开呈现：痛点频率、情绪强度、方案搜寻、历史付费、明确意向
+
+### 2.2 分开两类样本
+
+| 组 | 来源 | 目的 |
+|---|---|---|
+| A. 自然痛点 | 感情/工作/人生选择关键词，**不搜命理词** | 看用户是否会先产生现实问题 |
+| B. 命理消费 | 紫微/塔罗/算命/收费/被骗 | 看已接触命理者的消费经验与不满 |
+
+两组分别分析，再交叉比较；不要混成一个总体比例。
+
+### 2.3 台湾、香港分开看
+
+- 分别统计，不直接合并
+- 记录 `region_confidence` / `region_evidence`
+- 样本不足时标 `n`，只做方向性判断
+- 地区不明 → `unknown`
+
+### 2.4 Threads 只能形成假设
+
+Threads 样本不能代表整个市场，也不能证明转化率。
+最终结论要经过 8–12 个访谈/真实购买测试验证。
+
+### 2.5 区分四个层次
+
+报告里必须区分：
+
+1. **观察到的事实**：帖子原文/行为
+2. **研究编码**：按 Codebook 分类
+3. **研究推论**：从样本模式推导的假设
+4. **产品建议**：团队根据推论做的设计/商业决策
+
+不要把 2/3/4 写成 1。
+
+---
+
+## 3. 样本与搜索
+
+### 3.1 时间与数量
 
 | 项目 | 指定 |
 |---|---|
 | 平台 | Threads 公开帖子、公开回复 |
 | 语言 | 繁体中文（台湾/香港用词） |
 | 时间 | 最近 3 个月（2026-08-21 ～ 2026-11-21） |
-| 目标量 | 帖子 200–300、回复 500+（先 100 帖看饱和） |
-| 地区 | 台湾、香港；简体/日文另存 |
-| 方法 | 公开搜索、公开帖子；登录才能看的非公开区域不做 |
+| 试采样 | 40 条（A/B × TW/HK 各约 10） |
+| 正式采集 | 100–150 条（不是 300；先看饱和） |
+| 回复 | 尽量 300+，但不必机械凑数 |
+| 访谈 | 8–12 人（研究后期） |
 
-### 抽样原则
+### 3.2 A 组：自然痛点关键词（不搜命理）
 
-- 4 类痛点平均收集：
-  1. 感情（暧昧、复合、分离、婚姻）
-  2. 工作（转职、离职、创业、晋升）
-  3. 占卜/付费（紫微、塔罗、月老、通灵、价格、被骗）
-  4. 决策语言（该不该、要不要、卡住、内耗）
-- 不只看主帖，**回复**里购买意图更明显
-- 不只看高互动爆款，无名但真实的帖子也重要
-- 同一用户重复发帖合并为 1 条
-
----
-
-## 3. 搜索关键词（保留繁体）
-
-### 感情
+**感情**
 
 ```
-分手 復合 曖昧 暈船 遠距 結婚 婚前 劈腿 冷淡 已讀不回 放下 感情挽回 復合時機
+分手 復合 曖昧 暈船 遠距 婚前 劈腿 冷淡 已讀不回 放下 感情挽回
 ```
 
-### 工作
+**工作**
 
 ```
 轉職 離職 裸辭 留任 升遷 創業 副業 裁員 職涯 面試 工作不順
 ```
 
-### 占卜/付费
-
-```
-紫微 塔羅 算命 月老 通靈 老師 諮詢 費用 值得嗎 被騙 退款
-```
-
-### 决策语言
+**决策/情绪**
 
 ```
 該不該 要不要 好猶豫 卡住 內耗 不知道怎麼辦 選擇困難
 ```
 
-> 不固定关键词。调研中出现新说法，记到 `notes`，后半段补充；补充词要写进报告。
+> A 组不主动搜「紫微/塔罗/算命」，否则会污染自然需求样本。
 
----
+### 3.3 B 组：命理消费关键词
 
-## 4. 纳入/排除
-
-### 纳入
-
-- 本人正在经历的具体情境
-- 有明确 decision question（要不要复合？要不要辞职？）
-- 有情绪、时间压力、金钱/关系成本
-- 公开帖子、上下文可读
-
-### 排除
-
-- 命理师/塔罗师的广告、招生、免费鉴定宣传
-- 新闻、迷因、只有图没有正文
-- 能强烈识别第三人隐私的内容
-- 简体中文（需要的话另存 `language=zh-Hans`）
-
----
-
-## 5. 记录格式
-
-`docs/research/data/threads-posts.csv`，列如下：
-
-```csv
-post_id,url,platform,posted_at,collected_at,query,post_type,
-language,region_signal,author_bio_public,
-text_verbatim,situation_summary,decision_question,
-relationship_stage,work_stage,
-pain_cluster,emotion,urgency,
-prior_solutions,paid_before,price_signal,trust_objection,desired_outcome,
-engagement_likes,engagement_replies,notes
+```
+紫微 塔羅 算命 占卜 月老 通靈 老師 諮詢 費用 價格 值得嗎 被騙 退款
 ```
 
-### 列定义
+### 3.4 ChatGPT / 免费 AI 替代行为
 
-| 列 | 定义 |
-|---|---|
-| `post_id` | 平台内 ID（不明用 URL hash） |
-| `url` | 公开帖子 URL（内部用，报告不露出） |
-| `post_type` | `original` / `reply` / `quote` |
-| `language` | `zh-Hant` / `zh-Hans` / `mixed` |
-| `region_signal` | 台湾/香港用词、地名、币种（`TW` / `HK` / `unknown`） |
-| `author_bio_public` | 仅公开简介里的属性，可空 |
-| `text_verbatim` | 原文，不改写 |
-| `situation_summary` | 1–2 句摘要，不抄全文 |
-| `decision_question` | 本人真正要决定的事 |
-| `relationship_stage` | `single` / `ambiguous` / `dating` / `committed` / `married` / `breakup` / `na` |
-| `work_stage` | `student` / `employed` / `job-hunting` / `considering-quit` / `founder` / `na` |
-| `pain_cluster` | 下节 codebook，可多选（`;` 分隔） |
-| `emotion` | `anxiety` / `confusion` / `shame` / `hope` / `anger` / `numb` |
-| `urgency` | `now` / `weeks` / `months` / `unknown` |
-| `prior_solutions` | 朋友、塔罗、紫微、心理咨询、ChatGPT 等（`;`） |
-| `paid_before` | `yes` / `no` / `unknown`（是否为占卜/咨询付过费） |
-| `price_signal` | 价格提及（太贵/便宜/多少愿意付） |
-| `trust_objection` | `怕不準` / `怕被騙` / `隱私` / `覺得貴` / `不信命理`（`;`） |
-| `desired_outcome` | `answer` / `timing` / `action` / `comfort` / `validation` |
-| `engagement_likes` | 抓取时数量 |
-| `engagement_replies` | 抓取时数量 |
-| `notes` | 上下文、例外、搜索词 |
+```
+ChatGPT 感情
+ChatGPT 曖昧
+ChatGPT 轉職
+AI 算命
+AI 塔羅
+聊天機器人 感情
+```
 
-> `text_verbatim` 只内部保存；对外报告要匿名化、摘要、短引用。
+A/B 组都记录 `alternative_solution`，但 ChatGPT 要单独编码，不要只塞进备注。
+
+### 3.5 纳入 / 排除
+
+**纳入**
+
+- 本人正在经历的具体情境
+- 有 decision question（要不要复合/辞职/继续）
+- 有情绪、时间压力、金钱/关系成本
+- 公开且上下文可读
+
+**排除**
+
+- 命理师/塔罗师广告、招生、免费鉴定宣传
+- 新闻、迷因、只有图无正文
+- 能强烈识别第三人隐私
+- 简体中文（另存 `zh-Hans`，不混入繁中样本）
 
 ---
 
-## 6. Codebook（初版）
+## 4. 数据结构：Raw 与 Research 分开
 
-### 痛点（12–15）
+### 4.1 Raw Data（不提交 Git）
+
+`docs/research/data/raw/*.jsonl`：
+
+```json
+{"record_id":"r001","url":"...","thread_id":"...","parent_post_id":"...","post_type":"reply","posted_at":"...","collected_at":"...","text":"...","query":"...","notes":"..."}
+```
+
+规则：
+
+- 只收研究所需最少信息
+- 默认**不收集** `author_bio_public`
+- 不收集用户名/头像/私信
+- 设定访问权限、保留期限、删除机制
+- 绝不提交 Git
+
+### 4.2 Research Dataset（默认不提交 Git）
+
+`docs/research/data/threads-posts.csv`：只放脱敏摘要与编码。
+
+字段：
+
+```csv
+record_id,thread_id,parent_post_id,post_type,platform,posted_at,collected_at,query,sample_group,
+language,region,region_confidence,region_evidence,context_available,
+text_summary,decision_question,pain_cluster,emotion,urgency,
+purchase_stage,evidence_level,trigger_event,
+alternative_solution,alternative_satisfaction,
+price_signal,price_currency,price_context,
+trust_objection,desired_outcome,
+coding_confidence,coder_id,codebook_version,notes
+```
+
+### 4.3 字段定义
+
+| 字段 | 定义 |
+|---|---|
+| `record_id` | 内部随机 ID |
+| `thread_id` | 讨论串 ID |
+| `parent_post_id` | 回复对应的父帖 ID |
+| `post_type` | `post` / `reply` |
+| `sample_group` | `A_natural` / `B_metaphysical` |
+| `language` | `zh-Hant` / `zh-Hans` / `mixed` |
+| `region` | `TW` / `HK` / `unknown` |
+| `region_confidence` | `high` / `medium` / `low` |
+| `region_evidence` | 用词/地名/币种，仅必要信息 |
+| `context_available` | `true` / `false` |
+| `text_summary` | 1–2 句脱敏摘要，不抄原文 |
+| `decision_question` | 本人真正要决定的事 |
+| `pain_cluster` | Codebook，多选 `;` |
+| `emotion` | `anxiety` / `confusion` / `shame` / `hope` / `anger` / `numb` |
+| `urgency` | `now` / `weeks` / `months` / `unknown` |
+| `purchase_stage` | `not_seeking` / `seeking` / `comparing` / `purchased` / `abandoned` / `unknown` |
+| `evidence_level` | `E1`–`E4` / `unknown` |
+| `trigger_event` | 分手/复职/转职/被裁/家人催婚/节日/生日等 |
+| `alternative_solution` | 朋友/塔罗/紫微/心理咨询/ChatGPT/其他 |
+| `alternative_satisfaction` | `satisfied` / `unsatisfied` / `mixed` / `unknown` |
+| `price_signal` | 价格提及（贵/便宜/愿意付多少） |
+| `price_currency` | `TWD` / `HKD` / `other` / `unknown` |
+| `price_context` | `actual_paid` / `inquiry` / `other_quote` / `hypothetical` |
+| `trust_objection` | 怕不准/怕被骗/隐私/觉得贵/不信命理（`;`） |
+| `desired_outcome` | `answer` / `timing` / `action` / `comfort` / `validation` |
+| `coding_confidence` | `high` / `medium` / `low` |
+| `coder_id` | 编码者（agent 或人名代号） |
+| `codebook_version` | 例如 `v2.0` |
+| `notes` | 判断依据/例外 |
+
+> `text_summary` 不是原文；原文只在 Raw Data。
+
+---
+
+## 5. Codebook（V2 初版）
+
+> Codebook 的标签保留繁体，便于直接匹配港台原文与编码；正文说明用简体。
+
+### 5.1 痛点
 
 ```
 關係：不確定對方想法
@@ -193,7 +275,48 @@ engagement_likes,engagement_replies,notes
 金錢：怕花錢/怕被騙
 ```
 
-### 异议（5）
+### 5.2 购买阶段
+
+```
+not_seeking   只是抒发，没有找方案
+seeking       在问“有没有人推荐/怎么办”
+comparing     在比较老师/价格/服务
+purchased     已经买过
+abandoned     曾经想买但放弃
+unknown       无法判断
+```
+
+### 5.3 购买触发事件
+
+```
+分手/離婚
+復合失敗
+曖昧卡住
+被催婚
+轉職/離職
+被裁員
+創業/副業
+家庭衝突
+節日/生日/年末
+朋友推薦
+看到廣告/貼文
+其他
+```
+
+### 5.4 替代方案
+
+```
+朋友/家人
+塔羅
+紫微/八字
+月老/通靈
+心理諮商
+ChatGPT/AI
+自己查資料
+其他
+```
+
+### 5.5 信任异议
 
 ```
 怕不準
@@ -201,9 +324,11 @@ engagement_likes,engagement_replies,notes
 覺得貴
 隱私顧慮
 不相信命理
+不信任 AI
+需要真人背書
 ```
 
-### 想要的结果（5）
+### 5.6 想要的结果
 
 ```
 要一個答案
@@ -213,82 +338,147 @@ engagement_likes,engagement_replies,notes
 要驗證自己想的對不對
 ```
 
-### 规则
+### 5.7 编码规则
 
-- 一条帖子可多标签
-- 必须读 `text_verbatim` 再打标签，不能只看摘要
-- 犹豫时在 `notes` 写原因
-- 预留 10% 人工复核，保留判断依据
-
----
-
-## 7. 工作步骤
-
-1. 读 `docs/operations/HANDOVER.md` 和本 brief
-2. 每个搜索词先收 20 条公开帖子
-3. 按纳入/排除过滤
-4. 写入 `threads-posts.csv`
-5. 100 条时检查饱和（是否还出现新痛点）
-6. 不够再补到 200–300 条
-7. 打标签，按频率、强度、付费意愿整理
-8. 写 `threads-pain-points-findings.md`
-9. 原始数据放 `data/raw/`，CSV 匿名化后保存
-10. 完成后在 `docs/operations/HANDOVER.md` 时间线加一行
+- 一条可多标签
+- 必须读上下文，不能只看摘要
+- 证据等级取“最强直接证据”，不从语气推断
+- `unknown` 是合法值，不要强行填
+- 先做 10% 双编码校准，再扩大样本
+- 记录 `coder_id` / `codebook_version`
 
 ---
 
-## 8. 最终报告结构
+## 6. 采集流程
+
+### 阶段 1：试采样（约 40 条）
+
+覆盖：
+
+- A 组 TW / HK
+- B 组 TW / HK
+
+目的：检查关键词、地区识别、上下文、字段可用性。
+不要用这 40 条推断市场规模。
+
+### 阶段 2：编码校准（10%）
+
+1. AI 先按 Codebook 编码
+2. 人工复核 10%（或另一个 agent 独立编码）
+3. 比较分歧：痛点/阶段/证据等级/替代方案
+4. 修订标签定义与正反例
+5. 固定 `codebook_version`
+
+### 阶段 3：正式采集（100–150 条）
+
+- A/B 分开
+- TW/HK 分开
+- 记录来源关键词、采集日期、纳入理由
+- 接近饱和就停，不机械凑数
+
+### 阶段 4：定向补样
+
+只补证据不足的格子：
+
+- 某地区样本太少
+- 只有 E1，没有 E2–E4
+- ChatGPT 替代样本太少
+- 某类交付物需求只有个例
+- 某个购买阶段缺上下文
+
+### 阶段 5：分析
+
+- TW/HK 方向性差异
+- A/B 交叉
+- 痛点 × 证据等级
+- 购买触发 Top 10
+- 替代方案与 AI 替代行为
+- 信任因素与购买阻力
+- 需求 → 交付物映射
+
+### 阶段 6：访谈（8–12 人）
+
+从样本中选：
+
+- 不同地区
+- 不同痛点
+- 不同购买阶段（E2–E4 优先）
+- 不同替代方案（尤其 ChatGPT）
+
+验证：他们真的会为什么付费、什么情况下不买。
+
+---
+
+## 7. 最终报告结构
 
 `docs/research/threads-pain-points-findings.md`：
 
-1. **摘要**（5 条）
-2. **方法**（搜索词、时间、数量、排除、局限）
-3. **Top 20 痛点**（频率 × 情绪强度 × 付费意愿）
-4. **按痛点分组的原文**（每组 5–10 条，匿名化）
-5. **用户旅程**（trigger → search → compare → objection → purchase/abandon）
-6. **分群矩阵**（感情/工作 × 急迫/观望 × 价格敏感/价值敏感）
-7. **购买阻力 Top 5**
-8. **有效语言 / NG 表达**
-9. **待验证假设 10 条**
-10. **局限与下一步**（Dcard/IG/访谈）
+1. **Executive Summary**：最值得进入的机会是什么？
+2. **Methodology**：样本、关键词、偏差、限制
+3. **Pain Point Landscape**：Top 20 痛点（频率 × 强度）
+4. **Purchase Trigger Top 10**：什么事件让人开始找付费方案
+5. **Purchase Evidence**：E1–E4 分布；谁真的有购买行为/意向
+6. **Alternative Solutions**：朋友/塔罗/心理咨商/ChatGPT 为什么不够
+7. **Trust & Objections**：为什么不信任/不买
+8. **Segment Matrix**：TW/HK × 痛点 × 购买阶段 × 价格敏感
+9. **Product Opportunity**：应该卖什么交付物
+10. **Positioning & Copy**：应该怎么表达
+11. **Hypotheses & Validation**：哪些还是假设，下一步怎么验
 
-### 报告必须写
+### 必须附带的决策矩阵
 
-- 数量与搜索词（可复现）
-- 样本偏差（Threads 偏年轻、偏文字表达、偏特定社群）
-- 不大量转载原文（匿名化、摘要）
-- 不写「占卜很准」这种结论
+| 决策 | 研究要给出 |
+|---|---|
+| Beachhead | 首个目标群体是谁 |
+| 首要场景 | 感情还是事业，依据 |
+| 首发市场 | TW 还是 HK，是否分市场 |
+| 付费交付物 | 报告/决策/时机/行动/追问 |
+| 免费 AI | 免费给到什么程度 |
+| 付费 AI | 是否要持续追问 |
+| 信任设计 | 什么证据能降低阻力 |
+| 定价 | NT$680/980 是否进入下一轮验证 |
 
----
-
-## 9. 质量与伦理
-
-- 只做公开信息；不碰私信、非公开社群、登录才能看的区域
-- 遵守平台条款/频率限制
-- 不绕过登录或 CAPTCHA；需要登录就改人工收集
-- 用户名/URL 只内部管理，报告匿名化
-- 敏感内容（病名、暴力、未成年）只做摘要，不留原文
-- 记录抓取时间，数字标注「抓取时点」
+> Threads 只能形成价格假设，不能证明转化率；价格要靠访谈/真实购买测试。
 
 ---
 
-## 10. 完成条件（Definition of Done）
+## 8. 质量与伦理
 
-- [ ] 100 条以上（尽量 200–300）帖子、500+ 回复
-- [ ] CSV 必填列完整
-- [ ] 痛点/异议/想要结果的标签完成
-- [ ] `threads-pain-points-findings.md` 按结构写完
-- [ ] 原文已匿名化
-- [ ] 搜索词、数量、局限写清楚
-- [ ] 原始数据没有提交到 Git
-- [ ] `docs/operations/HANDOVER.md` 加完成行
+- 只做公开信息；不碰私信/非公开社群/登录才可见内容
+- 遵守平台条款/频率限制；不绕过登录/CAPTCHA
+- 默认不收集 `author_bio_public`；不收集用户名
+- Raw Data 限制访问、不提交 Git、设定删除期限
+- 报告匿名化，不大量转载原文
+- 敏感内容（病名/暴力/未成年）只做摘要
+- 记录采集时间，数字标“采集时点”
 
 ---
 
-## 11. 不要做
+## 9. 完成条件（Definition of Done）
 
-- 验证紫微斗数的准确率/命中率
+- [ ] 试采样 40 条 + 正式 100–150 条（或饱和说明）
+- [ ] A/B、TW/HK 都有样本
+- [ ] `evidence_level` / `purchase_stage` / `trigger_event` 已编码
+- [ ] 10% 双编码校准完成，`codebook_version` 固定
+- [ ] Report 11 节 + 决策矩阵完成
+- [ ] 原始数据未进 Git
+- [ ] 结论区分事实/编码/推论/建议
+- [ ] `HANDOVER.md` 加完成行
+
+---
+
+## 10. 不要做
+
+- 验证紫微斗数准确率/命中率
+- 把痛点频率直接当付费意愿
+- 把 A/B 组合并成一个总体比例
+- 把 Threads 当市场规模/转化率证据
 - 人肉/定位用户
-- 攻击竞品
-- 报告里大量转载原文
-- 把抓取数据外传
+- 大量转载原文
+- 用“大家都说准”替代证据
+
+---
+
+## 11. 一句话
+
+> 我们要找的不是“最想算命的人”，而是**正在做重要决定、已经试过其他方法、仍然没有得到满意答案，并且有付费证据/意向的人**。

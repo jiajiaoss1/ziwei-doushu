@@ -13,3 +13,6 @@ node_modules
 # VPS 本番用テンプレートはコミットする
 !.env.production.example
 .dsh-boot-animation/
+
+# 研究原始数据/编码表默认不入库（隐私）
+docs/research/data/

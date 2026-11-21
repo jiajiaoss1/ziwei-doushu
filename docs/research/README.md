@@ -23,7 +23,7 @@ canonical: true
 
 | 文件 | 状态 | 用途 |
 |---|---|---|
-| `threads-pain-points-brief.md` | approved | Threads 痛点/购买动机 |
+| `threads-pain-points-brief.md` | V2 / ready | Threads 首个付费用户群体研究 |
 | `threads-pain-points-findings.md` | 待产出 | 研究结论 |
 
 ## 3. 新增研究
