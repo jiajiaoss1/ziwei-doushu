@@ -30,9 +30,12 @@
     "香港塔羅"
   ],
   "maxPostsPerQuery": 15,
-  "searchSort": "top_and_recent",
+  "searchSort": "recent",
   "proxyConfiguration": {
     "useApifyProxy": true,
-    "apifyProxyGroups": ["RESIDENTIAL"]
-  }
+    "apifyProxyGroups": [
+      "RESIDENTIAL"
+    ]
+  },
+  "onlyPostsNewerThan": ""
 }

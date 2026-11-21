@@ -1,0 +1,15 @@
+{
+  "usernames": [],
+  "maxPostsPerProfile": 0,
+  "postUrls": [],
+  "includeReplies": false,
+  "maxReplies": 0,
+  "searchQueries": ["算命"],
+  "maxPostsPerQuery": 5,
+  "searchSort": "recent",
+  "onlyPostsNewerThan": "",
+  "proxyConfiguration": {
+    "useApifyProxy": true,
+    "apifyProxyGroups": ["RESIDENTIAL"]
+  }
+}
