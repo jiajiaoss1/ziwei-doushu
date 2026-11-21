@@ -85,7 +85,7 @@ canonical: true
 | ZH 定位同步 | done | ADR-0007 + POSITIONING + PRD-ZH；待报告/首页 SPEC、支付 |
 | 關係決策書 SPEC | approved | REQ-ZH-012；待实现 |
 | 首页/自查 SPEC | approved | REQ-ZH-013；待实现 |
-| 支付/退款 SPEC | draft | REQ-ZH-PAY-001/002/003；PSP/DB 待定 |
+| 支付/退款 SPEC | draft | REQ-ZH-PAY-001/002/003；SQLite 已定，PSP 待定 |
 | Dcard/IG 三角验证 | proposed | 研究后 |
 | 文章内链/CTA | proposed | 文章 → 诊断 |
 | 电子报/CRM | proposed | 无账号 |

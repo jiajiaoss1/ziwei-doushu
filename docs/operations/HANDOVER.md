@@ -208,6 +208,7 @@ Caddyfile / docker-compose.yml / Dockerfile
 | 14 | 2026-11-21 12:35 | lead | 首页/自查 SPEC draft（REQ-ZH-013）：4 步、默认午时+台北、结果 3+1、付费门槛、隐私/事件/测试 | 下一位 agent | 审/批首页 SPEC；支付/退款 SPEC | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 15 | 2026-11-21 12:42 | lead | 首页/自查 SPEC 已批准（REQ-ZH-013 approved）；未成年限制改为「限 18 岁」产品政策 | 下一位 agent | 支付/退款 SPEC；实现自查 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 16 | 2026-11-21 12:50 | lead | 支付/退款 SPEC draft（REQ-ZH-PAY-001/002/003）：checkout/webhook/1年访问/首次打开/退款/幂等；阻塞：PSP + 订单存储 | 下一位 agent | 先定 PSP 或订单存储，再实现 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
+| 17 | 2026-11-21 12:55 | lead | 支付 SPEC 订单存储定为 SQLite：/data 卷、WAL、busy_timeout、每日备份、迁移策略 | 下一位 agent | 定 PSP；实现 checkout/webhook | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 
 ### 交接快照模板
 

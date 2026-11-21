@@ -140,17 +140,27 @@ applies_to: [zh]
 
 ---
 
-## 6. 持久化（阻塞项）
+## 6. 持久化：SQLite（已定）
 
-当前 repo **没有订单 DB**；仅靠加密 order token 无法可靠支持：
+订单/权益/退款必须有持久化；选定 **SQLite**，不新增独立数据库服务。
 
-- 退款
-- 幂等
-- 1 年访问
-- 首次打开时间
-- 对账
+### 6.1 部署
 
-### 需要的最小数据
+- 文件：`/data/shibikan.db`（容器内）
+- 宿主机 bind mount：`/opt/shibikan/data:/data`
+- 环境变量：`ZH_DB_PATH=/data/shibikan.db`
+- 单实例运行；不做多副本
+- Docker 重建/升级不能丢 volume
+
+### 6.2 参数
+
+- `journal_mode=WAL`
+- `busy_timeout=5000`
+- `foreign_keys=ON`
+- 文件权限 `600`
+- 应用层加密生辰字段（DB 文件本身不加密）
+
+### 6.3 表
 
 ```text
 orders
@@ -166,15 +176,27 @@ entitlements
   order_id, access_exp, followup_exp, revoked_at
 ```
 
-### 方案（未定）
+### 6.4 备份
 
-- A. PostgreSQL（repo 已有 `pg` 依赖；需 VPS 增加服务/内存）
-- B. SQLite（单机简单；需新依赖/备份）
-- C. 托管 DB（Supabase/Neon 等；需网络/费用）
+- 每日 03:00（Asia/Taipei）执行 `sqlite3 .backup`
+- 备份到 `/opt/shibikan/backups/`，保留 14 天
+- 备份文件权限 `600`
+- 每月至少做一次恢复演练
+- 迁移/升级前先手动备份
 
-> **选型前不实现支付。** 这是本 SPEC 的阻塞项。
+### 6.5 迁移
 
----
+- `migrations/*.sql` + `schema_version`
+- 启动时检查版本；迁移前自动备份
+- 不手改生产 DB
+
+### 6.6 何时换 PostgreSQL
+
+- 多实例/横向扩容
+- 订单量/并发明显上升
+- 需要托管高可用/跨区备份
+
+现在不换；SQLite 够 MVP。
 
 ## 7. 安全
 
@@ -292,7 +314,7 @@ entitlements
 ## 12. 上线前阻塞
 
 1. PSP 选型/合同/密钥
-2. 订单持久化方案
+2. SQLite volume/备份就绪
 3. 公司主体/税务/收据
 4. 退款人工流程/客服信箱
 5. 服务条款/退款政策最终版
@@ -303,7 +325,7 @@ entitlements
 ## 13. 未决
 
 - PSP 用哪家（Stripe HK / MoR / 其他）
-- PostgreSQL / SQLite / 托管 DB
+- SQLite driver（better-sqlite3 / node:sqlite）
 - 早鸟截止时间/数量
 - 价格是否含税
 - 收据/发票怎么开
