@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import MockCheckout from '@/components/zh/MockCheckout';
 
 export const metadata: Metadata = {
   title: '關係決策書',
@@ -9,23 +9,21 @@ export const metadata: Metadata = {
 export default function DecisionPage() {
   return (
     <main>
-      <section className="ja-hero" style={{ padding: '56px 0 24px' }}>
+      <section className="ja-hero" style={{ padding: '44px 0 18px' }}>
         <div className="ja-wrap-narrow">
-          <div className="ja-eyebrow">RELATIONSHIP DECISION</div>
-          <h1 style={{ fontSize: 'clamp(24px, 4vw, 34px)' }}>完整報告準備中</h1>
+          <div className="ja-eyebrow">TEST MODE</div>
+          <h1 style={{ fontSize: 'clamp(24px, 4vw, 34px)' }}>取得完整關係決策書</h1>
           <p>
-            你已完成初步整理。完整《關係決策書》的付款與報告生成正在準備中，
-            目前尚未開放購買，也不會向你收取費用。
-          </p>
-          <div style={{ marginTop: 24, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <Link href="/zh/check/result" className="ja-btn">回到初步整理</Link>
-            <Link href="/zh/check" className="ja-btn ja-btn-ghost">重新自查</Link>
-          </div>
-          <p className="ja-disclaimer" style={{ marginTop: 28 }}>
-            本服務限 18 歲以上。這不是外遇鑑定、法律、醫療或心理治療建議，也不保證結果。
+            補上時辰與縣市。目前為測試模式，不會向你收費，也不會產生真實訂單。
           </p>
         </div>
       </section>
+      <div className="ja-wrap-narrow" style={{ padding: '0 20px 72px' }}>
+        <MockCheckout />
+        <p className="ja-disclaimer">
+          本服務限 18 歲以上。這不是外遇鑑定、法律、醫療或心理治療建議，也不保證結果。
+        </p>
+      </div>
     </main>
   );
 }

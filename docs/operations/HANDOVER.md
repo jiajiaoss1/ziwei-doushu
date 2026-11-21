@@ -211,6 +211,7 @@ Caddyfile / docker-compose.yml / Dockerfile
 | 17 | 2026-11-21 12:55 | lead | 支付 SPEC 订单存储定为 SQLite：/data 卷、WAL、busy_timeout、每日备份、迁移策略 | 下一位 agent | 定 PSP；实现 checkout/webhook | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 18 | 2026-11-21 13:05 | lead | 支付阶段定为 C（mock/手动），不接真 PSP；真实收款前需 PSP/法务/退款 | 下一位 agent | 实现 mock checkout/手动发货；后续评估 Paddle/HK 主体 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 19 | 2026-11-21 13:25 | lead | 实现新版 `/zh` 首页 + `/zh/check` 4 步 + 结果 + 占位 decision；只收年月日，默认午时/台北 | 下一位 agent | 部署验证；补 mock checkout/真实评价 | main=本次 code commit、线上=`c18fff1`、工作区干净 |
+| 20 | 2026-11-21 13:40 | lead | 新增 mock checkout（/api/zh/checkout + /zh/decision）与範例報告 /zh/sample；仅测试模式，不收款 | 下一位 agent | 部署验证；真实评价收集 | main=本次 code commit、线上=`c18fff1`、工作区干净 |
 
 ### 交接快照模板
 

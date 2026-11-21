@@ -251,7 +251,8 @@ Pilot 中反复出现：
 - `/zh` 新版首页（关系决策定位）
 - `/zh/check` 关系决策自查（4 步）
 - `/zh/check/result` 初步整理
-- `/zh/decision` 付费占位（未开放）
+- `/zh/decision` mock checkout（测试模式，不收款）
+- `/zh/sample` 關係決策書虛構範例
 
 ### 已上线（β，旧产品）
 

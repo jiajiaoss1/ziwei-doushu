@@ -57,7 +57,7 @@ export default function ZhHomePage() {
           </p>
           <div className="ja-hero-cta">
             <Link href="/zh/check" className="ja-btn">先做 5 分鐘關係決策自查</Link>
-            <a href="#what" className="ja-btn ja-btn-ghost">先看會拿到什麼</a>
+            <Link href="/zh/sample" className="ja-btn ja-btn-ghost">看範例報告</Link>
           </div>
           <p className="ja-hero-note">免註冊・約 5 分鐘・不是另一位老師</p>
         </div>

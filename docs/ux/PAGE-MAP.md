@@ -30,7 +30,8 @@ canonical: true
 | `/zh` | 首页：婚姻关系决策定位、6 部分、适合/不适合、价格、FAQ | ✅ | 关系决策自查 |
 | `/zh/check` | 关系决策自查（4 步，只收年月日） | ❌ noindex | 看初步整理 |
 | `/zh/check/result` | 自查结果（3 判断 + 1 建议） | ❌ noindex | 付费 CTA（准备中） |
-| `/zh/decision` | 付费/完整报告占位（当前未开放） | ❌ noindex | 回自查 |
+| `/zh/decision` | Mock checkout（测试模式，不收款） | ❌ noindex | 模拟付款 |
+| `/zh/sample` | 《關係決策書》虛構範例 | ✅ | 自查 |
 | `/zh/shindan` | 旧诊断表单（legacy） | ✅ | 产生结果 |
 | `/zh/result` | 旧结果页（legacy） | ❌ noindex | 看报告 / AI |
 | `/zh/report` | 旧报告页（legacy） | ❌ noindex | 解锁/付款 |
@@ -70,7 +71,7 @@ canonical: true
 | `/api/ja/interpret` | 日文 AI | beta |
 | `/api/ja/checkout` | 日文 checkout | skeleton |
 | `/api/ja/webhook` | 日文 webhook | skeleton |
-| `/api/zh/checkout` | 繁中 checkout | **未做** |
+| `/api/zh/checkout` | 繁中 mock checkout（不收款） | beta |
 | `/api/zh/webhook` | 繁中 webhook | **未做** |
 
 ## 5. 已知页面问题
@@ -81,7 +82,7 @@ canonical: true
 - 繁中 AI 免费问答可能替代付费报告
 - 繁中页面浏览事件缺失
 - `/zh/check` 结果依赖 sessionStorage；清除后需重新自查
-- `/zh/decision` 仍是占位，支付未开放
+- `/zh/decision` 是 mock checkout，真实支付未接
 - 日文 checkout 仍是骨架
 
 ## 6. 变更规则
