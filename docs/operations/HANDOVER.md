@@ -210,6 +210,7 @@ Caddyfile / docker-compose.yml / Dockerfile
 | 16 | 2026-11-21 12:50 | lead | 支付/退款 SPEC draft（REQ-ZH-PAY-001/002/003）：checkout/webhook/1年访问/首次打开/退款/幂等；阻塞：PSP + 订单存储 | 下一位 agent | 先定 PSP 或订单存储，再实现 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 17 | 2026-11-21 12:55 | lead | 支付 SPEC 订单存储定为 SQLite：/data 卷、WAL、busy_timeout、每日备份、迁移策略 | 下一位 agent | 定 PSP；实现 checkout/webhook | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 18 | 2026-11-21 13:05 | lead | 支付阶段定为 C（mock/手动），不接真 PSP；真实收款前需 PSP/法务/退款 | 下一位 agent | 实现 mock checkout/手动发货；后续评估 Paddle/HK 主体 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
+| 19 | 2026-11-21 13:25 | lead | 实现新版 `/zh` 首页 + `/zh/check` 4 步 + 结果 + 占位 decision；只收年月日，默认午时/台北 | 下一位 agent | 部署验证；补 mock checkout/真实评价 | main=本次 code commit、线上=`c18fff1`、工作区干净 |
 
 ### 交接快照模板
 

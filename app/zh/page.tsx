@@ -1,34 +1,46 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { formatZhPrice } from '@/lib/zh/pricing';
 
 export const metadata: Metadata = {
-  title: '紫微館｜用紫微斗數讀你的星盤',
+  title: '紫微館｜用命盤整理關係的混亂',
   description:
-    '輸入出生年月日與時辰，以中國傳統占術・紫微斗數，解讀你的本質、感情與工作傾向。免註冊的免費診斷。',
+    '給正在面對婚姻或長期關係重大決定的妳：用命盤整理關係模式，做成一份可以回看的關係決策書。台灣限定，免註冊。',
   alternates: { canonical: '/zh' },
 };
 
+const PARTS = [
+  ['01', '你真正要決定的是什麼', '把「他會不會回來」換成「你要不要繼續、怎麼談、什麼時候動」。'],
+  ['02', '命盤裡反覆出現的關係模式', '對應宮位與星曜，說明你在關係裡最容易卡住的地方。'],
+  ['03', '三個選項，各自的代價', '繼續、談／設界線、離開／暫停：適合條件、代價與下一步。'],
+  ['04', '怎麼開口：溝通腳本與界線', '不是教妳操控，而是把想說的話整理成可以開口的句子。'],
+  ['05', '時機：接下來的節奏', '未來一段時間的主題與需要注意的地方，不是確定事件。'],
+  ['06', '1–3 個追問', '報告後 14 天內，針對你的處境再問 1–3 個問題。'],
+];
+
 const FAQ = [
   {
-    q: '需要註冊會員嗎？',
-    a: '不需要。輸入出生年月日・時刻・縣市就能免費診斷，不會要求註冊或登入。',
+    q: '這跟一般算命有什麼不同？',
+    a: '我們不預測「他一定會不會回來」，而是用命盤整理你的關係模式，並把選項、代價與下一步寫清楚。決定還是由你做。',
   },
   {
-    q: '出生時刻不清楚怎麼辦？',
-    a: '勾選「出生時刻不清楚」，系統會以正午（12:00）計算。命宮可能因此不同，結果請當作參考。',
+    q: '沒有時辰可以嗎？',
+    a: '可以先做自查，不需要時辰。購買完整報告時再補時辰；真的不知道，也可以用午時推算，報告會明確標註。',
   },
   {
-    q: '出生地一定要選嗎？',
-    a: '出生地只用於真太陽時校正（誤差約幾分鐘），不清楚時以台北計算。',
+    q: '會不會叫我補東西、買課程？',
+    a: '不會。沒有開運商品、沒有補人緣、沒有恐嚇式加購。',
   },
   {
-    q: '結果會保存嗎？',
-    a: '輸入的出生資訊不會存入本服務的資料庫，只用於命盤計算與顯示。詳見隱私權政策。',
+    q: '可以退款嗎？',
+    a: '7 天內、尚未打開完整報告，可申請退款。',
   },
   {
-    q: '占卜結果準嗎？',
-    a: '本服務是以紫微斗數進行自我理解的娛樂性內容，不保證未來，也不能取代醫療・法律・投資等專業建議。',
+    q: '這是 AI 嗎？',
+    a: '命盤由系統計算，解讀以規則與科技輔助整理；不是真人老師，也不是自由聊天。我們會標示不確定性與邊界。',
+  },
+  {
+    q: '可以問對方有沒有第三者嗎？',
+    a: '不行。我們不做外遇鑑定，也不會替妳判斷對方有沒有說謊。我們會把重點放回：妳能確認的事實、妳能問的問題、妳的下一步。',
   },
 ];
 
@@ -37,132 +49,74 @@ export default function ZhHomePage() {
     <main>
       <section className="ja-hero">
         <div className="ja-wrap-narrow">
-          <div className="ja-eyebrow">中國傳統占術・紫微斗數</div>
-          <h1>帶著你的煩惱來，<br />帶走一個被理解的答案。</h1>
+          <div className="ja-eyebrow">關係決策分析｜台灣</div>
+          <h1>用命盤，把關係的混亂<br />整理成可以做的決定。</h1>
           <p className="ja-hero-lead">
-            不是星座運勢的通用描述，而是針對你現在最在意的事，從命盤給出解讀。
-            感情、工作、人際——先說說你在意什麼，我們再一起看命盤。
+            給 30–42 歲、正在婚姻或長期關係裡做決定的妳：<br />
+            命盤整理模式，報告給出選項與下一步。
           </p>
           <div className="ja-hero-cta">
-            <Link href="/zh/shindan" className="ja-btn">免費診斷</Link>
-            <a href="#about" className="ja-btn ja-btn-ghost">什麼是紫微斗數</a>
+            <Link href="/zh/check" className="ja-btn">先做 5 分鐘關係決策自查</Link>
+            <a href="#what" className="ja-btn ja-btn-ghost">先看會拿到什麼</a>
           </div>
-          <p className="ja-hero-note">免註冊・約 30 秒・免費</p>
+          <p className="ja-hero-note">免註冊・約 5 分鐘・不是另一位老師</p>
         </div>
       </section>
 
-      <section className="ja-section" id="about">
+      <section className="ja-section">
         <div className="ja-wrap">
-          <h2 className="ja-section-title">從命盤，讀出你自己的樣子。</h2>
-          <p className="ja-section-lead">
-            12 個宮位、14 顆主星，以及四化（化祿・化權・化科・化忌）的流動，會依照人生領域分別解讀。
-          </p>
+          <h2 className="ja-section-title">這不是另一位老師。</h2>
+          <p className="ja-section-lead">我們不做的事，和我們做的事一樣重要。</p>
           <div className="ja-cards ja-cards-3">
             <div className="ja-card">
-              <span className="ja-card-label">01 本質</span>
-              <h3>看見你天生的資質</h3>
-              <p>
-                從命宮的主星，讀出性格的核心與別人容易看到的魅力。不只講優點，也溫柔地說明陰影面。
-              </p>
+              <span className="ja-card-label">不是預測</span>
+              <h3>不是告訴妳「他會不會回來」</h3>
+              <p>而是幫妳看清：要不要繼續、怎麼談、什麼時候動。決定還是由妳做。</p>
             </div>
             <div className="ja-card">
-              <span className="ja-card-label">02 感情</span>
-              <h3>感情的傾向與緣分時機</h3>
-              <p>
-                以夫妻宮為中心，整理你容易喜歡上的人、關係變深之前的節奏，以及容易卡住的地方。
-              </p>
+              <span className="ja-card-label">不是十種說法</span>
+              <h3>同一張盤，同一套規則</h3>
+              <p>命盤由系統計算，解讀有結構、可重複查看，不是每次換一套說法。</p>
             </div>
             <div className="ja-card">
-              <span className="ja-card-label">03 工作</span>
-              <h3>工作與金錢的設計圖</h3>
-              <p>
-                從官祿宮與財帛宮，整理你適合的工作方式，以及與金錢相處的傾向。
-              </p>
+              <span className="ja-card-label">不是恐嚇</span>
+              <h3>不靠焦慮賺錢</h3>
+              <p>沒有「不補會怎樣」、沒有上萬風水陣、沒有假倒數。價格與退款一開始就寫清楚。</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="ja-section">
+      <section className="ja-section" id="what">
         <div className="ja-wrap">
-          <h2 className="ja-section-title">診斷流程</h2>
-          <p className="ja-section-lead">只要輸入三個項目，就能輕鬆診斷。</p>
-          <div className="ja-steps">
-            <div className="ja-step">
-              <strong>輸入出生年月日與時刻</strong>
-              <p>西元生日、可取得的出生時刻、出生縣市，這樣就好。</p>
-            </div>
-            <div className="ja-step">
-              <strong>自動計算命盤</strong>
-              <p>以真太陽時校正後，當場算出 12 宮與主星的配置。</p>
-            </div>
-            <div className="ja-step">
-              <strong>顯示診斷結果</strong>
-              <p>用溫柔的語言，告訴你本質、感情與今年的主題。</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="ja-section">
-        <div className="ja-wrap">
-          <h2 className="ja-section-title">結果範例</h2>
-          <p className="ja-section-lead">※ 以下為範例。實際結果會依命盤而不同。</p>
+          <h2 className="ja-section-title">妳會拿到什麼</h2>
+          <p className="ja-section-lead">不是更多章節，是一份可以拿來做決定的報告。</p>
           <div className="ja-cards ja-cards-3">
-            <div className="ja-card">
-              <span className="ja-card-label">本質</span>
-              <h3>你的資質</h3>
-              <p>
-                命宮有紫微。天生帶著格局與存在感，自然而然站在人群中心。責任感強，但也較不容易示弱。
-              </p>
-            </div>
-            <div className="ja-card">
-              <span className="ja-card-label">感情</span>
-              <h3>感情傾向</h3>
-              <p>
-                夫妻宮有天府。重視安心與穩定，比起華麗，更傾向選擇相處起來能放鬆的對象。
-              </p>
-            </div>
-            <div className="ja-card">
-              <span className="ja-card-label">今年</span>
-              <h3>2026 年的主題</h3>
-              <p>
-                今年官祿宮有順風，工作的評價與角色較容易變動。是把握準備已久的機會的時候。
-              </p>
-            </div>
+            {PARTS.map(([n, title, body]) => (
+              <div className="ja-card" key={n}>
+                <span className="ja-card-label">{n}</span>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="ja-section">
         <div className="ja-wrap">
-          <h2 className="ja-section-title">更多</h2>
-          <p className="ja-section-lead">相性診斷、2027 年運勢、文章專欄。</p>
-          <div className="ja-cards">
-            <Link href="/zh/aishou" className="ja-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <span className="ja-card-label">相性</span>
-              <h3>看兩個人的相性</h3>
-              <p>把兩張命盤疊起來，解讀互相吸引的地方與容易錯身的地方。免費。</p>
-              <span style={{ display: 'inline-block', marginTop: 12, color: '#e3c473', fontSize: 13 }}>
-                相性診斷 →
-              </span>
-            </Link>
-            <Link href="/zh/2027" className="ja-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <span className="ja-card-label">2027 年</span>
-              <h3>讀 2027 年的運勢</h3>
-              <p>丁未年的四化（太陰祿・天同權・天機科・巨門忌），讀出一年的主題。</p>
-              <span style={{ display: 'inline-block', marginTop: 12, color: '#e3c473', fontSize: 13 }}>
-                看 2027 年 →
-              </span>
-            </Link>
-            <Link href="/zh/articles" className="ja-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <span className="ja-card-label">專欄</span>
-              <h3>從文章認識紫微斗數</h3>
-              <p>基礎、感情、工作的讀法，用白話整理，第一次接觸也能看懂。</p>
-              <span style={{ display: 'inline-block', marginTop: 12, color: '#e3c473', fontSize: 13 }}>
-                讀文章 →
-              </span>
-            </Link>
+          <h2 className="ja-section-title">適合 / 不適合</h2>
+          <div className="ja-cards" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
+            <div className="ja-card">
+              <span className="ja-card-label">適合</span>
+              <h3>如果你正在…</h3>
+              <p>正在做婚姻或長期關係的重大決定；已經想很久、問過朋友或老師，還是沒有答案；願意看自己的模式，也願意行動。</p>
+            </div>
+            <div className="ja-card">
+              <span className="ja-card-label">不適合</span>
+              <h3>如果你只想…</h3>
+              <p>聽「他一定會回來」；要外遇鑑定／抓小三；要法律、醫療或心理治療；未滿 18 歲；處於家暴或危險情境。</p>
+            </div>
           </div>
         </div>
       </section>
@@ -170,28 +124,39 @@ export default function ZhHomePage() {
       <section className="ja-section">
         <div className="ja-wrap">
           <h2 className="ja-section-title">為什麼是紫微館</h2>
-          <p className="ja-section-lead">我們不做的事，和我們做的事一樣重要。</p>
           <div className="ja-cards">
             <div className="ja-card">
-              <span className="ja-card-label">01 不藏</span>
-              <h3>免費診斷就是完整解讀</h3>
-              <p>命盤、本質、感情、工作、今年的主題，免費版就給你。不把重點藏在付費牆後面。</p>
+              <span className="ja-card-label">01 有依據</span>
+              <h3>命盤由引擎計算</h3>
+              <p>不是模型自由生成；解讀會對應宮位、星曜與四化，並標示不確定性。</p>
             </div>
             <div className="ja-card">
-              <span className="ja-card-label">02 不嚇</span>
-              <h3>不製造焦慮</h3>
-              <p>不用「大凶」「必分手」「血光」這種字眼。命盤是理解自己的工具，不是恐嚇。</p>
+              <span className="ja-card-label">02 不推銷</span>
+              <h3>沒有開運商品</h3>
+              <p>不賣水晶、符咒、補人緣。只提供一份報告，以及報告後的 1–3 個追問。</p>
             </div>
             <div className="ja-card">
-              <span className="ja-card-label">03 不賣</span>
-              <h3>不推銷開運商品</h3>
-              <p>沒有水晶、符咒、開運小物。我們只提供解讀，不靠販賣焦慮賺錢。</p>
+              <span className="ja-card-label">03 可回看</span>
+              <h3>1 年內可以重看</h3>
+              <p>決定不是一次看完就結束。報告可回看 1 年，讓妳在不同時間對照自己的狀態。</p>
             </div>
             <div className="ja-card">
-              <span className="ja-card-label">04 專業</span>
-              <h3>真太陽時校正</h3>
-              <p>用出生地的經度與均時差校正時辰，不是只按出生時間套公式。</p>
+              <span className="ja-card-label">04 有邊界</span>
+              <h3>不保證結果</h3>
+              <p>我們不承諾復合、離婚或結婚，也不做外遇鑑定。命盤是理解的工具，不是替妳做決定的人。</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="ja-section">
+        <div className="ja-wrap">
+          <h2 className="ja-section-title">真實回饋，整理中</h2>
+          <p className="ja-section-lead">我們不編造見證。Beta 用戶的真實回饋整理後會放在這裡。</p>
+          <div className="ja-card" style={{ maxWidth: 720 }}>
+            <span className="ja-card-label">我們想做到的體驗</span>
+            <h3>「被當成大人看待，而不是被嚇著買單。」</h3>
+            <p>如果妳做完報告，覺得自己更清楚要問什麼、下一步怎麼走，那會是我們最在意的事。</p>
           </div>
         </div>
       </section>
@@ -199,31 +164,19 @@ export default function ZhHomePage() {
       <section className="ja-section" id="price">
         <div className="ja-wrap">
           <h2 className="ja-section-title">價格</h2>
-          <p className="ja-section-lead">
-            針對你的問題，給出更深的解讀。
-          </p>
-          <div className="ja-price-grid ja-cards-3">
-            <div className="ja-price">
-              <h3>免費診斷</h3>
-              <div className="amount">0<small>元</small></div>
-              <p>命盤＋本質・感情・今年主題</p>
-              <Link href="/zh/shindan" className="ja-btn ja-btn-sm">免費診斷</Link>
-            </div>
+          <p className="ja-section-lead">一份報告，一次購買，不做訂閱。</p>
+          <div className="ja-price-grid" style={{ maxWidth: 520, gridTemplateColumns: '1fr' }}>
             <div className="ja-price featured">
-              <span className="ja-badge">Beta 免費公開中</span>
-              <h3>感情鑑定書</h3>
-              <div className="amount">{formatZhPrice('love')}<small>（含稅）</small></div>
-              <p>對象形象・關係的培養・緣分時機・建議</p>
-              <Link href="/zh/shindan" className="ja-btn ja-btn-sm">先免費診斷</Link>
-            </div>
-            <div className="ja-price">
-              <span className="ja-badge">Beta 免費公開中</span>
-              <h3>事業鑑定書</h3>
-              <div className="amount">{formatZhPrice('work')}<small>（含稅）</small></div>
-              <p>工作資質・職種・金錢・轉機・行動提示</p>
-              <Link href="/zh/shindan" className="ja-btn ja-btn-sm ja-btn-ghost">先免費診斷</Link>
+              <span className="ja-badge">早鳥準備中</span>
+              <h3>關係決策書</h3>
+              <div className="amount">NT$680<small> 早鳥（原價 NT$980）</small></div>
+              <p>6 部分報告、命盤圖、1 年回看、14 天內 1–3 個追問。</p>
+              <Link href="/zh/check" className="ja-btn ja-btn-sm">先做免費自查</Link>
             </div>
           </div>
+          <p className="ja-hint" style={{ marginTop: 14 }}>
+            目前為準備階段，尚未開放付款；先做自查不會收費。
+          </p>
         </div>
       </section>
 
@@ -241,14 +194,37 @@ export default function ZhHomePage() {
         </div>
       </section>
 
+      <section className="ja-section">
+        <div className="ja-wrap">
+          <h2 className="ja-section-title">更多免費工具</h2>
+          <div className="ja-cards ja-cards-3">
+            <Link href="/zh/aishou" className="ja-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <span className="ja-card-label">相性</span>
+              <h3>看兩個人的相性</h3>
+              <p>兩張命盤的吸引與錯身。免費。</p>
+            </Link>
+            <Link href="/zh/2027" className="ja-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <span className="ja-card-label">2027</span>
+              <h3>讀 2027 年的主題</h3>
+              <p>丁未年四化與一年節奏。免費。</p>
+            </Link>
+            <Link href="/zh/articles" className="ja-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <span className="ja-card-label">專欄</span>
+              <h3>從文章認識紫微斗數</h3>
+              <p>第一次接觸也能看懂的白話整理。</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="ja-section" style={{ textAlign: 'center' }}>
         <div className="ja-wrap-narrow">
-          <h2 className="ja-section-title">想看看自己的星圖嗎？</h2>
-          <p className="ja-section-lead">免註冊・約 30 秒。先從免費診斷開始。</p>
-          <Link href="/zh/shindan" className="ja-btn">免費診斷</Link>
+          <h2 className="ja-section-title">先整理你現在的處境</h2>
+          <p className="ja-section-lead">5 分鐘，四個問題。不用先相信命理，也不用先付錢。</p>
+          <Link href="/zh/check" className="ja-btn">開始關係決策自查</Link>
           <p className="ja-disclaimer" style={{ marginTop: 28, borderTop: 'none' }}>
-            本服務是以紫微斗數進行自我理解的娛樂性內容，不保證未來結果，
-            也不能取代醫療、法律、投資等專業建議。
+            本服務限 18 歲以上。以紫微斗數進行自我理解與決策參考，不保證未來結果，
+            也不能取代醫療、法律、投資或心理治療等專業建議。
           </p>
         </div>
       </section>

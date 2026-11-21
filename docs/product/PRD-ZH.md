@@ -246,12 +246,18 @@ Pilot 中反复出现：
 
 ## 12. 实现状态
 
+### 已实现（本地，2026-11-21；未部署）
+
+- `/zh` 新版首页（关系决策定位）
+- `/zh/check` 关系决策自查（4 步）
+- `/zh/check/result` 初步整理
+- `/zh/decision` 付费占位（未开放）
+
 ### 已上线（β，旧产品）
 
-- `/zh` 首页
-- `/zh/shindan`
-- `/zh/result`
-- `/zh/report`（感情/事业旧报告）
+- `/zh/shindan`（legacy）
+- `/zh/result`（legacy）
+- `/zh/report`（legacy 感情/事业旧报告）
 - `/zh/aishou`
 - `/zh/2027`
 - 文章

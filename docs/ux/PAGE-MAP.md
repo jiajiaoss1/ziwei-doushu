@@ -27,10 +27,13 @@ canonical: true
 
 | 路由 | 目的 | index | 主要 CTA |
 |---|---|---|---|
-| `/zh` | 首页：Hero、结果范例、信任、价格、FAQ | ✅ | 免费诊断 |
-| `/zh/shindan` | 表单：烦恼/情境、生日、时辰、县市 | ✅ | 产生结果 |
-| `/zh/result` | 结果：共情、命盘、免费解读、AI、报告入口 | ❌ noindex | 看报告 / AI |
-| `/zh/report` | 报告：感情/事业，β 全文 | ❌ noindex | 解锁/付款 |
+| `/zh` | 首页：婚姻关系决策定位、6 部分、适合/不适合、价格、FAQ | ✅ | 关系决策自查 |
+| `/zh/check` | 关系决策自查（4 步，只收年月日） | ❌ noindex | 看初步整理 |
+| `/zh/check/result` | 自查结果（3 判断 + 1 建议） | ❌ noindex | 付费 CTA（准备中） |
+| `/zh/decision` | 付费/完整报告占位（当前未开放） | ❌ noindex | 回自查 |
+| `/zh/shindan` | 旧诊断表单（legacy） | ✅ | 产生结果 |
+| `/zh/result` | 旧结果页（legacy） | ❌ noindex | 看报告 / AI |
+| `/zh/report` | 旧报告页（legacy） | ❌ noindex | 解锁/付款 |
 | `/zh/aishou` | 相性表单 | ✅ | 产生相性 |
 | `/zh/aishou/result` | 相性结果 | ❌ noindex | 回诊断 |
 | `/zh/2027` | 2027 丁未年专题 | ✅ | 免费诊断 |
@@ -77,6 +80,8 @@ canonical: true
 - 繁中报告页切换类型会丢失 `w`/`s`
 - 繁中 AI 免费问答可能替代付费报告
 - 繁中页面浏览事件缺失
+- `/zh/check` 结果依赖 sessionStorage；清除后需重新自查
+- `/zh/decision` 仍是占位，支付未开放
 - 日文 checkout 仍是骨架
 
 ## 6. 变更规则

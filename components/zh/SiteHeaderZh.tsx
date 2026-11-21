@@ -10,8 +10,8 @@ export default function SiteHeaderZh({ current }: { current?: 'home' | 'shindan'
           <span>SHIBIKAN</span>
         </Link>
         <nav className="ja-nav" aria-label="主要導覽">
-          <Link href="/zh/shindan">免費診斷</Link>
-          <Link href="/zh#about">關於紫微斗數</Link>
+          <Link href="/zh/check">關係決策自查</Link>
+          <Link href="/zh#what">你會拿到什麼</Link>
         </nav>
       </div>
     </header>

@@ -7,11 +7,11 @@ export default function SiteFooterZh() {
       <div className="ja-wrap ja-footer-inner">
         <div>
           <div style={{ marginBottom: 8, color: '#a49e8f', letterSpacing: '0.12em' }}>紫微館</div>
-          <div>以中國傳統占術・紫微斗數，為你解讀自己的星圖。</div>
+          <div>用命盤整理關係的混亂，做成可以回看的決定。</div>
         </div>
         <div style={{ textAlign: 'right' }}>
           <div>
-            <Link href="/zh/shindan">免費診斷</Link>
+            <Link href="/zh/check">關係決策自查</Link>
           </div>
           <div style={{ marginTop: 10 }}>© 2026 紫微館</div>
           <div style={{ marginTop: 6, fontSize: 11, color: '#8a8577' }}>
