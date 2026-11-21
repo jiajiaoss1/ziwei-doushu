@@ -19,7 +19,7 @@ canonical: true
 - 服务：紫微馆（しびかん）— 紫微斗数诊断/付费报告
 - 线上：https://shibikan.com
 - 市场：
-  - 繁中 `/zh`（港台，**主推**）
+  - 繁中 `/zh`（**台湾首发**；HK 先隐藏）
   - 日文 `/ja`（日本）
 - 根路径：`/` → **307 `/zh`**
 - 仓库：`github.com/jiajiaoss1/ziwei-doushu`（private）
@@ -54,11 +54,11 @@ npm run build
 | VPS | Vultr Tokyo，Ubuntu 24.04，`/opt/shibikan` |
 | 部署 | Docker Compose：app + Caddy |
 | 凭证 | **HTTP-01**（Caddyfile 无 `tls { dns ... }`） |
-| 线上版本 | `c18fff1`（根路径跳 `/zh`） |
-| 本地 main | 本次文件系统 commit（见 `git log -1`） |
+| 线上版本 | `73dbfea`（新版 `/zh` + 自查 + mock checkout + sample） |
+| 本地 main | 与线上同版（见 `git log -1`） |
 | AI | DeepSeek，SSE，已启用；有 origin/token/限流/日次护栏 |
-| 支付 | 只有骨架（order token/webhook/unlock），未接 PSP |
-| 收费 | `JP_BETA_FREE=true`，全免费 |
+| 支付 | ZH 为 mock checkout（不收款）；日文骨架；未接 PSP |
+| 收费 | ZH 不收費（mock）；日文 `JP_BETA_FREE=true` |
 
 ### 部署
 
@@ -76,6 +76,8 @@ curl -s -o /dev/null -w "%{http_code}\n" https://shibikan.com/api/health
 curl -s -o /dev/null -w "%{http_code}\n" https://shibikan.com/zh
 curl -s -o /dev/null -w "%{http_code}\n" https://shibikan.com/ja
 curl -s -o /dev/null -w "%{redirect_url}\n" https://shibikan.com/
+curl -s -o /dev/null -w "%{http_code}\n" https://shibikan.com/zh/check
+curl -s -o /dev/null -w "%{http_code}\n" https://shibikan.com/zh/sample
 ```
 
 详细：`engineering/DEPLOY.md`。
@@ -212,6 +214,7 @@ Caddyfile / docker-compose.yml / Dockerfile
 | 18 | 2026-11-21 13:05 | lead | 支付阶段定为 C（mock/手动），不接真 PSP；真实收款前需 PSP/法务/退款 | 下一位 agent | 实现 mock checkout/手动发货；后续评估 Paddle/HK 主体 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 19 | 2026-11-21 13:25 | lead | 实现新版 `/zh` 首页 + `/zh/check` 4 步 + 结果 + 占位 decision；只收年月日，默认午时/台北 | 下一位 agent | 部署验证；补 mock checkout/真实评价 | main=本次 code commit、线上=`c18fff1`、工作区干净 |
 | 20 | 2026-11-21 13:40 | lead | 新增 mock checkout（/api/zh/checkout + /zh/decision）与範例報告 /zh/sample；仅测试模式，不收款 | 下一位 agent | 部署验证；真实评价收集 | main=本次 code commit、线上=`c18fff1`、工作区干净 |
+| 21 | 2026-11-21 13:50 | lead | 部署 73dbfea 到 VPS；线上 /zh、/zh/check、/zh/decision、/zh/sample、mock API 已验证 200 | 下一位 agent | 真实 PSP/评价/访谈；继续实现报告生成 | main=`73dbfea`、线上=`73dbfea`、工作区干净 |
 
 ### 交接快照模板
 

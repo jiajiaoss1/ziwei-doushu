@@ -30,6 +30,7 @@ canonical: true
 - 支付/退款 SPEC draft：checkout/webhook/1 年访问/首次打开/退款/幂等；订单存储定为 SQLite；当前阶段 C（mock/手动）
 - 实现新版 ZH 首页 + 关系决策自查 4 步 + 结果页；`REQ-ZH-013` beta
 - 新增 mock checkout（测试模式，不收款）与範例報告 `/zh/sample`
+- 部署 `73dbfea`：线上新版 `/zh`、`/zh/check`、`/zh/decision`、`/zh/sample` 已验证
 - 新增 `AGENTS.md` 根目录指针
 - 新增 Threads 痛点研究 brief
 - 根路径 `/` → `/zh`

@@ -53,6 +53,8 @@ applies_to: [zh]
 
 > C 只用于跑通产品/漏斗，不是正式收款方案。
 
+当前已实现：`/api/zh/checkout` mock（server 定价、拒绝 HK/非法输入） + `/zh/decision` 表单；不写 DB、不收款。
+
 ### 不做
 
 - 订阅/分期
