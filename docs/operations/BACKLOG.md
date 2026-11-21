@@ -81,7 +81,7 @@ canonical: true
 
 | 项目 | 状态 | 备注 |
 |---|---|---|
-| Threads beachhead 研究 | pilot v3 done | 合并 533 条 + 28 条试编码；待正式采集 100–150 条 |
+| Threads beachhead 研究 | codebook v3 done | 合并 533 条 + 28 条试编码 + codebook；待正式采集 100–150 条 |
 | Dcard/IG 三角验证 | proposed | 研究后 |
 | 文章内链/CTA | proposed | 文章 → 诊断 |
 | 电子报/CRM | proposed | 无账号 |

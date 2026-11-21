@@ -251,101 +251,24 @@ coding_confidence,coder_id,codebook_version,notes
 
 ---
 
-## 5. Codebook（V2 初版）
+## 5. Codebook
 
-> Codebook 的标签保留繁体，便于直接匹配港台原文与编码；正文说明用简体。
+完整定义见 **[threads-codebook-v3.md](./threads-codebook-v3.md)**（canonical）。
+本 brief 不再重复 code 定义，避免两份不一致。
 
-### 5.1 痛点
+编码时至少确认：
 
-```
-關係：不確定對方想法
-關係：復合/挽回
-關係：曖昧卡住
-關係：結婚時機
-關係：遠距/跨國
-關係：背叛/劈腿
-關係：放下/失戀
-工作：轉職猶豫
-工作：留任痛苦
-工作：創業/副業恐懼
-工作：升遷/人際瓶頸
-工作：裁員/失業
-自我：內耗/反覆思考
-自我：選擇困難
-金錢：怕花錢/怕被騙
-```
-
-### 5.2 购买阶段
-
-```
-not_seeking   只是抒发，没有找方案
-seeking       在问“有没有人推荐/怎么办”
-comparing     在比较老师/价格/服务
-purchased     已经买过
-abandoned     曾经想买但放弃
-unknown       无法判断
-```
-
-### 5.3 购买触发事件
-
-```
-分手/離婚
-復合失敗
-曖昧卡住
-被催婚
-轉職/離職
-被裁員
-創業/副業
-家庭衝突
-節日/生日/年末
-朋友推薦
-看到廣告/貼文
-其他
-```
-
-### 5.4 替代方案
-
-```
-朋友/家人
-塔羅
-紫微/八字
-月老/通靈
-心理諮商
-ChatGPT/AI
-自己查資料
-其他
-```
-
-### 5.5 信任异议
-
-```
-怕不準
-怕被騙
-覺得貴
-隱私顧慮
-不相信命理
-不信任 AI
-需要真人背書
-```
-
-### 5.6 想要的结果
-
-```
-要一個答案
-要時機
-要具體行動
-要被理解/安慰
-要驗證自己想的對不對
-```
-
-### 5.7 编码规则
-
-- 一条可多标签
-- 必须读上下文，不能只看摘要
-- 证据等级取“最强直接证据”，不从语气推断
-- `unknown` 是合法值，不要强行填
-- 先做 10% 双编码校准，再扩大样本
-- 记录 `coder_id` / `codebook_version`
+- `sample_group`：A_natural / B_metaphysical
+- `evidence_level`：E1–E4 / unknown
+- `purchase_stage`：not_seeking / seeking / comparing / purchased / abandoned / unknown
+- `pain_cluster`：多标签
+- `trigger_event`：单选主触发
+- `alternative_solution` / `alternative_satisfaction`
+- `trust_objection`
+- `desired_outcome`
+- `price_signal` / `price_currency` / `price_context`
+- `region` / `region_confidence`
+- `codebook_version=v3.0`
 
 ---
 

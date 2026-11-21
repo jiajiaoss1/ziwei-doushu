@@ -28,6 +28,7 @@ canonical: true
 | `threads-pilot-2026-11-21.md` | pilot v1 | 旧 423 条的 20 条试编码 |
 | `threads-pilot-v2-2026-11-21.md` | pilot v2 | 新 339 条的 20 条试编码 |
 | `threads-pilot-v3-2026-11-21.md` | pilot v3 | 合并 533 条的 28 条试编码 |
+| `threads-codebook-v3.md` | canonical | 编码定义（A/B、E1–E4、痛点/触发/信任/价格） |
 | `apify-threads-input.json` | ready | Apify Threads Scraper 输入（V4：高信号词，top_and_recent） |
 
 ## 3. 新增研究
