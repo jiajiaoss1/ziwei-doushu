@@ -1,7 +1,7 @@
 ---
 title: SPEC｜關係決策書
 requirement_id: REQ-ZH-012
-status: draft
+status: approved
 owner: 负责人
 last_verified: 2026-11-21
 applies_to: [zh]

@@ -25,7 +25,7 @@ canonical: true
 - Threads pilot V3（合并 533 条）：28 条试编码，补婚姻/外遇/分居/裁员/35 岁转职；HK 仍弱
 - Threads Codebook V3：婚姻细分、E1–E4、购买阶段、触发/替代/信任/价格/地区规则
 - ADR-0007 + PRD-ZH 同步：台湾首发、A×C beachhead、单 SKU 關係決策書、免费自查/付费补时辰
-- 《關係決策書》SPEC draft：6 部分、1 年访问、14 天追问、退款/边界/测试
+- 《關係決策書》SPEC approved：6 部分、1 年访问、14 天追问、退款/边界/测试
 - 新增 `AGENTS.md` 根目录指针
 - 新增 Threads 痛点研究 brief
 - 根路径 `/` → `/zh`

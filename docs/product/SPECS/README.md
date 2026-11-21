@@ -10,7 +10,7 @@
 
 | 文件 | 需求 | 状态 |
 |---|---|---|
-| `zh-decision-report.md` | REQ-ZH-012 | draft |
+| `zh-decision-report.md` | REQ-ZH-012 | approved |
 
 ## SPEC 模板
 
