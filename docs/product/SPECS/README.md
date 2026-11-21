@@ -6,6 +6,12 @@
 - `zh-checkout.md`
 - `shared-ai-reading.md`
 
+## 现有 SPEC
+
+| 文件 | 需求 | 状态 |
+|---|---|---|
+| `zh-decision-report.md` | REQ-ZH-012 | draft |
+
 ## SPEC 模板
 
 ```md
