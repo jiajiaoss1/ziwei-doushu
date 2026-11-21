@@ -22,6 +22,7 @@ canonical: true
 - Threads 研究 brief V2：购买证据 E1–E4、自然/命理样本分离、TW/HK 分开、Raw/Research 数据分离、购买触发/信任/决策矩阵
 - Threads pilot V1（423 条）：A 组多为 E1，B 组付费样本老/广告多，无 HK，回复无父帖
 - Threads pilot V2（339 条）：B 组出现 E2 集群（算命推薦/流年/命盤）；ChatGPT 搜索词失效
+- Threads pilot V3（合并 533 条）：28 条试编码，补婚姻/外遇/分居/裁员/35 岁转职；HK 仍弱
 - 新增 `AGENTS.md` 根目录指针
 - 新增 Threads 痛点研究 brief
 - 根路径 `/` → `/zh`

@@ -96,6 +96,7 @@
 | `research/threads-pain-points-brief.md` | Threads beachhead 研究 brief V2 | ready |
 | `research/threads-pilot-2026-11-21.md` | 旧 423 条 pilot 结论 | draft |
 | `research/threads-pilot-v2-2026-11-21.md` | 新 339 条 pilot V2 结论 | draft |
+| `research/threads-pilot-v3-2026-11-21.md` | 合并 533 条 pilot V3 结论 | draft |
 | `archive/` | 被取代的旧文件 | superseded |
 | `tianji-ziwei/` | 天纪语料（参考，非产品文件） | reference |
 
