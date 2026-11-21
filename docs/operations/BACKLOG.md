@@ -110,6 +110,7 @@ canonical: true
 - 根路径 `/zh`、Caddy HTTP-01、DNS 切西部数码
 - 日文版格局翻译/审查
 - 文件系统（本次）
+- 增量 docs V2：`DOMAIN-MODEL` / `CALENDAR-AND-TIME` / `MARKET-MODEL` / 产品意图矩阵
 
 历史细节：`archive/ja-backlog-2026-11-18.md`。
 

@@ -16,6 +16,7 @@ canonical: true
 
 - **文件系统重构**：新增索引、AI 合约、工作方法、共享/分市场 PRD、需求矩阵、ADR、backlog、handover；旧文件移到 `archive/`
 - 文档正文统一为**简体中文**；繁中/日文目标文案示例保留原文并标注
+- 增量 docs V2：领域模型、历法/时间、市场模型；Agent Contract 增加“产品意图 vs 实现事实”权威矩阵
 - 新增 `AGENTS.md` 根目录指针
 - 新增 Threads 痛点研究 brief
 - 根路径 `/` → `/zh`

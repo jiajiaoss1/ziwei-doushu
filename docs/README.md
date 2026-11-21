@@ -47,10 +47,11 @@
 | 改日文页面／文案 | `product/PRD-JA.md` → `content/TONE-AND-CLAIMS.md` → `ux/PAGE-MAP.md` |
 | 改付费／定价／解锁 | `product/PRICING.md` → `product/REQUIREMENTS.md` → `decisions/DECISION-LOG.md` → `engineering/SECURITY.md` |
 | 改 AI 解读 | `domain/ASTROLOGY-RULES.md` → `domain/CONTENT-PIPELINE.md` → `product/PRD-SHARED.md` |
-| 改命理规则／格局 | `domain/ASTROLOGY-RULES.md` → `domain/CONTENT-PIPELINE.md` → `engineering/TESTING.md` |
+| 改命理规则／格局 | `domain/ASTROLOGY-RULES.md` → `domain/CALENDAR-AND-TIME.md` → `domain/CONTENT-PIPELINE.md` → `engineering/TESTING.md` |
 | 部署／排查 | `engineering/DEPLOY.md` → `engineering/ARCHITECTURE.md` |
 | 做研究 | `research/README.md` → 对应 brief |
-| 产品规划 | `product/PRD-*.md` → `product/REQUIREMENTS.md` → `operations/BACKLOG.md` → `product/METRICS.md` |
+| 产品规划 | `product/PRD-*.md` → `product/MARKET-MODEL.md` → `product/REQUIREMENTS.md` → `operations/BACKLOG.md` → `product/METRICS.md` |
+| 新增市场 | `product/MARKET-MODEL.md` → `product/PRD-TEMPLATE.md` → `domain/GLOSSARY.md` → `content/TONE-AND-CLAIMS.md` |
 
 ---
 
@@ -67,9 +68,12 @@
 | `product/SPECS/` | 功能 SPEC 与模板 | canonical |
 | `product/REQUIREMENTS.md` | 已实现／β／计划／放弃的需求矩阵 | canonical |
 | `product/POSITIONING.md` | 目标人群、JTBD、痛点、差异化 | draft |
+| `product/MARKET-MODEL.md` | Market/Locale、TW/HK/JP、继承与覆盖 | canonical |
 | `product/PRICING.md` | 定价、包装、免费/付费边界 | canonical |
 | `product/METRICS.md` | 漏斗与事件定义 | draft |
 | `domain/ASTROLOGY-RULES.md` | 流派、术语、边界、空宫/流年规则 | canonical |
+| `domain/DOMAIN-MODEL.md` | 核心对象、关系、事实边界 | canonical |
+| `domain/CALENDAR-AND-TIME.md` | 时区、真太阳时、晚子时、历法 | canonical |
 | `domain/CONTENT-PIPELINE.md` | 命盘→facts→文案→AI 的资料流 | canonical |
 | `domain/GLOSSARY.md` | 中日术语对照 | canonical |
 | `ux/PAGE-MAP.md` | 路由、页面目的、index/noindex | canonical |
