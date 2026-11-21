@@ -202,6 +202,7 @@ Caddyfile / docker-compose.yml / Dockerfile
 | 8 | 2026-11-21 11:50 | lead | 新 339 条数据 V2 pilot：20 条（A10/B10）；B 组出现 E2 集群（算命推薦/流年/命盤）、价格 3800 TWD/3000-5000 HKD；ChatGPT 词失效 | 下一位 agent | 用 20 条校准 codebook；正式采集 100–150 条；补 HK 消费者 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 9 | 2026-11-21 11:58 | lead | 339 + 237 合并 533；V3 pilot 28 条（A17/B11）；补婚姻/外遇/分居/裁员/35 岁转职；HK 仍弱 | 下一位 agent | 用 28 条校准 codebook；正式采集 100–150 条；访谈优先婚姻决策 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 10 | 2026-11-21 12:05 | lead | Codebook V3：A/B、E1–E4、婚姻细分、触发/替代/信任/价格/地区规则、28 条示例 | 下一位 agent | 正式编码 100–150 条（B 加权 + 婚姻）；访谈 8–12 人 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
+| 11 | 2026-11-21 12:15 | lead | ADR-0007 + POSITIONING + PRD-ZH 同步：台湾首发、A×C、单 SKU 關係決策書、免费自查/付费补时辰 | 下一位 agent | 写报告 SPEC 或首页 SPEC；支付/退款实现 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 
 ### 交接快照模板
 

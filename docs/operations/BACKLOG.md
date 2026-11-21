@@ -82,6 +82,7 @@ canonical: true
 | 项目 | 状态 | 备注 |
 |---|---|---|
 | Threads beachhead 研究 | codebook v3 done | 合并 533 条 + 28 条试编码 + codebook；待正式采集 100–150 条 |
+| ZH 定位同步 | done | ADR-0007 + POSITIONING + PRD-ZH；待报告/首页 SPEC、支付 |
 | Dcard/IG 三角验证 | proposed | 研究后 |
 | 文章内链/CTA | proposed | 文章 → 诊断 |
 | 电子报/CRM | proposed | 无账号 |

@@ -65,7 +65,7 @@
 | `ai/evaluation/golden-cases.jsonl` | 7 个金标准案例 | canonical |
 | `ai/evaluation/results/2026-11-21.md` | 首次 baseline 结果 | canonical |
 | `product/PRD-SHARED.md` | 共同产品定义、AI 政策、合规 | canonical |
-| `product/PRD-ZH.md` | 港台市场 PRD | canonical |
+| `product/PRD-ZH.md` | 台湾首发 PRD（ADR-0007） | canonical |
 | `product/PRD-JA.md` | 日本市场 PRD | canonical |
 | `product/PRD-TEMPLATE.md` | 新市场 PRD 模板（ko/vi） | template |
 | `product/SPECS/` | 功能 SPEC 与模板 | canonical |
