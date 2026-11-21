@@ -9,33 +9,33 @@
     "復合",
     "曖昧",
     "轉職",
-    "離職",
     "裁員",
+    "資遣",
+    "失業",
     "職涯",
-    "迷惘",
-    "感情困擾",
+    "創業",
     "婚姻問題",
     "算命",
-    "塔羅",
-    "紫微斗數",
-    "命盤",
-    "流年",
-    "命理",
-    "占卜",
-    "AI算命",
-    "ChatGPT",
-    "被騙",
     "算命推薦",
+    "流年",
+    "命盤",
+    "紫微斗數",
+    "塔羅",
+    "塔羅推薦",
+    "問事",
+    "改名",
+    "占卜",
+    "命理",
     "香港算命",
-    "香港塔羅"
+    "香港塔羅",
+    "AI算命",
+    "AI占卜"
   ],
   "maxPostsPerQuery": 15,
   "searchSort": "recent",
+  "onlyPostsNewerThan": "",
   "proxyConfiguration": {
     "useApifyProxy": true,
-    "apifyProxyGroups": [
-      "RESIDENTIAL"
-    ]
-  },
-  "onlyPostsNewerThan": ""
+    "apifyProxyGroups": ["RESIDENTIAL"]
+  }
 }

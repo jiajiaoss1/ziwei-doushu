@@ -27,7 +27,7 @@ canonical: true
 | `threads-pain-points-findings.md` | 待产出 | 研究结论 |
 | `threads-pilot-2026-11-21.md` | pilot v1 | 旧 423 条的 20 条试编码 |
 | `threads-pilot-v2-2026-11-21.md` | pilot v2 | 新 339 条的 20 条试编码 |
-| `apify-threads-input.json` | ready | Apify Threads Scraper 输入（V2 正式采集） |
+| `apify-threads-input.json` | ready | Apify Threads Scraper 输入（V3：B 组加权 + 删除 ChatGPT） |
 
 ## 3. 新增研究
 
