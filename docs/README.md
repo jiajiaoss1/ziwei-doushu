@@ -70,7 +70,7 @@
 | `product/PRD-TEMPLATE.md` | 新市场 PRD 模板（ko/vi） | template |
 | `product/SPECS/` | 功能 SPEC 与模板 | canonical |
 | `product/REQUIREMENTS.md` | 已实现／β／计划／放弃的需求矩阵 | canonical |
-| `product/POSITIONING.md` | 目标人群、JTBD、痛点、差异化 | draft |
+| `product/POSITIONING.md` | 目标人群、JTBD、痛点、差异化 | approved |
 | `product/MARKET-MODEL.md` | Market/Locale、TW/HK/JP、继承与覆盖 | canonical |
 | `product/PRICING.md` | 定价、包装、免费/付费边界 | canonical |
 | `product/METRICS.md` | 漏斗与事件定义 | draft |
