@@ -54,6 +54,7 @@ proposed / approved / implemented / beta / planned / blocked / dropped
 | REQ-ZH-010 | 文章 6 篇 | implemented | `PRD-ZH.md` | `lib/zh/articles.ts` | `zh-content` |
 | REQ-ZH-011 | 法务页（隐私/条款/交易） | beta | `content/TONE-AND-CLAIMS.md` | `app/zh/legal` | — |
 | REQ-ZH-012 | 關係決策書：免费自查 + 6 部分报告 + 14 天追问 | approved | `PRD-ZH.md`、`SPECS/zh-decision-report.md` | 未实现 | 待加 |
+| REQ-ZH-013 | 首页 + 关系决策自查（4 步/结果/付费 CTA） | planned | `PRD-ZH.md`、`SPECS/zh-home-selfcheck.md` | 未实现 | 待加 |
 | REQ-ZH-REL-001 | 感情报告锁定区价格/链接依 type 正确 | planned | `PRD-ZH.md` §7 | `app/zh/report` | 待加 |
 | REQ-ZH-REL-002 | 报告页保留 `w`/`s` 情境参数 | planned | `PRD-ZH.md` §7 | `app/zh/report` | 待加 |
 | REQ-ZH-CONV-001 | 结果页报告卡显示价格 | proposed | `PRD-ZH.md` | `app/zh/result` | — |

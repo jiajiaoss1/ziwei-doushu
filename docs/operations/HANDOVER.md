@@ -205,6 +205,7 @@ Caddyfile / docker-compose.yml / Dockerfile
 | 11 | 2026-11-21 12:15 | lead | ADR-0007 + POSITIONING + PRD-ZH 同步：台湾首发、A×C、单 SKU 關係決策書、免费自查/付费补时辰 | 下一位 agent | 写报告 SPEC 或首页 SPEC；支付/退款实现 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 12 | 2026-11-21 12:22 | lead | 《關係決策書》SPEC draft（REQ-ZH-012）：自查/付费/6 部分/1 年/14 天追问/退款/边界/测试 | 下一位 agent | 写首页/自查 SPEC 或支付 SPEC；Owner 批准报告 SPEC | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 13 | 2026-11-21 12:28 | lead | 《關係決策書》SPEC 已批准（REQ-ZH-012 approved）；4 个歧义已修正 | 下一位 agent | 写首页/自查 SPEC；支付/退款 SPEC | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
+| 14 | 2026-11-21 12:35 | lead | 首页/自查 SPEC draft（REQ-ZH-013）：4 步、默认午时+台北、结果 3+1、付费门槛、隐私/事件/测试 | 下一位 agent | 审/批首页 SPEC；支付/退款 SPEC | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 
 ### 交接快照模板
 
