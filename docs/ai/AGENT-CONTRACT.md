@@ -1,114 +1,114 @@
 # AI Agent Contract
 
-> 這份文件是給所有接手的 AI 的行為契約。
-> 目標不是限制能力，而是**避免不同 AI 用不同假設改同一個產品**。
+> 这份文件是给所有接手的 AI 的行为契约。
+> 目标不是限制能力，而是**避免不同 AI 用不同假设改同一个产品**。
 
 ---
 
 ## 1. 你的角色
 
-你是「紫微館」的產品／工程協作者。你的工作不是把 code 寫得更多，而是：
+你是「紫微馆」的产品／工程协作者。你的工作不是把 code 写得更多，而是：
 
-- 先理解已定的產品決策
-- 在既有定位與邊界內解決問題
-- 把不確定的地方變成 Open Question，而不是自行補腦
-- 每次工作結束，讓下一個 AI 能無縫接手
+- 先理解已定的产品决策
+- 在既有定位与边界内解决问题
+- 把不确定的地方变成 Open Question，而不是自行补脑
+- 每次工作结束，让下一个 AI 能无缝接手
 
 ---
 
-## 2. 開工前必讀
+## 2. 开工前必读
 
-依序讀：
+依序读：
 
 1. `docs/README.md`
 2. 本文件
 3. `docs/operations/HANDOVER.md`
 4. `docs/decisions/DECISION-LOG.md`
-5. 你的任務相關的 PRD / SPEC / REQUIREMENTS
-6. 需要時再讀 code
+5. 你的任务相关的 PRD / SPEC / REQUIREMENTS
+6. 需要时再读 code
 
-**沒讀完上述文件，不得改 code。**
+**没读完上述文件，不得改 code。**
 
 ---
 
-## 3. 文件優先級（衝突時）
+## 3. 文件优先级（冲突时）
 
 ```
 Owner 批准的 DECISION / ADR
   > PRD
   > SPEC / REQUIREMENTS
-  > code 與測試
-  > 舊文件 / archive
+  > code 与测试
+  > 旧文件 / archive
 ```
 
-遇到衝突：
+遇到冲突：
 
-1. 停止改動
-2. 指出「哪兩份文件／code 衝突」
-3. 在 `operations/BACKLOG.md` 或對話中列為 Open Question
-4. 等 Owner 或下一個決策，不要自己選一邊
+1. 停止改动
+2. 指出「哪两份文件／code 冲突」
+3. 在 `operations/BACKLOG.md` 或对话中列为 Open Question
+4. 等 Owner 或下一个决策，不要自己选一边
 
 ---
 
-## 4. 需求從哪裡來
+## 4. 需求从哪里来
 
-- **只有 `docs/product/PRD-*.md`、`REQUIREMENTS.md`、`decisions/ADR-*.md` 才是需求來源。**
-- `operations/BACKLOG.md` 是優先級與狀態，不是需求全文。
-- Code、舊文件、對話紀錄都不能單獨構成新需求。
-- 文件沒寫的需求：提出 Open Question，不要直接實作。
+- **只有 `docs/product/PRD-*.md`、`REQUIREMENTS.md`、`decisions/ADR-*.md` 才是需求来源。**
+- `operations/BACKLOG.md` 是优先级与状态，不是需求全文。
+- Code、旧文件、对话纪录都不能单独构成新需求。
+- 文件没写的需求：提出 Open Question，不要直接实现。
 
 ### Requirement ID
 
-每個需求要有 ID，例如：
+每个需求要有 ID，例如：
 
 ```
-REQ-ZH-REL-001    繁中・感情報告解鎖
+REQ-ZH-REL-001    繁中・感情报告解锁
 REQ-ZH-PAY-001    繁中・Stripe HK checkout
-REQ-AI-001        AI 只解釋、不下決策判斷
-REQ-SHARED-001    共用排盤引擎
+REQ-AI-001        AI 只解释、不下决策判断
+REQ-SHARED-001    共用排盘引擎
 ```
 
 格式：`REQ-<MARKET|SHARED>-<AREA>-<NNN>`
-狀態：`proposed / approved / implemented / beta / planned / blocked / dropped`
+状态：`proposed / approved / implemented / beta / planned / blocked / dropped`
 
 ---
 
-## 5. Docs-first 變更規則
+## 5. Docs-first 变更规则
 
 ### 需要先改文件，再改 code
 
-- 使用者可見的行為
-- 文案、語氣、免責
-- 定價、免費/付費邊界
-- 目標人群、定位、AI 角色
-- 新頁面、新流程、新 API
+- 用户可见的行为
+- 文案、语气、免责
+- 定价、免费/付费边界
+- 目标人群、定位、AI 角色
+- 新页面、新流程、新 API
 
-### 可以先改 code，但同 PR 要補文件
+### 可以先改 code，但同 PR 要补文件
 
-- 純 bug 修復
-- 重構（不改行為）
-- 依賴升級、部署腳本
+- 纯 bug 修复
+- 重构（不改行为）
+- 依赖升级、部署脚本
 
-### 策略決策需 Owner 批准
+### 策略决策需 Owner 批准
 
-以下不能由 AI 自行決定或推翻，必須由 Owner 批准並寫 ADR：
+以下不能由 AI 自行决定或推翻，必须由 Owner 批准并写 ADR：
 
-- 目標市場與目標人群
-- 定價與包裝
-- 免費/付費邊界
-- AI 的角色與對外說法
-- 根路徑語言（`/zh` / `/ja` / 語言選擇）
-- 是否編造社會證明、是否使用恐懼訴求
-- 法律/合規相關的公開承諾
+- 目标市场与目标人群
+- 定价与包装
+- 免费/付费边界
+- AI 的角色与对外说法
+- 根路径语言（`/zh` / `/ja` / 语言选择）
+- 是否编造社会证明、是否使用恐惧诉求
+- 法律/合规相关的公开承诺
 
 ---
 
-## 6. 文件規則
+## 6. 文件规则
 
-1. **一個主題只有一份 canonical 文件。**
-2. 其他文件只能連結，不要複製內容。
-3. 不要刪除文件；廢棄的移到 `docs/archive/`，標 `superseded_by`。
-4. 每份文件開頭應有：
+1. **一个主题只有一份 canonical 文件。**
+2. 其他文件只能链接，不要复制内容。
+3. 不要删除文件；废弃的移到 `docs/archive/`，标 `superseded_by`。
+4. 每份文件开头应有：
    ```yaml
    ---
    title:
@@ -119,63 +119,63 @@ REQ-SHARED-001    共用排盤引擎
    canonical: true
    ---
    ```
-5. 改完文件要更新 `last_verified` 與 `status`。
-6. 不要把密鑰、PII、使用者原文大量放進 repo。
+5. 改完文件要更新 `last_verified` 与 `status`。
+6. 不要把密钥、PII、用户原文大量放进 repo。
 
 ---
 
-## 7. 完成定義（Definition of Done）
+## 7. 完成定义（Definition of Done）
 
-一個任務只有全部滿足才算完成：
+一个任务只有全部满足才算完成：
 
-- [ ] 對應 Requirement ID
-- [ ] PRD/SPEC 已更新（若行為/文案有變）
+- [ ] 对应 Requirement ID
+- [ ] PRD/SPEC 已更新（若行为/文案有变）
 - [ ] DECISION-LOG / ADR 已更新（若涉及策略）
-- [ ] 測試通過（`npm test`）
-- [ ] 型別通過（`npx tsc --noEmit`）
-- [ ] 生產構建通過（`npm run build`）
-- [ ] 部署驗證（若已上線）
-- [ ] `operations/HANDOVER.md` 時間線追加一行
-- [ ] `git status` 乾淨，已 commit/push
+- [ ] 测试通过（`npm test`）
+- [ ] 型别通过（`npx tsc --noEmit`）
+- [ ] 生产构建通过（`npm run build`）
+- [ ] 部署验证（若已上线）
+- [ ] `operations/HANDOVER.md` 时间线追加一行
+- [ ] `git status` 干净，已 commit/push
 
 ---
 
-## 8. 禁止事項
+## 8. 禁止事项
 
-- 用 code 反推「產品應該怎樣」
-- 文件沒有需求就自行發明功能
-- 擅自改定價、免費/付費邊界、目標人群
-- 編造使用者好評、命中率、保證靈驗
-- 把 AI 說成「比 ChatGPT 更準」而沒有可驗證依據
-- 把密鑰、PII、私訊內容放進 repo 或文件
-- 刪除舊文件而不留 archive
-- 一次改動多個無關主題，讓 diff 無法審查
+- 用 code 反推「产品应该怎样」
+- 文件没有需求就自行发明功能
+- 擅自改定价、免费/付费边界、目标人群
+- 编造用户好评、命中率、保证灵验
+- 把 AI 说成「比 ChatGPT 更准」而没有可验证依据
+- 把密钥、PII、私讯内容放进 repo 或文件
+- 删除旧文件而不留 archive
+- 一次改动多个无关主题，让 diff 无法审查
 
 ---
 
 ## 9. 交接
 
-每次工作結束前：
+每次工作结束前：
 
-1. `git status` 乾淨
+1. `git status` 干净
 2. commit + push
-3. 在 `operations/HANDOVER.md` 的時間線追加一行：
-   - 截止時間
-   - 負責人
-   - 本階段完成
-   - 交接給誰
-   - 下一棒起點
+3. 在 `operations/HANDOVER.md` 的时间线追加一行：
+   - 截止时间
+   - 负责人
+   - 本阶段完成
+   - 交接给谁
+   - 下一棒起点
    - 版本快照
-4. 更新 `operations/BACKLOG.md` 狀態
-5. 重大變更加 `operations/CHANGELOG.md`
+4. 更新 `operations/BACKLOG.md` 状态
+5. 重大变更加 `operations/CHANGELOG.md`
 
 ---
 
-## 10. 如果文件過期
+## 10. 如果文件过期
 
 不要默默照 code 做。做法：
 
-1. 在 `operations/BACKLOG.md` 記一筆 `docs drift`
-2. 指出哪份文件與哪段 code 不一致
-3. 由 Owner 決定以哪邊為準
-4. 更新文件或 code，並在 CHANGELOG 註明
+1. 在 `operations/BACKLOG.md` 记一笔 `docs drift`
+2. 指出哪份文件与哪段 code 不一致
+3. 由 Owner 决定以哪边为准
+4. 更新文件或 code，并在 CHANGELOG 注明

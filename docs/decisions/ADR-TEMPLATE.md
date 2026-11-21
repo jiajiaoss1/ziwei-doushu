@@ -1,15 +1,15 @@
-# ADR-000X 標題
+# ADR-000X 标题
 
 - 日期：YYYY-MM-DD
-- 狀態：Proposed / Accepted / Superseded
+- 状态：Proposed / Accepted / Superseded
 - 批准人：
 
 ## 背景
 
-## 選項
+## 选项
 
-## 決定
+## 决定
 
 ## 理由
 
-## 後果
+## 后果

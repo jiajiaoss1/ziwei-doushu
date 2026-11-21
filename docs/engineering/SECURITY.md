@@ -1,5 +1,5 @@
 ---
-title: 安全與密鑰
+title: 安全与密钥
 status: approved
 owner: 负责人
 last_verified: 2026-11-21
@@ -7,65 +7,65 @@ applies_to: [shared]
 canonical: true
 ---
 
-# 安全與密鑰
+# 安全与密钥
 
-## 1. 密鑰清單
+## 1. 密钥清单
 
-| 變數 | 用途 | 備註 |
+| 变数 | 用途 | 备注 |
 |---|---|---|
-| `JP_UNLOCK_SECRET` | 報告解鎖 HMAC | 曾出現在對話，建議輪換 |
-| `JP_AI_TOKEN_SECRET` | AI token HMAC | 曾出現在對話，建議輪換 |
-| `JP_WEBHOOK_SECRET` | webhook 驗簽 + order token | 不可洩漏 |
+| `JP_UNLOCK_SECRET` | 报告解锁 HMAC | 曾出现在对话，建议轮换 |
+| `JP_AI_TOKEN_SECRET` | AI token HMAC | 曾出现在对话，建议轮换 |
+| `JP_WEBHOOK_SECRET` | webhook 验签 + order token | 不可泄漏 |
 | `JP_LLM_API_KEY` | DeepSeek | 只放 VPS |
-| `NETLIFY_AUTH_TOKEN` | 舊 Caddy DNS-01 | Caddyfile 已 HTTP-01，待移除 |
-| `ACME_EMAIL` | Let's Encrypt | 非密鑰 |
+| `NETLIFY_AUTH_TOKEN` | 旧 Caddy DNS-01 | Caddyfile 已 HTTP-01，待移除 |
+| `ACME_EMAIL` | Let's Encrypt | 非密钥 |
 
-**不要**把任何 key 寫進 repo、docs、截圖、聊天。已暴露的要輪換。
+**不要**把任何 key 写进 repo、docs、截图、聊天。已暴露的要轮换。
 
 ## 2. 部署安全
 
-- SSH 只用 key，關閉 password
-- UFW 只開 22/80/443
+- SSH 只用 key，关闭 password
+- UFW 只开 22/80/443
 - `.env.production` `chmod 600`
 - VPS 定期 `apt upgrade` / unattended-upgrades
-- Docker socket 等於 root，限制登入
+- Docker socket 等于 root，限制登录
 
 ## 3. Web/API
 
-- HTTPS 強制（Caddy）
+- HTTPS 强制（Caddy）
 - HSTS、X-Content-Type-Options、Referrer-Policy、Permissions-Policy
 - AI API：
-  - 同源檢查（`Origin`）
+  - 同源检查（`Origin`）
   - 短命 token（IP + 生日 + 15 分）
   - IP 10/10min、token 5/15min
   - 每日 IP 20 / 全域 1000
 - 支付：
   - order token AES-256-GCM
   - webhook HMAC-SHA256
-  - 驗簽失敗 401
+  - 验签失败 401
 
-## 4. 隱私
+## 4. 隐私
 
-- 無帳號、無 DB
-- 生日資料主要存在 URL 參數
-- URL 參數會進瀏覽器歷史/日誌/分析工具，法務頁要揭露
-- 不要把使用者原文/PII 放進 repo
+- 无账号、无 DB
+- 生日资料主要存在 URL 参数
+- URL 参数会进浏览器历史/日志/分析工具，法务页要揭露
+- 不要把用户原文/PII 放进 repo
 
-## 5. 已知風險
+## 5. 已知风险
 
-1. 密鑰曾在對話出現，必須輪換
+1. 密钥曾在对话出现，必须轮换
 2. `NETLIFY_AUTH_TOKEN` 仍存在但已不需要
-3. 限流是進程內計數，多實例可繞過
-4. 無 Sentry/告警，錯誤可能無人知道
-5. 1GB VPS，DDoS/突發流量風險
-6. 無訂單 DB，付款後對帳/退款靠 PSP
+3. 限流是进程内计数，多实例可绕过
+4. 无 Sentry/告警，错误可能无人知道
+5. 1GB VPS，DDoS/突发流量风险
+6. 无订单 DB，付款后对帐/退款靠 PSP
 
-## 6. 事件處理
+## 6. 事件处理
 
-若懷疑洩漏：
+若怀疑泄漏：
 
-1. 立即輪換該密鑰
-2. 重啟相關服務
-3. 檢查 access log / PSP 後台
-4. 在 `operations/CHANGELOG.md` 記錄（不寫密鑰）
+1. 立即轮换该密钥
+2. 重启相关服务
+3. 检查 access log / PSP 后台
+4. 在 `operations/CHANGELOG.md` 记录（不写密钥）
 5. 通知 Owner

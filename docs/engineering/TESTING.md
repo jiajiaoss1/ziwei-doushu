@@ -1,5 +1,5 @@
 ---
-title: 測試策略
+title: 测试策略
 status: approved
 owner: 负责人
 last_verified: 2026-11-21
@@ -7,9 +7,9 @@ applies_to: [shared]
 canonical: true
 ---
 
-# 測試策略
+# 测试策略
 
-> 目標：改文案/命理規則時，不破壞既有輸出；改支付/AI 時，不產生安全漏洞。
+> 目标：改文案/命理规则时，不破坏既有输出；改支付/AI 时，不产生安全漏洞。
 
 ## 1. 必跑
 
@@ -19,25 +19,25 @@ npm test
 npm run build
 ```
 
-- `npm test` 目前跑 `scripts/regression/*.test.ts`（25 個套件）
+- `npm test` 目前跑 `scripts/regression/*.test.ts`（25 个套件）
 - `jp-patterns` / `zh-patterns` 需要：
   ```bash
   NODE_OPTIONS=--conditions=react-server npx tsx scripts/regression/jp-patterns.test.ts
   NODE_OPTIONS=--conditions=react-server npx tsx scripts/regression/zh-patterns.test.ts
   ```
-  `package.json` 的 `test` 已處理。
+  `package.json` 的 `test` 已处理。
 
-## 2. 測試分層
+## 2. 测试分层
 
-| 類型 | 檔案 | 保護 |
+| 类型 | 文件 | 保护 |
 |---|---|---|
-| 排盤/時間 | `pan-integrity`、`dst-cn`、`clock-adjust`、`sizhu-lichun-boundary`、`iztro-time-index-boundary`、`solar-date-exists` | 命盤/時區/節氣 |
-| 命理規則 | `hongluan-tianxi`、`famous-hour-consistency`、`natal-dual-sihua-same-palace`、`neutral-naming` | 星曜/四化/命名 |
-| 日文內容 | `jp-birth`、`jp-content`、`jp-compat`、`jp-report`、`jp-edge` | 文案/空宮/大限 |
-| 繁中內容 | `zh-content` | 詞庫/解讀/報告/相性 |
+| 排盘/时间 | `pan-integrity`、`dst-cn`、`clock-adjust`、`sizhu-lichun-boundary`、`iztro-time-index-boundary`、`solar-date-exists` | 命盘/时区/节气 |
+| 命理规则 | `hongluan-tianxi`、`famous-hour-consistency`、`natal-dual-sihua-same-palace`、`neutral-naming` | 星曜/四化/命名 |
+| 日文内容 | `jp-birth`、`jp-content`、`jp-compat`、`jp-report`、`jp-edge` | 文案/空宫/大限 |
+| 繁中内容 | `zh-content` | 词库/解读/报告/相性 |
 | 格局 | `jp-patterns`、`zh-patterns` | 格局/排序/出典 |
 | 支付 | `jp-checkout` | order token/webhook |
-| AI | `jp-llm`、`jp-llm-guard`、`jp-ratelimit`、`jp-ai-token` | prompt/護欄/限流 |
+| AI | `jp-llm`、`jp-llm-guard`、`jp-ratelimit`、`jp-ai-token` | prompt/护栏/限流 |
 
 ## 3. CI
 
@@ -52,36 +52,36 @@ npm run build
 ### npm lock 注意
 
 Docker（npm 10）曾因 `fdir`/`picomatch` hoisting 需要 `npm ci --legacy-peer-deps`。
-2026-11-21 已用 npm 10 `ci --dry-run` 驗證目前的 lock 可用；CI 用 `npm ci` 應該正常。
+2026-11-21 已用 npm 10 `ci --dry-run` 验证目前的 lock 可用；CI 用 `npm ci` 应该正常。
 
-若日後用 npm 11 重新生成 lock，可能再出現同問題；到時優先用 npm 10 重新生成，或在 Docker/CI 加 `--legacy-peer-deps`。
+若日后用 npm 11 重新生成 lock，可能再出现同问题；到时优先用 npm 10 重新生成，或在 Docker/CI 加 `--legacy-peer-deps`。
 
-## 4. 尚未覆蓋
+## 4. 尚未覆盖
 
-- 繁中 checkout/webhook（尚未實作）
+- 繁中 checkout/webhook（尚未实现）
 - E2E（Playwright/Cypress）
-- 視覺回歸/手機版
-- 付款真實流程
-- AI 事實性/一致性評估（目前只有 prompt/護欄測試）
-- 多實例限流
+- 视觉回归/手机版
+- 付款真实流程
+- AI 事实性/一致性评估（目前只有 prompt/护栏测试）
+- 多实例限流
 
-## 5. 金標準盤
+## 5. 金标准盘
 
 至少保留：
 
-- 空宮（命宮/官祿）
+- 空宫（命宫/官禄）
 - 多主星
-- 晚子時 23:59 / 00:00
-- 立春/春節邊界
-- 大限虛歲邊界
+- 晚子时 23:59 / 00:00
+- 立春/春节边界
+- 大限虚岁边界
 
-新增規則時，先加金標準盤，再改 code。
+新增规则时，先加金标准盘，再改 code。
 
 ## 6. Definition of Done
 
 - [ ] tsc 0
-- [ ] npm test 全綠
+- [ ] npm test 全绿
 - [ ] build 成功
-- [ ] 部署後 `/api/health`、`/zh`、`/ja` 200
-- [ ] 若改文案，人工看一次頁面
+- [ ] 部署后 `/api/health`、`/zh`、`/ja` 200
+- [ ] 若改文案，人工看一次页面
 - [ ] 若改支付/AI，测 401/403/429/501

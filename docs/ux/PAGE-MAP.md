@@ -1,5 +1,5 @@
 ---
-title: 頁面地圖
+title: 页面地图
 status: approved
 owner: 负责人
 last_verified: 2026-11-21
@@ -7,62 +7,62 @@ applies_to: [shared, zh, ja]
 canonical: true
 ---
 
-# 頁面地圖
+# 页面地图
 
 > 所有路由、目的、index/noindex、主要 CTA。
-> 新增頁面或改路由，先更新這裡，再改 `next.config.js` / `app/*`。
+> 新增页面或改路由，先更新这里，再改 `next.config.js` / `app/*`。
 
 ## 1. 入口
 
-| 路由 | 行為 |
+| 路由 | 行为 |
 |---|---|
 | `/` | 307 → `/zh`（host: shibikan.com / www） |
-| `/zh` | 繁中首頁 |
-| `/ja` | 日文首頁 |
+| `/zh` | 繁中首页 |
+| `/ja` | 日文首页 |
 | `/api/health` | `{"ok":true}` |
 
-> 根路徑固定 `/zh`；日文版不是預設入口。改這個要 ADR。
+> 根路径固定 `/zh`；日文版不是默认入口。改这个要 ADR。
 
 ## 2. 繁中 `/zh`
 
 | 路由 | 目的 | index | 主要 CTA |
 |---|---|---|---|
-| `/zh` | 首頁：Hero、結果範例、信任、價格、FAQ | ✅ | 免費診斷 |
-| `/zh/shindan` | 表單：煩惱/情境、生日、時辰、縣市 | ✅ | 產生結果 |
-| `/zh/result` | 結果：共情、命盤、免費解讀、AI、報告入口 | ❌ noindex | 看報告 / AI |
-| `/zh/report` | 報告：感情/事業，β 全文 | ❌ noindex | 解鎖/付款 |
-| `/zh/aishou` | 相性表單 | ✅ | 產生相性 |
-| `/zh/aishou/result` | 相性結果 | ❌ noindex | 回診斷 |
-| `/zh/2027` | 2027 丁未年專題 | ✅ | 免費診斷 |
-| `/zh/articles` | 文章列表 | ✅ | 閱讀 |
-| `/zh/articles/[slug]` | 6 篇文章 | ✅ | 免費診斷 |
-| `/zh/legal/privacy` | 隱私 | ✅ | — |
-| `/zh/legal/terms` | 使用條款 | ✅ | — |
-| `/zh/legal/tokushoho` | 交易條款 | ✅ | — |
-| `/zh/not-found` | 404 | — | 回首頁 |
+| `/zh` | 首页：Hero、结果范例、信任、价格、FAQ | ✅ | 免费诊断 |
+| `/zh/shindan` | 表单：烦恼/情境、生日、时辰、县市 | ✅ | 产生结果 |
+| `/zh/result` | 结果：共情、命盘、免费解读、AI、报告入口 | ❌ noindex | 看报告 / AI |
+| `/zh/report` | 报告：感情/事业，β 全文 | ❌ noindex | 解锁/付款 |
+| `/zh/aishou` | 相性表单 | ✅ | 产生相性 |
+| `/zh/aishou/result` | 相性结果 | ❌ noindex | 回诊断 |
+| `/zh/2027` | 2027 丁未年专题 | ✅ | 免费诊断 |
+| `/zh/articles` | 文章列表 | ✅ | 阅读 |
+| `/zh/articles/[slug]` | 6 篇文章 | ✅ | 免费诊断 |
+| `/zh/legal/privacy` | 隐私 | ✅ | — |
+| `/zh/legal/terms` | 使用条款 | ✅ | — |
+| `/zh/legal/tokushoho` | 交易条款 | ✅ | — |
+| `/zh/not-found` | 404 | — | 回首页 |
 
 ## 3. 日文 `/ja`
 
 | 路由 | 目的 | index | 主要 CTA |
 |---|---|---|---|
-| `/ja` | 首頁 | ✅ | 無料診断 |
-| `/ja/shindan` | 表單 | ✅ | 結果 |
-| `/ja/result` | 結果 | ❌ noindex | 鑑定書 / AI |
-| `/ja/report` | 戀愛/事業報告 | ❌ noindex | 解鎖/付款 |
-| `/ja/checkout` | 購買頁 | ❌ noindex | 決済/無料 |
-| `/ja/aishou` | 相性表單 | ✅ | 結果 |
-| `/ja/aishou/result` | 相性結果 | ❌ noindex | — |
-| `/ja/2027` | 2027 | ✅ | 診断 |
-| `/ja/articles` | 文章列表 | ✅ | 閱讀 |
-| `/ja/articles/[slug]` | 6 篇 | ✅ | 診断 |
-| `/ja/legal/*` | 法務 | ✅ | — |
+| `/ja` | 首页 | ✅ | 无料诊断 |
+| `/ja/shindan` | 表单 | ✅ | 结果 |
+| `/ja/result` | 结果 | ❌ noindex | 鉴定书 / AI |
+| `/ja/report` | 恋爱/事业报告 | ❌ noindex | 解锁/付款 |
+| `/ja/checkout` | 购买页 | ❌ noindex | 决済/无料 |
+| `/ja/aishou` | 相性表单 | ✅ | 结果 |
+| `/ja/aishou/result` | 相性结果 | ❌ noindex | — |
+| `/ja/2027` | 2027 | ✅ | 诊断 |
+| `/ja/articles` | 文章列表 | ✅ | 阅读 |
+| `/ja/articles/[slug]` | 6 篇 | ✅ | 诊断 |
+| `/ja/legal/*` | 法务 | ✅ | — |
 | `/ja/not-found` | 404 | — | — |
 
 ## 4. API
 
-| 路由 | 用途 | 狀態 |
+| 路由 | 用途 | 状态 |
 |---|---|---|
-| `/api/health` | 健康檢查 | implemented |
+| `/api/health` | 健康检查 | implemented |
 | `/api/zh/interpret` | 繁中 AI | beta |
 | `/api/ja/interpret` | 日文 AI | beta |
 | `/api/ja/checkout` | 日文 checkout | skeleton |
@@ -70,18 +70,18 @@ canonical: true
 | `/api/zh/checkout` | 繁中 checkout | **未做** |
 | `/api/zh/webhook` | 繁中 webhook | **未做** |
 
-## 5. 已知頁面問題
+## 5. 已知页面问题
 
-- 繁中結果頁的報告卡沒有價格
-- 繁中報告頁的鎖定區寫死事業價格/連結
-- 繁中報告頁切換類型會丟失 `w`/`s`
-- 繁中 AI 免費問答可能替代付費報告
-- 繁中頁面瀏覽事件缺失
+- 繁中结果页的报告卡没有价格
+- 繁中报告页的锁定区写死事业价格/链接
+- 繁中报告页切换类型会丢失 `w`/`s`
+- 繁中 AI 免费问答可能替代付费报告
+- 繁中页面浏览事件缺失
 - 日文 checkout 仍是骨架
 
-## 6. 變更規則
+## 6. 变更规则
 
-- 新增/刪除路由：更新本文件 + `next.config.js` + sitemap（若 index）
-- 所有結果/報告/購買頁預設 `noindex`
-- 行銷頁、文章、法務頁才 index
-- 不要讓兩個市場互相 redirect（除根路徑）
+- 新增/删除路由：更新本文件 + `next.config.js` + sitemap（若 index）
+- 所有结果/报告/购买页默认 `noindex`
+- 营销页、文章、法务页才 index
+- 不要让两个市场互相 redirect（除根路径）
