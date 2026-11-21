@@ -196,6 +196,7 @@ Caddyfile / docker-compose.yml / Dockerfile
 | 2 | 2026-11-21 10:31 | lead | 文件系统重构：索引、AI 合约、工作方法、PRD（shared/zh/ja）、需求矩阵、ADR、backlog、handover；旧文件归档；Threads 研究 brief | 下一位 agent | P1 产品打磨：等 Threads 研究 → 定 beachhead/付费交付物 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 3 | 2026-11-21 10:58 | lead | 增量 docs V2：Domain Model、Calendar & Time、Market Model、产品意图 vs 实现事实矩阵 | 下一位 agent | 产品打磨：Threads 数据回来后定 beachhead/付费交付物 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 4 | 2026-11-21 11:05 | lead | 增量 docs V2：Module Map/依赖规则、AI 质量评估最小版 + 7 个 golden cases | 下一位 agent | 产品打磨：Threads 数据回来后定 beachhead/付费交付物 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
+| 5 | 2026-11-21 11:12 | lead | AI 质量 baseline：7 案例全部通过；记录误报与后续改进 | 下一位 agent | 产品打磨：Threads 数据回来后定 beachhead/付费交付物 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 
 ### 交接快照模板
 

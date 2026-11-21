@@ -63,6 +63,7 @@
 | `ai/WORKING-METHOD.md` | 我们怎么持续迭代 | canonical |
 | `ai/AI-EVALUATION.md` | AI 输出质量评估（最小版） | canonical |
 | `ai/evaluation/golden-cases.jsonl` | 7 个金标准案例 | canonical |
+| `ai/evaluation/results/2026-11-21.md` | 首次 baseline 结果 | canonical |
 | `product/PRD-SHARED.md` | 共同产品定义、AI 政策、合规 | canonical |
 | `product/PRD-ZH.md` | 港台市场 PRD | canonical |
 | `product/PRD-JA.md` | 日本市场 PRD | canonical |

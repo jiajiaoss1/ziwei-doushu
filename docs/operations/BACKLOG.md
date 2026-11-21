@@ -72,6 +72,7 @@ canonical: true
 | 信任区块（不编好评） | proposed | 方法/作者/样本 |
 | 免费 AI 限制为解释型 | proposed | 方向见 ADR-0003 |
 | 付费 AI 追问 | proposed | 需先有付费 |
+| AI digest 补空宫借对宫 | planned | REQ-AI-002；2026-11-21 baseline 发现 |
 | 购买流程说明 | proposed | 退款/交付 |
 
 ---
@@ -111,6 +112,7 @@ canonical: true
 - 日文版格局翻译/审查
 - 文件系统（本次）
 - 增量 docs V2：`DOMAIN-MODEL` / `CALENDAR-AND-TIME` / `MARKET-MODEL` / 产品意图矩阵 / `MODULE-MAP` / `AI-EVALUATION` + 7 golden cases
+- AI 质量 baseline 2026-11-21：7/7 通过（结果在 `docs/ai/evaluation/results/2026-11-21.md`）
 
 历史细节：`archive/ja-backlog-2026-11-18.md`。
 

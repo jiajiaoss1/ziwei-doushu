@@ -79,6 +79,15 @@ canonical: true
 
 ## 4. 评估流程
 
+### 4.0 运行器
+
+```bash
+node scripts/ai-eval/run-baseline.mjs
+```
+
+会从结果页取短期 token、调用生产 API，把输出存到 `/tmp/ai-eval/`。
+**会消耗 AI 额度；不要放进 CI。**
+
 ```text
 固定 golden case
   → 固定 model + prompt + facts digest 版本
@@ -92,6 +101,7 @@ canonical: true
 ### 4.1 确定性检查（可脚本化）
 
 - 禁用词：`一定`、`保證`、`保证`、`命中率`、`絕對`、`绝对`、`命中`、`靈驗`、`灵验`
+- **禁用词是 flag，不是自动 fail**：`不保證未來`、`不一定`、`必ずしも`、引用否定句都是允许的，必须读上下文
 - 医疗/法律/投资建议：`診斷`、`诊断`、`吃藥`、`吃药`、`投資建議`、`投资建议`、`離婚`（作为命令式）
 - 星曜名：输出中的星名必须在 facts digest 允许集合内（后续可写脚本）
 - 语言：
@@ -148,13 +158,19 @@ canonical: true
 
 1. 模型输出非确定性；同一输入跑 2–3 次取最差
 2. facts digest 只含部分宫位/星曜，评估要区分“没给” vs “编造”
-3. AI 用当前年份，2027 案例目前会失败/不适用
-4. 没有自动星曜名比对脚本；先人工
-5. 不用 LLM-as-judge 作为唯一评分；最多辅助
+3. facts digest **不含 borrowedStars**：空宫时 AI 只能写“空宮”，写不出“借對宮 天同・巨門”；这是 2026-11-21 baseline 发现的实际缺口
+4. AI 用当前年份，2027 案例目前会失败/不适用
+5. 没有自动星曜名比对脚本；先人工
+6. 不用 LLM-as-judge 作为唯一评分；最多辅助
 
 ---
 
-## 7. 最小落地顺序
+## 7. Baseline
+
+- 2026-11-21：7/7 通过，记录在 `docs/ai/evaluation/results/2026-11-21.md`
+- 原始输出在 `/tmp/ai-eval/`，未提交
+
+## 8. 最小落地顺序
 
 1. 先用 7 个 golden cases 跑一次 baseline（人工）
 2. 记录 model/prompt/commit
@@ -164,7 +180,7 @@ canonical: true
 
 ---
 
-## 8. 相关文件
+## 9. 相关文件
 
 - `docs/ai/evaluation/golden-cases.jsonl`
 - `docs/domain/CONTENT-PIPELINE.md`

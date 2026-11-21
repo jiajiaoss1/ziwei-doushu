@@ -34,6 +34,7 @@ proposed / approved / implemented / beta / planned / blocked / dropped
 | REQ-SHARED-008 | CI（typecheck/test/build） | implemented | `engineering/TESTING.md` | `.github/workflows/*` | CI |
 | REQ-SHARED-009 | 文件系统（索引/合约/ADR） | approved | `README.md`、`ai/*` | docs | — |
 | REQ-SHARED-010 | 全局限流（跨实例） | planned | `engineering/SECURITY.md` | 目前进程内 | — |
+| REQ-AI-002 | AI digest 补空宫借对宫/borrowed stars | planned | `ai/AI-EVALUATION.md` | `lib/{zh,jp}/llm.ts` | 待加 |
 
 ---
 
