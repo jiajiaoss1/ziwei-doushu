@@ -217,7 +217,7 @@ Pilot 初步信号：
 
 ## 10. 未决 / 待补
 
-1. **ADR**：按 `AGENT-CONTRACT`，定位变更应写 ADR；本轮 Owner 指定只更新 POSITIONING，ADR 待补
+1. **ADR**：已记录 `ADR-0007`（Accepted）；本文与 ADR 同步
 2. **PRD-ZH 同步**：本次未改 PRD；后续需把本决策写进 PRD
 3. **报告 SPEC**：6 部分的具体字段/文案/边界
 4. **首页 SPEC**：主标题、副标题、信任区、自查表单
