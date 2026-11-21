@@ -11,7 +11,7 @@
 | 文件 | 需求 | 状态 |
 |---|---|---|
 | `zh-decision-report.md` | REQ-ZH-012 | approved |
-| `zh-home-selfcheck.md` | REQ-ZH-013 | draft |
+| `zh-home-selfcheck.md` | REQ-ZH-013 | approved |
 
 ## SPEC 模板
 

@@ -1,7 +1,7 @@
 ---
 title: SPEC｜首页 + 关系决策自查
 requirement_id: REQ-ZH-013
-status: draft
+status: approved
 owner: 负责人
 last_verified: 2026-11-21
 applies_to: [zh]
