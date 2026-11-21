@@ -94,6 +94,7 @@
 | `operations/CHANGELOG.md` | 重大变更 | canonical |
 | `research/README.md` | 研究资料规范 | canonical |
 | `research/threads-pain-points-brief.md` | Threads beachhead 研究 brief V2 | ready |
+| `research/threads-pilot-2026-11-21.md` | 20 条 pilot 试编码结论 | draft |
 | `archive/` | 被取代的旧文件 | superseded |
 | `tianji-ziwei/` | 天纪语料（参考，非产品文件） | reference |
 

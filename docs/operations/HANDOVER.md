@@ -198,6 +198,7 @@ Caddyfile / docker-compose.yml / Dockerfile
 | 4 | 2026-11-21 11:05 | lead | 增量 docs V2：Module Map/依赖规则、AI 质量评估最小版 + 7 个 golden cases | 下一位 agent | 产品打磨：Threads 数据回来后定 beachhead/付费交付物 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 5 | 2026-11-21 11:12 | lead | AI 质量 baseline：7 案例全部通过；记录误报与后续改进 | 下一位 agent | 产品打磨：Threads 数据回来后定 beachhead/付费交付物 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 6 | 2026-11-21 11:20 | lead | Threads 研究 brief 升级到 V2：E1–E4、A/B 样本、TW/HK 分开、Raw/Research 分离、购买触发/信任/决策矩阵 | 下一位 agent | 执行 Threads 研究；结果回来定 beachhead/付费交付物 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
+| 7 | 2026-11-21 11:35 | lead | 现有 scraper 数据 pilot：423→164→20 条试编码；发现 A 组多为 E1、B 组付费样本老且广告多、无 HK、回复无父帖 | 下一位 agent | 正式采集前校准 codebook；补 HK/消费决策词 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 
 ### 交接快照模板
 

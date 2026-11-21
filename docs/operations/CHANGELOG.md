@@ -20,6 +20,7 @@ canonical: true
 - 增量 docs V2：Module Map/依赖规则；AI 质量评估最小版（7 个 golden cases）
 - AI 质量 baseline 2026-11-21：7/7 通过，误报已记录
 - Threads 研究 brief V2：购买证据 E1–E4、自然/命理样本分离、TW/HK 分开、Raw/Research 数据分离、购买触发/信任/决策矩阵
+- Threads pilot 20 条：A 组多为 E1，B 组付费样本老/广告多，无 HK，回复无父帖
 - 新增 `AGENTS.md` 根目录指针
 - 新增 Threads 痛点研究 brief
 - 根路径 `/` → `/zh`
