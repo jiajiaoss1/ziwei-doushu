@@ -1021,7 +1021,7 @@ function detectKeQuanShuangHui(chart: ZiweiChart, patterns: Pattern[]) {
 //
 // 日文版只接入〈定贵局〉(27) 与〈定富局〉(6) 两张表：两者都是正向格，契合
 // 服务「不安をあおらず、安心感を保つ」的定位。〈定贫贱局〉(8) 多为负面格名、
-// 〈定杂局〉(8) 多为大限格，暂不接入，见 docs/ja-backlog.md。
+// 〈定杂局〉(8) 多为大限格，暂不接入，见 docs/domain/ASTROLOGY-RULES.md。
 
 interface QuanshuHit {
   no: number;

@@ -6,7 +6,7 @@
  * ・23:59 は翌日、00:00 は当日。
  *
  * 注：四柱はエンジンが中国標準時前提で計算する。日本語版の画面には表示していない。
- *     将来表示する場合は utcOffset 対応が必要（docs/ja-professional-review.md 参照）。
+ *     将来表示する場合は utcOffset 対応が必要（docs/domain/ASTROLOGY-RULES.md 参照）。
  */
 
 import { generateChart } from '../../lib/ziwei/algorithm';

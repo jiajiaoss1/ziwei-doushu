@@ -1,6 +1,6 @@
 # 紫微館 VPS デプロイ手順（Vultr 東京 / ConoHa）
 
-Next.js を **Docker + Caddy** で 1 台の VPS に載せる構成です。  
+Next.js を **Docker + Caddy** で 1 台の VPS に載せる構成です。
 Netlify は止めずに残し、DNS を切り替えて移行します（失敗したら戻せる）。
 
 ## 構成
@@ -122,7 +122,7 @@ cd /opt/shibikan
 bash scripts/vps/deploy.sh
 ```
 
-初回はビルド込みで 3–6 分。  
+初回はビルド込みで 3–6 分。
 Caddy が証明書を取るまで 1–2 分待つ。
 
 ```bash
