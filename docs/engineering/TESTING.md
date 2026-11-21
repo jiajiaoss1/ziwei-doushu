@@ -56,7 +56,11 @@ Docker（npm 10）曾因 `fdir`/`picomatch` hoisting 需要 `npm ci --legacy-pee
 
 若日后用 npm 11 重新生成 lock，可能再出现同问题；到时优先用 npm 10 重新生成，或在 Docker/CI 加 `--legacy-peer-deps`。
 
-## 4. 尚未覆盖
+## 4. AI 输出
+
+AI 文本的质量评估见 `ai/AI-EVALUATION.md`；工程测试不替代人工评估。
+
+## 5. 尚未覆盖
 
 - 繁中 checkout/webhook（尚未实现）
 - E2E（Playwright/Cypress）

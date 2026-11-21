@@ -137,4 +137,5 @@ npm run build
 - 命理规则：`domain/ASTROLOGY-RULES.md`
 - 架构：`engineering/ARCHITECTURE.md`
 - 测试：`engineering/TESTING.md`
+- AI 质量：`ai/AI-EVALUATION.md`
 - 旧版（日文）：`archive/` 无；本文件取代 `ja-content-pipeline.md`

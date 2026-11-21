@@ -46,9 +46,9 @@
 | 改繁中页面／文案 | `product/PRD-ZH.md` → `product/POSITIONING.md` → `content/TONE-AND-CLAIMS.md` → `ux/PAGE-MAP.md` |
 | 改日文页面／文案 | `product/PRD-JA.md` → `content/TONE-AND-CLAIMS.md` → `ux/PAGE-MAP.md` |
 | 改付费／定价／解锁 | `product/PRICING.md` → `product/REQUIREMENTS.md` → `decisions/DECISION-LOG.md` → `engineering/SECURITY.md` |
-| 改 AI 解读 | `domain/ASTROLOGY-RULES.md` → `domain/CONTENT-PIPELINE.md` → `product/PRD-SHARED.md` |
+| 改 AI 解读 | `ai/AI-EVALUATION.md` → `domain/ASTROLOGY-RULES.md` → `domain/CONTENT-PIPELINE.md` → `product/PRD-SHARED.md` |
 | 改命理规则／格局 | `domain/ASTROLOGY-RULES.md` → `domain/CALENDAR-AND-TIME.md` → `domain/CONTENT-PIPELINE.md` → `engineering/TESTING.md` |
-| 部署／排查 | `engineering/DEPLOY.md` → `engineering/ARCHITECTURE.md` |
+| 部署／排查 | `engineering/DEPLOY.md` → `engineering/ARCHITECTURE.md` → `engineering/MODULE-MAP.md` |
 | 做研究 | `research/README.md` → 对应 brief |
 | 产品规划 | `product/PRD-*.md` → `product/MARKET-MODEL.md` → `product/REQUIREMENTS.md` → `operations/BACKLOG.md` → `product/METRICS.md` |
 | 新增市场 | `product/MARKET-MODEL.md` → `product/PRD-TEMPLATE.md` → `domain/GLOSSARY.md` → `content/TONE-AND-CLAIMS.md` |
@@ -61,6 +61,8 @@
 |---|---|---|
 | `ai/AGENT-CONTRACT.md` | AI 行为规则 | canonical |
 | `ai/WORKING-METHOD.md` | 我们怎么持续迭代 | canonical |
+| `ai/AI-EVALUATION.md` | AI 输出质量评估（最小版） | canonical |
+| `ai/evaluation/golden-cases.jsonl` | 7 个金标准案例 | canonical |
 | `product/PRD-SHARED.md` | 共同产品定义、AI 政策、合规 | canonical |
 | `product/PRD-ZH.md` | 港台市场 PRD | canonical |
 | `product/PRD-JA.md` | 日本市场 PRD | canonical |
@@ -81,6 +83,7 @@
 | `engineering/ARCHITECTURE.md` | 技术架构与资料流 | canonical |
 | `engineering/DEPLOY.md` | VPS 部署与运维 | canonical |
 | `engineering/TESTING.md` | 测试策略与 CI | canonical |
+| `engineering/MODULE-MAP.md` | 模块职责、依赖规则、跨市场技术债 | canonical |
 | `engineering/SECURITY.md` | 密钥、限流、支付安全 | canonical |
 | `decisions/DECISION-LOG.md` | 决策索引 | canonical |
 | `decisions/ADR-*.md` | 单一决策记录 | canonical |

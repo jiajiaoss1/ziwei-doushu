@@ -158,6 +158,9 @@ Caddyfile / docker-compose.yml / Dockerfile
 - 领域模型：`docs/domain/DOMAIN-MODEL.md`
 - 历法/时间：`docs/domain/CALENDAR-AND-TIME.md`
 - 市场模型：`docs/product/MARKET-MODEL.md`
+- 模块地图：`docs/engineering/MODULE-MAP.md`
+- AI 质量评估：`docs/ai/AI-EVALUATION.md`
+- AI 金标准案例：`docs/ai/evaluation/golden-cases.jsonl`
 - 旧文件：`docs/archive/`
 
 ---
@@ -192,6 +195,7 @@ Caddyfile / docker-compose.yml / Dockerfile
 | 1 | 2026-11-21 09:45 | lead | 繁中版全套、产品化、根路径 `/zh`、Caddy HTTP-01、DNS、交接文件 | 下一位 agent | P0 Stripe HK（等 keys） | main=`79f3827`、线上=`c18fff1` |
 | 2 | 2026-11-21 10:31 | lead | 文件系统重构：索引、AI 合约、工作方法、PRD（shared/zh/ja）、需求矩阵、ADR、backlog、handover；旧文件归档；Threads 研究 brief | 下一位 agent | P1 产品打磨：等 Threads 研究 → 定 beachhead/付费交付物 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 | 3 | 2026-11-21 10:58 | lead | 增量 docs V2：Domain Model、Calendar & Time、Market Model、产品意图 vs 实现事实矩阵 | 下一位 agent | 产品打磨：Threads 数据回来后定 beachhead/付费交付物 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
+| 4 | 2026-11-21 11:05 | lead | 增量 docs V2：Module Map/依赖规则、AI 质量评估最小版 + 7 个 golden cases | 下一位 agent | 产品打磨：Threads 数据回来后定 beachhead/付费交付物 | main=本次 docs commit、线上=`c18fff1`、工作区干净 |
 
 ### 交接快照模板
 

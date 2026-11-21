@@ -72,7 +72,7 @@ Next.js 16 standalone（Docker）
 - `Caddyfile`：HTTP-01、`www` → apex、安全头
 - `scripts/vps/deploy.sh`：pull → build → up → prune
 
-细节：`engineering/DEPLOY.md`。
+细节：`engineering/DEPLOY.md`；模块边界见 `engineering/MODULE-MAP.md`。
 
 ## 6. 外部依赖
 
