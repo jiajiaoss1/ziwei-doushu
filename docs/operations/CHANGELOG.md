@@ -27,6 +27,7 @@ canonical: true
 - ADR-0007 + PRD-ZH 同步：台湾首发、A×C beachhead、单 SKU 關係決策書、免费自查/付费补时辰
 - 《關係決策書》SPEC approved：6 部分、1 年访问、14 天追问、退款/边界/测试
 - 首页/自查 SPEC approved：4 步、默认午时/台北、3+1 结果、付费门槛、隐私/事件/测试
+- 支付/退款 SPEC draft：checkout/webhook/1 年访问/首次打开/退款/幂等；PSP 与订单存储待定
 - 新增 `AGENTS.md` 根目录指针
 - 新增 Threads 痛点研究 brief
 - 根路径 `/` → `/zh`

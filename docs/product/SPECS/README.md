@@ -12,6 +12,7 @@
 |---|---|---|
 | `zh-decision-report.md` | REQ-ZH-012 | approved |
 | `zh-home-selfcheck.md` | REQ-ZH-013 | approved |
+| `zh-payment-refund.md` | REQ-ZH-PAY-001/002/003 | draft |
 
 ## SPEC 模板
 

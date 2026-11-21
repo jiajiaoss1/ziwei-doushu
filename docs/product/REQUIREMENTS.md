@@ -60,9 +60,9 @@ proposed / approved / implemented / beta / planned / blocked / dropped
 | REQ-ZH-CONV-001 | 结果页报告卡显示价格 | proposed | `PRD-ZH.md` | `app/zh/result` | — |
 | REQ-ZH-CONV-002 | 报告样本/试读 | proposed | `PRD-ZH.md` | 未做 | — |
 | REQ-ZH-CONV-003 | 报告按情境客制（不只开场） | proposed | `PRD-ZH.md` | `lib/zh/report.ts` | — |
-| REQ-ZH-PAY-001 | Stripe HK checkout | planned | `PRICING.md` | 未做 | — |
-| REQ-ZH-PAY-002 | Stripe webhook + 解锁 | planned | `PRICING.md` | 未做 | — |
-| REQ-ZH-PAY-003 | 收据/退款/客服 | planned | `PRICING.md` | 未做 | — |
+| REQ-ZH-PAY-001 | ZH checkout（服务端定价/PSP 跳转） | planned | `SPECS/zh-payment-refund.md` | 未做 | — |
+| REQ-ZH-PAY-002 | ZH webhook + 解锁/幂等 | planned | `SPECS/zh-payment-refund.md` | 未做 | — |
+| REQ-ZH-PAY-003 | 退款/访问撤销/客服 | planned | `SPECS/zh-payment-refund.md` | 未做 | — |
 
 ---
 
