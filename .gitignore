@@ -12,3 +12,4 @@ node_modules
 
 # VPS 本番用テンプレートはコミットする
 !.env.production.example
+.dsh-boot-animation/
