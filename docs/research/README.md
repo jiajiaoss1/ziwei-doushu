@@ -25,7 +25,8 @@ canonical: true
 |---|---|---|
 | `threads-pain-points-brief.md` | V2 / ready | Threads 首个付费用户群体研究 |
 | `threads-pain-points-findings.md` | 待产出 | 研究结论 |
-| `threads-pilot-2026-11-21.md` | pilot | 20 条试编码与关键词校准 |
+| `threads-pilot-2026-11-21.md` | pilot v1 | 旧 423 条的 20 条试编码 |
+| `threads-pilot-v2-2026-11-21.md` | pilot v2 | 新 339 条的 20 条试编码 |
 | `apify-threads-input.json` | ready | Apify Threads Scraper 输入（V2 正式采集） |
 
 ## 3. 新增研究
